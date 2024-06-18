@@ -42,10 +42,10 @@ public class HomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
 
-	//検索処理を行う
-	HomeDao hDao = new HomeDao();
-	List<Posts> PostList = hDao.select(new Posts());
+		//検索処理を行う
+		HomeDao hDao = new HomeDao();
+		List<Posts> PostList = hDao.select(new Posts());
+	}
 
 }
