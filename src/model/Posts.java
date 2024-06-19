@@ -1,6 +1,5 @@
 package model;
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 
 public class Posts implements Serializable{
@@ -13,14 +12,14 @@ public class Posts implements Serializable{
 	private int comments;
 	private int reaction_id;
 	private int file_id;
-	private Timestamp created_at;
+	private String created_at;
 
 
 	public Posts() {
 
 	}
 
-	public Posts(int post_id, int channels_id, int employee_id, String content, int comments, int reaction_id, int file_id, Timestamp created_at) {
+	public Posts(int post_id, int channels_id, int employee_id, String content, int comments, int reaction_id, int file_id, String created_at) {
 		super();
 		this.post_id = post_id;
 		this.channels_id = channels_id;
@@ -88,11 +87,11 @@ public class Posts implements Serializable{
 		this.file_id = file_id;
 	}
 
-	public Timestamp getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
