@@ -9,65 +9,47 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.UsersDao;
-import model.Users;
+import dao.UserDao;
+import model.User;
 
-/**
- * Servlet implementation class AccountServlet
- */
 @WebServlet("/AccountServlet")
 public class AccountServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("employee_id") == null) {
-			response.sendRedirect("/C4/LoginServlet");
-			return;
-		}
+    /**
+     * アクセス時にaccount.jspを表示
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserDao aDao = new UserDao();
+        List<User> userList = aDao.selectAllUsers();
+        System.out.print(userList);
 
-		// 検索ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
-		dispatcher.forward(request, response);
-	}
+        // 全ユーザー情報をリクエストスコープに格納
+        request.setAttribute("userList", userList);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("employee_id") == null) {
-			response.sendRedirect("/C4/LoginServlet");
-			return;
-		}
+        // JSPにフォワード
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
+        dispatcher.forward(request, response);
+    }
 
-		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String employee_id = request.getParameter("employee_id");
-		String username = request.getParameter("username");
-		String lang = request.getParameter("lang");
-		String comment = request.getParameter("comment");
+    /**
+     * 検索キーワードでユーザーを検索、結果を表示する
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // リクエストパラメータを取得
+        request.setCharacterEncoding("UTF-8");
+        String username = request.getParameter("username");
 
+        UserDao aDao = new UserDao();
+        // 検索キーワードに基づいてユーザーを検索
+        List<User> userList = aDao.selectByUsername(username);
 
-		// 検索処理を行う 空は検索に入らない
-		UsersDao bDao = new UsersDao();
-		List<Users> UsersList = bDao.select(new Users(
-				0,"employee_id", "" ,"username","" , "lang", "" ,"comment", ""
-				));
+        // 検索結果をリクエストスコープに格納
+        request.setAttribute("userList", userList);
 
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("UsersList", UsersList);
-
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
-		dispatcher.forward(request, response);
-	}
+        // JSPにフォワード
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
+        dispatcher.forward(request, response);
+    }
 }
-
