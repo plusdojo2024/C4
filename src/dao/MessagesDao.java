@@ -5,133 +5,328 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.messages;
 
-
-
-
-
 public class MessagesDao {
-	 // データベース接続情報
-    private final String url = "jdbc:mysql://localhost:3306/C4";
+	// 引数paramで検索項目を指定し、検索結果のリストを返す
+	public List<messages> select(int conversation_id) {
+		Connection conn = null;
+		List<messages> messagesList = new ArrayList<messages>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM MESSAGES WHERE conversations_id =?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる
+
+				pStmt.setInt(1,conversation_id);
 
 
- // メッセージをデータベースに挿入するメソッド
-    public void insertMessage(int conversationsId, String senderId, String receiverId, String messageContent) {
-        String sql = "INSERT INTO messages (conversations_id, sender_id,"
-        		+ " receiver_id, message_content, created_at) VALUES (?, ?, ?, ?, ?)";
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
 
-        try (Connection conn = DriverManager.getConnection(url);
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-               stmt.setInt(1, conversationsId);
-               stmt.setString(2, senderId);
-               stmt.setString(3, receiverId);
-               stmt.setString(4, messageContent);
-               stmt.setTimestamp(5, new Timestamp(System.currentTimeMillis())); // 現在の時刻を取得してセット
-               stmt.executeUpdate();
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
-       }
- // 特定の会話（conversationsId）に関連するメッセージを取得するメソッド
-    public List<messages> getMessagesByConversationsId(int conversationsId) {
-        List<messages> messages = new ArrayList<>();
-        String sql = "SELECT * FROM messages WHERE conversations_id = ?";
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				messages record = new messages(
+				rs.getInt("MESSAGE_ID"),
+				rs.getInt("CONVERSATIONS_ID"),
+				rs.getString("SENDER_ID"),
+				rs.getString("RECEIVER_ID"),
+				rs.getString("MESSAGE_CONTENT"),
+				rs.getTimestamp ("CREATED_AT")
 
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, conversationsId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                int messageId = rs.getInt("message_id");
-                String senderId = rs.getString("sender_id");
-                String receiverId = rs.getString("receiver_id");
-                String messageContent = rs.getString("message_content");
-                Timestamp createdAt = rs.getTimestamp("created_at");
-                messages message = new messages(messageId, conversationsId, senderId, receiverId, messageContent, createdAt);
-                messages.add(message);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+				);
+				messagesList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			messagesList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			messagesList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					messagesList = null;
+				}
+			}
+		}
 
-        return messages;
-    }
+		// 結果を返す
+		return messagesList;
+	}
+/*
+	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
+	public boolean insert(Bc card) {
+		Connection conn = null;
+		boolean result = false;
 
-    // conversationsテーブルに対する操作
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
-    // 新しい会話を追加するメソッド
-    public void insertConversation(String user1Id, String user2Id) {
-        String sql = "INSERT INTO conversations (user1_id, user2_id) VALUES (?, ?)";
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
 
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user1Id);
-            stmt.setString(2, user2Id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
+			String sql = "INSERT INTO Bc VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-    // conversations_idを指定して会話を取得するメソッド
-    public Conversation getConversationById(int conversationsId) {
-        String sql = "SELECT * FROM conversations WHERE conversations_id = ?";
-        Conversation conversation = null;
+			// SQL文を完成させる
+			if (card.getCompany() != null && !card.getCompany().equals("")) {
+				pStmt.setString(1, card.getCompany());
+			}
+			else {
+				pStmt.setString(1, "（未設定）");
+			}
+			if (card.getDepartment() != null && !card.getDepartment().equals("")) {
+				pStmt.setString(2, card.getDepartment());
+			}
+			else {
+				pStmt.setString(2, "（未設定）");
+			}
+			if (card.getPosition() != null && !card.getPosition().equals("")) {
+				pStmt.setString(3, card.getPosition());
+			}
+			else {
+				pStmt.setString(3, "（未設定）");
+			}
+			if (card.getName() != null && !card.getName().equals("")) {
+				pStmt.setString(4, card.getName());
+			}
+			else {
+				pStmt.setString(4, "（未設定）");
+			}
+			if (card.getZipcode() != null && !card.getZipcode().equals("")) {
+				pStmt.setString(5, card.getZipcode());
+			}
+			else {
+				pStmt.setString(5, "（未設定）");
+			}
+			if (card.getAddress() != null && !card.getAddress().equals("")) {
+				pStmt.setString(6, card.getAddress());
+			}
+			else {
+				pStmt.setString(6, "（未設定）");
+			}
+			if (card.getPhone() != null && !card.getPhone().equals("")) {
+				pStmt.setString(7, card.getPhone());
+			}
+			else {
+				pStmt.setString(7, "（未設定）");
+			}
+			if (card.getFax() != null && !card.getFax().equals("")) {
+				pStmt.setString(8, card.getFax());
+			}
+			else {
+				pStmt.setString(8, "（未設定）");
+			}
+			if (card.getEmail() != null && !card.getEmail().equals("")) {
+				pStmt.setString(9, card.getEmail());
+			}
+			else {
+				pStmt.setString(9, "（未設定）");
+			}
+			if (card.getRemarks() != null && !card.getRemarks().equals("")) {
+				pStmt.setString(10, card.getRemarks());
+			}
+			else {
+				pStmt.setString(10, "（未設定）");
+			}
 
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, conversationsId);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                String user1Id = rs.getString("user1_id");
-                String user2Id = rs.getString("user2_id");
-                conversation = new Conversation(conversationsId, user1Id, user2Id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
-        return conversation;
-    }
+		// 結果を返す
+		return result;
+	}
 
-    // conversationsテーブルのエンティティクラス
-    public class Conversation {
-        private int conversationsId;
-        private String user1Id;
-        private String user2Id;
+	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
+	public boolean update(Bc card) {
+		Connection conn = null;
+		boolean result = false;
 
-        public Conversation(int conversationsId, String user1Id, String user2Id) {
-            this.conversationsId = conversationsId;
-            this.user1Id = user1Id;
-            this.user2Id = user2Id;
-        }
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
-        // ゲッター、セッターなどを実装
-    }
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
 
-    // messagesテーブルのエンティティクラス
-    public class Message {
-        private int messageId;
-        private int conversationsId;
-        private String senderId;
-        private String receiverId;
-        private String messageContent;
-        private Timestamp createdAt;
+			// SQL文を準備する
+			String sql = "UPDATE Bc SET company=?, department=?, position=?, name=?, zipcode=?, address=?, phone=?, fax=?, email=?, remarks=? WHERE number=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-        public Message(int messageId, int conversationsId, String senderId, String receiverId, String messageContent, Timestamp createdAt) {
-            this.messageId = messageId;
-            this.conversationsId = conversationsId;
-            this.senderId = senderId;
-            this.receiverId = receiverId;
-            this.messageContent = messageContent;
-            this.createdAt = createdAt;
-        }
+			// SQL文を完成させる
+			if (card.getCompany() != null && !card.getCompany().equals("")) {
+				pStmt.setString(1, card.getCompany());
+			}
+			else {
+				pStmt.setString(1, null);
+			}
+			if (card.getDepartment() != null && !card.getDepartment().equals("")) {
+				pStmt.setString(2, card.getDepartment());
+			}
+			else {
+				pStmt.setString(2, null);
+			}
+			if (card.getPosition() != null && !card.getPosition().equals("")) {
+				pStmt.setString(3, card.getPosition());
+			}
+			else {
+				pStmt.setString(3, null);
+			}
+			if (card.getName() != null && !card.getName().equals("")) {
+				pStmt.setString(4, card.getName());
+			}
+			else {
+				pStmt.setString(4, null);
+			}
+			if (card.getZipcode() != null && !card.getZipcode().equals("")) {
+				pStmt.setString(5, card.getZipcode());
+			}
+			else {
+				pStmt.setString(5, null);
+			}
+			if (card.getAddress() != null && !card.getAddress().equals("")) {
+				pStmt.setString(6, card.getAddress());
+			}
+			else {
+				pStmt.setString(6, null);
+			}
+			if (card.getPhone() != null && !card.getPhone().equals("")) {
+				pStmt.setString(7, card.getPhone());
+			}
+			else {
+				pStmt.setString(7, null);
+			}
+			if (card.getFax() != null && !card.getFax().equals("")) {
+				pStmt.setString(8, card.getFax());
+			}
+			else {
+				pStmt.setString(8, null);
+			}
+			if (card.getEmail() != null && !card.getEmail().equals("")) {
+				pStmt.setString(9, card.getEmail());
+			}
+			else {
+				pStmt.setString(9, null);
+			}
+			if (card.getRemarks() != null && !card.getRemarks().equals("")) {
+				pStmt.setString(10, card.getRemarks());
+			}
+			else {
+				pStmt.setString(10, null);
+			}
+			pStmt.setInt(11, card.getNumber());
 
-        // ゲッター、セッターなどを実装
-    }
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+	// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
+	public boolean delete(int number) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM Bc WHERE number=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, number);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}*/
 }

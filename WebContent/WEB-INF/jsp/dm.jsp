@@ -1,6 +1,7 @@
 <!-- dm.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,13 @@
     <title>Chat</title>
 </head>
 <body>
-    <div id="room">
+<ul>
+        <li><a href="HomeServlet">タイムライン</a></li>
+        <li><a href="ChServlet">チャンネル</a></li>
+        <li><a href="">通知</a></li>
+    </ul>
+    <a href="">相手の名前</a>
+   <!--   <div id="room">
 
         <div class="box-left">
             <p class="message-box white">こんにちは</p>
@@ -20,14 +27,27 @@
             <p class="message-box green">こんにちは</p>
         </div>
 
+    </div>-->
+    <div>
+    <c:if test="${empty cardList}">
+	<p>一致するデータはありません。</p>
+</c:if>
+<c:forEach var="e" items="${cardList}" >
+
+	<input type="text" name="messageContent" value="${e.messageContent}" readonly="readonly"><br>
+
+
+
+</c:forEach>
     </div>
 
     <form action = "MessagesServlet" method="post">
-    <input type="hidden" name="conversations_id" value="1"> <!-- 会話IDは適宜設定 -->
-        <input type="hidden" name="sender_id" placeholder="Your ID" required><br>
-        <input type="hidden" name="receiver_id" placeholder="Receiver's ID" required><br>
-        <textarea name="message_content" rows="3" cols="50" placeholder="Type your message..." required></textarea><br>
-        <input type="submit" value="Send">
-     </form>
+
+
+        <textarea name="message" id="message" rows="5" cols="50" placeholder="メッセージを入力"></textarea>
+        <br><br>
+        <input type="submit" value="送信">
+    </form>
+
 </body>
 </html>
