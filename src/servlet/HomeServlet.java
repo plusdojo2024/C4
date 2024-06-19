@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.tools.javac.util.List;
-
+//自分がインポートしました
 import dao.HomeDao;
 import model.Posts;
+
 
 /**
  * Servlet implementation class HomeServlet
@@ -32,9 +33,13 @@ public class HomeServlet extends HttpServlet {
 			return;
 		}*/
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);
 	}
+
+
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,9 +48,22 @@ public class HomeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 
+
+		//リクエストパラメータ
+		request.setCharacterEncoding("UTF-8");
+		String content = request.getParameter("content");
+
 		//検索処理を行う
 		HomeDao hDao = new HomeDao();
 		List<Posts> PostList = hDao.select(new Posts());
-	}
 
+
+		//検索結果をリクエストスコープに格納する
+		request.setAttribute("PostList", PostList);
+
+		//結果をページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+		dispatcher.forward(request, response);
+
+	}
 }
