@@ -122,15 +122,17 @@
         <input type="text" id="channelDescription" placeholder="チャンネル説明">
         <button id="createChannelButton">作成</button>
     </div>
-
+<form method="post" action="ChsPostServlet">
     <div class="channel-container">
         <!-- スノーボードチャンネル -->
         <div class="channel-n">
             <button class="channel channel-name  channel-n" onclick="window.location.href='snowboard.jsp'"
                 class="channel-link">スノーボード</button>
+                <input type="submit" value="test">
             <button class="delete-button">削除</button>
         </div>
     </div>
+    </form>
     <div class="channel-container">
         <!-- 野球部チャンネル -->
         <div class="channel-n">

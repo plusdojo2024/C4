@@ -11,9 +11,9 @@
 <body>
     <h1>アカウント一覧</h1>
     <ul>
-        <li><a href="home.jsp">タイムライン</a></li>
-        <li><a href="channel.jsp">チャンネル</a></li>
-        <li><a href="messages.jsp">アカウント</a></li>
+        <li><a href="${pageContext.request.contextPath}/HomeServlet">タイムライン</a></li>
+			<li><a href="${pageContext.request.contextPath}/ChServlet">チャンネル</a></li>
+			<li><a href="${pageContext.request.contextPath}/AccountServlet">アカウント</a></li>
     </ul>
 
     <!-- キーワード検索フォーム -->

@@ -38,6 +38,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//テスト用
+		RequestDispatcher test = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+		test.forward(request, response);
+
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
@@ -72,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 		else {									// ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			request.setAttribute("result",
-			new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/LinX/LoginServlet"));
+			new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/C4/LoginServlet"));
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");

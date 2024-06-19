@@ -11,7 +11,7 @@
 	<header>
 		<div>
 			<h1 id="logo">
-				<a href="home.html"><img src="" alt="LinX"></a>
+				<a href="HomeServlet"><img src="" alt="LinX"></a>
 			</h1>
 			<form method="get">
 				<input type="search" name="search" placeholder="キーワードを入力"> <input

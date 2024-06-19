@@ -43,7 +43,7 @@ public class HomeDao {
 				rs.getInt("comments"),
 				rs.getInt("reaction_id"),
 				rs.getInt("file_id"),
-				rs.getTimestamp("created_at")
+				rs.getString("created_at")
 				);
 				PostList.add(record);
 			}

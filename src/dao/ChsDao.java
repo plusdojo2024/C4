@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Chs;
+import model.Posts;
 
 
 
@@ -80,6 +81,76 @@ public class ChsDao {
 
 
  		}
+
+	// 引数paramで検索項目を指定し、検索結果のリストを返す
+			public List<Posts> chSelect(int chId) {
+				Connection conn = null;
+				List<Posts> cardList = new ArrayList<Posts>();
+				try {
+
+
+		 				// JDChsドライバを読み込む
+		 				Class.forName("org.h2.Driver");
+
+		 				 // データベースに接続する
+		 	 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+
+
+		 				// SQL文を準備する
+		 				String sql = "SELECT *FROM postsWHERE channels_id LIKE ?";
+
+
+
+		 				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+		 				// SQL文を完成させる
+
+
+		 					pStmt.setString(1, "%" + chId + "%");
+
+
+
+		 				// SQL文を実行し、結果表を取得する
+		 				ResultSet rs = pStmt.executeQuery();
+
+		 				// 結果表をコレクションにコピーする
+		 				//カラム名を合わせる
+		 				while (rs.next()) {
+		 					Posts record = new Posts(
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getString("CHNAME"),
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getInt("CHANNEL_ID"),
+		 						rs.getString("CHNAME")
+		 				);
+		 						cardList.add(record);
+		 				}
+		 			} catch (SQLException e) {
+		 				e.printStackTrace();
+		 				cardList = null;
+		 			} catch (ClassNotFoundException e) {
+		 				e.printStackTrace();
+		 				cardList = null;
+		 			} finally {
+		 				// データベースを切断
+		 				if (conn != null) {
+		 					try {
+		 						conn.close();
+		 					} catch (SQLException e) {
+		 						e.printStackTrace();
+		 						cardList = null;
+		 					}
+		 				}
+		 			}
+
+		 			// 結果を返す
+		 			return cardList;
+
+
+		 		}
 /*
 
  		// 引数cardで指定されたレコードを登録し、成功したらtrueを返す

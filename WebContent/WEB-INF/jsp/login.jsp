@@ -11,7 +11,7 @@
         <h1>ログインページ</h1>
     </header>
     <main>
-        <form method="post" action="/LinX/LoginServlet">
+        <form method="post" action="/C4/LoginServlet">
 
             社員 ID<input type="text" name="id"><br>
             パスワード<input type="password" name="pw"><br>
@@ -20,7 +20,7 @@
 
             <span id="error_message"></span><br>
 
-            <a href="/LinX/RegistServlet">新規登録</a>
+            <a href="/C4/RegistServlet">新規登録</a>
 
         </form>
 

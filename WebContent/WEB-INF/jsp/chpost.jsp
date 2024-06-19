@@ -166,7 +166,7 @@
         <textarea id="text" placeholder="投稿内容"></textarea>
         <button onclick="addPost()">投稿</button>
     </div>
-    <a href="ch.html" class="back-button">戻る</a>
+    <a href="ChServlet" class="back-button">戻る</a>
     <script src="js/chPost.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
         <h1>新規登録</h1>
     </header>
     <main>
-        <form method="post" action="/LinX/CreateUserServlet">
+        <form method="post" action="/C4/CreateUserServlet">
 
             社員 ID<input type="text" name="new_id"><br>
             氏名<input type="text" name="name"><br>
@@ -24,7 +24,7 @@
             <span id="error_message"></span><br>
             <a href="#">利用規約</a><br>
 
-            <a href="/LinX/LoginServlet">ログイン</a>
+            <a href="/C4/LoginServlet">ログイン</a>
 
         </form>
 
