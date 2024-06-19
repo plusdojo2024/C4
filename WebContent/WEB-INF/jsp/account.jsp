@@ -11,9 +11,9 @@
 <body>
     <h1>アカウント一覧</h1>
     <ul>
-        <li><a href="home.html">タイムライン</a></li>
-        <li><a href="channel.html">チャンネル</a></li>
-        <li><a href="messages.html">アカウント</a></li>
+        <li><a href="home.jsp">タイムライン</a></li>
+        <li><a href="channel.jsp">チャンネル</a></li>
+        <li><a href="messages.jsp">アカウント</a></li>
     </ul>
 
     <!-- キーワード検索フォーム -->
@@ -86,6 +86,45 @@
         }
         %>
     </div>
+
+    <!-- アカウント検索結果表示 -->
+    <h1>searchResults prof</h1>
+    <div class="searchResults-prof">
+        <%
+        List<User> searchResults = (List<User>) request.getAttribute("searchResults");
+        if (searchResults != null && !searchResults.isEmpty()) {
+            for (User user : searchResults) {
+        %>
+            <div class="searchResults-profile"
+            onclick="location.href='/testC4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
+                <div>
+                    <label>氏名: </label>
+                    <span><%= user.getUsername() %></span>
+                </div>
+                <div>
+                    <label>ユーザーネーム: </label>
+                    <span><%= user.getEmployeeId() %></span>
+                </div>
+                <div>
+                    <label>言語: </label>
+                    <span><%= user.getLang() %></span>
+                </div>
+                <div>
+                    <label>コメント: </label>
+                    <span><%= user.getComment() %></span>
+                </div>
+                <hr>
+            </div>
+        <%
+            }
+        } else if (searchResults != null) {
+        %>
+            <p>該当するユーザーが見つかりませんでした。</p>
+        <%
+        }
+        %>
+    </div>
+
 
 </body>
 </html>

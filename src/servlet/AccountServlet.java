@@ -21,8 +21,8 @@ public class AccountServlet extends HttpServlet {
      * アクセス時にaccount.jspを表示
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDao aDao = new UserDao();
-        List<User> userList = aDao.selectAllUsers();
+        UserDao userDao = new UserDao();
+        List<User> userList = userDao.selectAllUsers();
         System.out.print(userList);
 
         // 全ユーザー情報をリクエストスコープに格納
@@ -40,13 +40,15 @@ public class AccountServlet extends HttpServlet {
         // リクエストパラメータを取得
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
+        System.out.print(username);
 
-        UserDao aDao = new UserDao();
+        UserDao userDao = new UserDao();
         // 検索キーワードに基づいてユーザーを検索
-        List<User> userList = aDao.selectByUsername(username);
+        List<User> searchResults = userDao.selectByUsername(username);
+        System.out.print(searchResults);
 
         // 検索結果をリクエストスコープに格納
-        request.setAttribute("userList", userList);
+        request.setAttribute("searchResults", searchResults);
 
         // JSPにフォワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
