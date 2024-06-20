@@ -5,18 +5,21 @@
 
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>ホーム</title>
+</head>
 <body>
 	<!--ヘッダーここから-->
 	<header>
 		<div>
 			<h1 id="logo">
-				<a href="HomeServlet"><img src="" alt="LinX"></a>
+				<a href="home.html"><img src="" alt="LinX"></a>
 			</h1>
-			<form method="get">
+			<form method="get"
+				action="${pageContext.request.contextPath}/HomeServlet">
 				<input type="search" name="search" placeholder="キーワードを入力"> <input
 					type="submit" name="submit" value="検索">
 			</form>
+
 			<h2>ランキング</h2>
 		</div>
 	</header>
@@ -46,9 +49,9 @@
 
 	<!--右のカラムここから-->
 	<div class="right-navi">
-		<div class=noti></div>
-		<div class=clock></div>
-		<div class=calender></div>
+		<div class=noti>通知</div>
+		<div class=clock>時計</div>
+		<div class=calender>カレンダー</div>
 	</div>
 	<!--右のカラムここまで-->
 
@@ -61,6 +64,7 @@
 		</div>
 	</div>
 	<!-- フッター（ここまで） -->
+
 
 </body>
 </head>

@@ -87,7 +87,7 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Bc VALUES (NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO Bc VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -122,6 +122,7 @@ public class HomeDao {
 			else {
 				pStmt.setInt(6, 0);
 			}
+			pStmt.setString(7, post.getCreated_at());
 
 
 			// SQL文を実行する
