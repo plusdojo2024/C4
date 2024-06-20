@@ -39,6 +39,9 @@ public class ChsPostServlet extends HttpServlet {
         	// テスト用
         	int channels_id = 1;
 
+
+
+
         	ChsDao cDao = new ChsDao();
         	List<Posts> cardList = cDao.chSelect(channels_id);
 
@@ -56,8 +59,9 @@ public class ChsPostServlet extends HttpServlet {
 
     // POSTリクエストを処理するメソッド
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // POSTリクエストもdoGetメソッドで処理
-        doGet(request, response);
+    	String chName = request.getParameter("channelName");
+    	request.setAttribute("chName", chName);
+    	request.getRequestDispatcher("/WEB-INF/jsp/chpost.jsp").forward(request, response);
     }
 }
 
