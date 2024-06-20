@@ -1,30 +1,44 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable {
 	private String employeeId;
 	private String password;
 	private String username;
 	private String icon;
-	private int lang;
 	private String birth;
 	private String comment;
 	private int point;
+	private List<String> langList;
 
+	public User(String employeeId, String password, String username, String icon, String birth, String comment,
+			int point, List<String> langList) {
+		super();
+		this.employeeId = employeeId;
+		this.password = password;
+		this.username = username;
+		this.icon = icon;
+		this.birth = birth;
+		this.comment = comment;
+		this.point = point;
+		this.langList = langList;
+	}
 
-	public User(String employeeId, String password, String username, String icon, int lang, String birth, String comment,
+	public User(String employeeId, String password, String username, String icon, String birth, String comment,
 			int point) {
 		super();
 		this.employeeId = employeeId;
 		this.password = password;
 		this.username = username;
 		this.icon = icon;
-		this.lang = lang;
 		this.birth = birth;
 		this.comment = comment;
 		this.point = point;
+
 	}
+
 	public User(String employeeId, String password) {
 		this.employeeId = employeeId;
 		this.password = password;
@@ -67,12 +81,7 @@ public class User implements Serializable {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	public int getLang() {
-		return lang;
-	}
-	public void setLang(int lang) {
-		this.lang = lang;
-	}
+
 	public String getBirth() {
 		return birth;
 	}
@@ -90,6 +99,12 @@ public class User implements Serializable {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public List<String> getLangList() {
+		return langList;
+	}
+	public void setLangList(List<String> langList) {
+		this.langList = langList;
 	}
 
 
