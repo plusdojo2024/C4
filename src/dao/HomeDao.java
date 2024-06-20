@@ -12,7 +12,7 @@ import model.Posts;
 
 public class HomeDao {
 	// 引数paramで検索項目を指定し、検索結果のリストを返す
-	public List<Posts> select(Posts post) {
+	public List<Posts> search(String search) {
 		Connection conn = null;
 		List<Posts> PostList = new ArrayList<Posts>();
 
@@ -24,11 +24,11 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM Bc WHERE content LIKE ? ORDER BY date desc";
+			String sql = "SELECT * FROM POSTS WHERE CHANNELS_ID = 0 AND CONTENT LIKE ? ORDER BY CREATED_AT desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			//検索するためのDAOを作成
-			pStmt.setString(1, "%" + post.getContent() + "%");
+			pStmt.setString(1, "%" + search + "%");
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -199,7 +199,7 @@ public class HomeDao {
 		// 結果を返す
 		return result;
 	}
-/*					//削除用sql文
+				//削除用sql文
 	// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
 	public boolean delete(int post_id) {
 		Connection conn = null;
@@ -245,5 +245,62 @@ public class HomeDao {
 		// 結果を返す
 		return result;
 	}
-*/
+
+	public List<Posts> select() {
+		Connection conn = null;
+		List<Posts> PostList = new ArrayList<Posts>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM POSTS WHERE CHANNELS_ID = 0 ORDER BY CREATED_AT desc";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				Posts record = new Posts(
+				rs.getInt("POST_ID"),
+				rs.getInt("CHANNELS_ID"),
+				rs.getInt("EMPLOYEE_ID"),
+				rs.getString("CONTENT"),
+				rs.getInt("COMMENTS_ID"),
+				rs.getInt("REACTION_ID"),
+				rs.getInt("FILE_ID"),
+				rs.getString("CREATED_AT")
+				);
+				PostList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			PostList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			PostList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					PostList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return PostList;
+	}
 }
