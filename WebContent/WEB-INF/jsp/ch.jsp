@@ -40,6 +40,9 @@
             justify-content: space-between;
             align-items: center;
             font-size: 16px;
+            margin-right: 1px; /* チャンネルボタンと削除ボタンの間のスペース */
+            padding: 10px; /* 必要に応じてパディングを調整 */
+            font-size: 18px; /* 必要に応じてフォントサイズを調整 */
         }
 
         .channel:hover {
@@ -109,6 +112,14 @@
             align-items: center;
             height: 55px;
             float: left;
+            width: 300px; /* 必要に応じて幅を調整 */
+            height: 55px; /* 必要に応じて高さを調整 */
+
+          }
+
+
+    }
+
 
         }
     </style>
@@ -128,37 +139,40 @@
         <div class="channel-n">
             <button class="channel channel-name  channel-n" onclick="window.location.href='snowboard.jsp'"
                 class="channel-link">スノーボード</button>
-                <input type="submit" value="test">
             <button class="delete-button">削除</button>
         </div>
     </div>
     </form>
+   <form method="post" action="ChsPostServlet">
     <div class="channel-container">
         <!-- 野球部チャンネル -->
         <div class="channel-n">
-            <button class="channel channel-name channel-n" onclick="window.location.href='baseball.jsp'"
+            <button class="channel channel-name  channel-n" onclick="window.location.href='baseball.jsp'"
                 class="channel-link">野球部</button>
             <button class="delete-button">削除</button>
         </div>
     </div>
+    </form>
+    <form method="post" action="ChsPostServlet">
     <div class="channel-container">
-    <!-- サウナチャンネル -->
-    <div class="channel-n">
-        <button class="channel channel-name channel-n" onclick="window.location.href='sauna.jsp'"
-            class="channel-link">サウナ</button>
-        <button class="delete-button">削除</button>
-    </div>
-    </div>
-    <div class="channel-container">
-        <!-- マラソンチャンネル -->
+        <!-- サウナチャンネル -->
         <div class="channel-n">
-            <button class="channel channel-name channel-n" onclick="window.location.href='marathon.jsp'"
-                class="channel-link">マラソン</button>
+            <button class="channel channel-name  channel-n" onclick="window.location.href='sauna.jsp'"
+                class="channel-link">サウナ</button>
             <button class="delete-button">削除</button>
         </div>
     </div>
-
-
+    </form>
+    <form method="post" action="ChsPostServlet">
+    <div class="channel-container">
+        <!-- マラソンチャンネル -->
+        <div class="channel-n">
+            <button class="channel channel-name  channel-n" onclick="window.location.href='marathon.jsp'"
+                class="channel-link">マラソン</button>
+            <button class="delete-button">削除</button>
+       </div>
+    </div>
+    </form>
     <script>
         // チャンネル作成ボタンのクリックイベント
         document.getElementById('createChannelButton').addEventListener('click', function () {
