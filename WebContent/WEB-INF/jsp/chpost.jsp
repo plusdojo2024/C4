@@ -144,7 +144,7 @@
 </head>
 <body>
     <h1>${channelName} チャンネル</h1>
-    <div class="description">ここは${channelName}の情報を共有するチャンネルです。投稿やコメントを通じて交流しましょう！</div>
+    <div class="description">ここは${channelName}情報を共有するチャンネルです。投稿やコメントを通じて交流しましょう！</div>
     <div class="channel-content" id="posts">
         <c:if test="${empty cardList}">
             <p>まだ投稿はありません</p>

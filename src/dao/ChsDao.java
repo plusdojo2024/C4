@@ -16,9 +16,9 @@ import model.Posts;
 public class ChsDao {
 
 	          // 引数paramで検索項目を指定し、検索結果のリストを返す
-	public Chs select(int chId) {
+	public List<Chs> select() {
 		Connection conn = null;
-		Chs chs = null;
+		List<Chs> chList = new ArrayList<Chs>();
 		try {
                // データベースに接続する
  			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
@@ -31,35 +31,29 @@ public class ChsDao {
  				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
 
  				// SQL文を準備する
- 				String sql = "SELECT * FROM CHANNELS WHERE CHANNEL_ID LIKE ? ORDER BY created_At DESC";
+ 				String sql = "SELECT * FROM CHANNELS ORDER BY created_At DESC";
 
 
  				PreparedStatement pStmt = conn.prepareStatement(sql);
-
- 				// SQL文を完成させる
-
- 				pStmt.setInt(1, chId);
-
-
 
  				// SQL文を実行し、結果表を取得する
  				ResultSet rs = pStmt.executeQuery();
 
  				// 結果表をコレクションにコピーする
- 				rs.next();
- 				Chs record = new Chs(
- 					rs.getInt("Channel_Id"),
- 					rs.getString("chName"),
- 					rs.getString("chComment"),
- 					rs.getString("created_At")
- 				);
- 				chs = record;
+ 				while (rs.next()) {
+ 					Chs record = new Chs(
+ 		 				rs.getInt("Channel_Id"),
+ 		 				rs.getString("chName"),
+ 		 				rs.getString("chComment"),
+ 		 				rs.getString("created_At"));
+ 					chList.add(record);
+ 				}
  			} catch (SQLException e) {
  				e.printStackTrace();
- 				chs = null;
+ 				chList = null;
  			} catch (ClassNotFoundException e) {
  				e.printStackTrace();
- 				chs = null;
+ 				chList = null;
  			} finally {
  				// データベースを切断
  				if (conn != null) {
@@ -67,13 +61,13 @@ public class ChsDao {
  						conn.close();
  					} catch (SQLException e) {
  						e.printStackTrace();
- 						chs = null;
+ 						chList = null;
  					}
  				}
  			}
 
  			// 結果を返す
- 			return chs;
+ 			return chList;
 
 
  		}
@@ -148,7 +142,7 @@ public class ChsDao {
 
 		 		}
 
-			public int chCount() {
+			/*public int chCount() {
 				Connection conn = null;
 				int count;
 				try {
@@ -198,32 +192,28 @@ public class ChsDao {
 		 			return count;
 
 
-		 		}
-/*
+		 		}*/
 
  		// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
- 		public boolean insert(Chs card) {
+ 		public boolean regist(String name, String comment) {
  			Connection conn = null;
  			boolean result = false;
+ 			System.out.print(name);
+ 			System.out.print(comment);
 
  			try {
  				// JDChsドライバを読み込む
  				Class.forName("org.h2.Driver");
 
  				// データベースに接続する
- 				conn = DriverManager.getConnection("jdChs:h2:file:C:/pleiades/workspace/data/simpleChs", "sa", "");
+ 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
 
  				// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
- 				String sql = "INSERT INTO Chs (CHANNEL_ID, CHNAME, CHCOMMENT,CREATED_AT ) VALUES (?, ?, ?, ?)";
+ 				String sql = "INSERT INTO CHANNELS (CHANNEL_ID, CHNAME, CHCOMMENT,CREATED_AT ) VALUES(null, ?, ?, CURRENT_TIMESTAMP);";
  				PreparedStatement pStmt = conn.prepareStatement(sql);
-
  				// SQL文を完成させる
- 				pStmt.setString(1, card.getChannelId());
- 				pStmt.setString(2, card.getchName());
- 				pStmt.setString(3, card.getCHCOMMENT());
- 				pStmt.setString(4, card.getcreatedAt());
-
-
+ 				pStmt.setString(1, name);
+ 				pStmt.setString(2, comment);
 
  				// SQL文を実行する
  				if (pStmt.executeUpdate() == 1) {
@@ -248,8 +238,7 @@ public class ChsDao {
  			return result;
  		}
 
-
-
+/*
  		// 引数numberで指定されたレコードを削除し、成功したらtrueを返す
  		public boolean delete(int number) {
  			Connection conn = null;
