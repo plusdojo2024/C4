@@ -23,20 +23,39 @@
             padding: 20px;
         }
 
-        input {
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        #searchInput {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: width 0.4s ease-in-out;
+        }
+
+        #searchInput:focus {
+            width: 300px;
+        }
+
+        #channnel-shinji {
         	background-color: white;
             border: 2px solid #000;
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 16px;
             margin-right: 1px; /* チャンネルボタンと削除ボタンの間のスペース */
             padding: 10px; /* 必要に応じてパディングを調整 */
-            font-size: 18px; /* 必要に応じてフォントサイズを調整 */
+            font-size: 15px; /* 必要に応じてフォントサイズを調整 */
             flex: 1;
             display: flex;
             justify-content: center;
@@ -45,6 +64,33 @@
             float: left;
             width: 300px; /* 必要に応じて幅を調整 */
             height: 55px; /* 必要に応じて高さを調整 */
+        }
+
+         .create-channel form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+         #channelName, #channelDescription {
+            text-align: center;
+            width: 300px; /* 幅を調整 */
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+         #createChannelButton {
+            display: flex;
+            justify-content: center;
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: black;
+            width: 70px; /* 必要に応じて幅を調整 */
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
         .channel-container {
@@ -154,9 +200,11 @@
     <h1>チャンネル選択</h1>
 
     <div class="create-channel">
-        <input type="text" id="channelName" placeholder="チャンネル名">
-        <input type="text" id="channelDescription" placeholder="チャンネル説明">
-        <button id="createChannelButton">作成</button>
+    <form method="post" action="ChServlet">
+        <input type="text" id="channelName" name="channelName" placeholder="チャンネル名">
+        <input type="text" id="channelDescription" name="channelDescription" placeholder="チャンネル説明">
+        <input type="submit" id="createChannelButton" value="作成">
+        </form>
     </div>
 
     <c:if test="${empty chList}">
@@ -166,63 +214,13 @@
 		<form method="post" action="ChsPostServlet">
     		<div class="channel-container">
         		<div class="channel-n">
-            		<input type="submit" value="${e.chName}">
+            		<input id="channnel-shinji" type="submit" value="${e.chName}">
             		<button class="delete-button">削除</button>
         		</div>
     		</div>
     	</form>
 	</c:forEach>
-    <script>
-        // チャンネル作成ボタンのクリックイベント
-        document.getElementById('createChannelButton').addEventListener('click', function () {
-            const name = document.getElementById('channelName').value;
-            const description = document.getElementById('channelDescription').value;
-            if (name && description) {
-                // 新しいチャンネル要素を作成
-                const newChannel = document.createElement('div');
-                newChannel.classList.add('channel');
-                newChannel.innerHTML = `
-                    <span class="channel-name">${name}</span>
-                    <a href="channel.html" class="channel-link">Go</a>
-                    <button class="delete-button">削除</button>
-                `;
-                // チャンネルコンテナに追加
-                const channelContainer = document.querySelector('.channel-container');
-                channelContainer.appendChild(newChannel);
-
-                // 入力フィールドをクリア
-                document.getElementById('channelName').value = '';
-                document.getElementById('channelDescription').value = '';
-
-                alert(`新しいチャンネルが作成されました！\n名前: ${name}\n説明: ${description}`);
-            } else {
-                alert('チャンネル名と説明を入力してください。');
-            }
-        });
-
-        // 削除ボタンのクリックイベント
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.stopPropagation(); // 親要素へのクリックイベント伝播を止める
-                const channel = this.parentElement;
-                channel.remove();
-                alert(`${channel.querySelector('.channel-name').textContent} チャンネルが削除されました。`);
-            });
-        });
-
-        // 各チャンネルリンクのクリックイベント
-        const channelLinks = document.querySelectorAll('.channel-link');
-        channelLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault(); // デフォルトのリンク先への遷移をキャンセル
-                const url = this.getAttribute('href');
-                if (url) {
-                    window.location.href = url; // 指定されたURLに遷移
-                }
-            });
-        });
-    </script>
+    <!-- <script src="js/ch.js"></script> -->
 </body>
 
 </html>
