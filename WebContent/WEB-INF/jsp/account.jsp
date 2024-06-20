@@ -58,7 +58,7 @@
             for (User user : userList) {
         %>
             <div class="user-profile"
-            onclick="location.href='/testC4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
+            onclick="location.href='/C4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
                 <div>
                     <label>氏名: </label>
                     <span><%= user.getUsername() %></span>
@@ -96,7 +96,7 @@
             for (User user : searchResults) {
         %>
             <div class="searchResults-profile"
-            onclick="location.href='/testC4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
+            onclick="location.href='/C4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
                 <div>
                     <label>氏名: </label>
                     <span><%= user.getUsername() %></span>
