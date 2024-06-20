@@ -1,0 +1,53 @@
+/*BCテーブルを削除するSQL文*/
+DROP TABLE BC;
+
+/*確認するためのSQL文*/
+SELECT * FROM BC;
+
+/*テーブルの追加*/
+ALTER TABLE <テーブル名> ADD COLUMN <列の定義>;
+
+/*テーブルの削除*/
+ALTER TABLE <テーブル名> DROP COLUMN <列の定義>;
+
+
+
+CREATE TABLE BC ( 
+post_id		INTEGER		AUTO_INCREMENT(1),
+channels_id	INTEGER				,
+employee_id	INTEGER			NOT NULL,
+content 	VARCHAR(1000)		NOT NULL,
+comments_id	INTEGER				,
+reaction_id	INTEGER				,
+file_id 	INTEGER				,
+created_at	DATETIME		NOT NULL,
+PRIMARY KEY (post_id) 
+); 
+
+
+INSERT INTO BC VALUES ( 
+NULL, 
+'1', 
+'1', 
+'こんにちは、丸山勇貴です。', 
+'1', 
+'1', 
+CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+CREATE TABLE BC (
+post_id INTEGER AUTO_INCREMENT(1),	/* 番号 */
+channels_id INTEGER,			/* 会社名 */
+employee_id INTEGER,			/* 部署名 */
+cotent VARCHAR(1000),			/* 役職名 */
+reaction_id INTEGER,			/* 氏名 */
+file_id INTEGER,			/* 郵便番号 */
+DATE TIMESTAMP ,			/* 住所 */
+PRIMARY KEY (post_id)			/* 主キーの設定 */
+);
