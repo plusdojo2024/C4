@@ -23,9 +23,7 @@
             padding: 20px;
         }
 
-        .form{
-        padding: center;
-        }
+
         .search-container {
             display: flex;
             justify-content: center;
@@ -66,6 +64,33 @@
             float: left;
             width: 300px; /* 必要に応じて幅を調整 */
             height: 55px; /* 必要に応じて高さを調整 */
+        }
+
+         .create-channel form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+         #channelName, #channelDescription {
+            text-align: center;
+            width: 300px; /* 幅を調整 */
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+         #createChannelButton {
+            display: flex;
+            justify-content: center;
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: black;
+            width: 70px; /* 必要に応じて幅を調整 */
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
         .channel-container {
