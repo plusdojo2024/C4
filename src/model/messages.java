@@ -28,7 +28,6 @@ public class messages implements Serializable{
  			this.receiverId = receiverId;
  			this.messageContent = messageContent;
  			this.createdAt = createdAt;
-
  		}
 
 		public int getMessagesId() {

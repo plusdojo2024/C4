@@ -17,6 +17,8 @@
         <li><a href="">通知</a></li>
     </ul>
     <a href="">相手の名前</a>
+
+
    <!--   <div id="room">
 
         <div class="box-left">
@@ -37,13 +39,12 @@
 	<input type="text" name="messageContent" value="${e.messageContent}" readonly="readonly"><br>
 
 
-
 </c:forEach>
+
     </div>
 
     <form action = "MessagesServlet" method="post">
-
-
+		<input type="hidden" name="conversationsId" value="${conversationsId}">
         <textarea name="message" id="message" rows="5" cols="50" placeholder="メッセージを入力"></textarea>
         <br><br>
         <input type="submit" value="送信">

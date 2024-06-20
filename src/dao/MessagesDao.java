@@ -72,9 +72,9 @@ public class MessagesDao {
 		return messagesList;
 	}
 
-	public List<messages> regist(messages messages) {
+	public boolean regist(int conversationsId,String messages) {
 		Connection conn = null;
-		List<messages> messagesList = new ArrayList<messages>();
+		boolean result = false;
 
 		try {
 			// JDBCドライバを読み込む
@@ -83,41 +83,49 @@ public class MessagesDao {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
-			// SQL文を準備する
-			String sql = "INSERT INTO MESSAGES VALUES (NULL, ?, ?, ?, ?, ?)";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//conversationsIdが一致するデータを取得
+			String selectSql = "SELECT * FROM MESSAGES WHERE conversations_id = ? LIMIT 1";
+			//dataにそのデータを格納。
+			PreparedStatement sStmt = conn.prepareStatement(selectSql);
 			// SQL文を完成させる
 
-				pStmt.setInt(1,messages.getConversationsId());
-				pStmt.setString(1,messages.getSenderId());
-				pStmt.setString(1,messages.getReceiverId());
-				pStmt.setString(1,messages.getMessageContent());
-				pStmt.setTimestamp(1,messages.getCreatedAt());
+			sStmt.setInt(1,conversationsId);
 
 			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+			ResultSet srs = sStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-				messages record = new messages(
-				rs.getInt("MESSAGE_ID"),
-				rs.getInt("CONVERSATIONS_ID"),
-				rs.getString("SENDER_ID"),
-				rs.getString("RECEIVER_ID"),
-				rs.getString("MESSAGE_CONTENT"),
-				rs.getTimestamp ("CREATED_AT")
+			srs.next();
+			messages srecord = new messages(
+				srs.getInt("MESSAGE_ID"),
+				srs.getInt("CONVERSATIONS_ID"),
+				srs.getString("SENDER_ID"),
+				srs.getString("RECEIVER_ID"),
+				srs.getString("MESSAGE_CONTENT"),
+				srs.getTimestamp ("CREATED_AT"));
 
-				);
-				messagesList.add(record);
-			}
+
+			// SQL文を準備する
+			String sql = "INSERT INTO MESSAGES VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+				pStmt.setInt(1,srecord.getConversationsId());
+				pStmt.setString(2,srecord.getSenderId());
+				pStmt.setString(3,srecord.getReceiverId());
+				pStmt.setString(4,messages);
+
+
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			messagesList = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			messagesList = null;
 		}
 		finally {
 			// データベースを切断
@@ -127,13 +135,12 @@ public class MessagesDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					messagesList = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return messagesList;
+		return result;
 	}
 /*
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
