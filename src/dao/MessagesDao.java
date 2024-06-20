@@ -43,6 +43,69 @@ public class MessagesDao {
 				rs.getString("RECEIVER_ID"),
 				rs.getString("MESSAGE_CONTENT"),
 				rs.getTimestamp ("CREATED_AT")
+				);
+				messagesList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			messagesList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			messagesList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					messagesList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return messagesList;
+	}
+
+	public List<messages> regist(messages messages) {
+		Connection conn = null;
+		List<messages> messagesList = new ArrayList<messages>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "INSERT INTO MESSAGES VALUES (NULL, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる
+
+				pStmt.setInt(1,messages.getConversationsId());
+				pStmt.setString(1,messages.getSenderId());
+				pStmt.setString(1,messages.getReceiverId());
+				pStmt.setString(1,messages.getMessageContent());
+				pStmt.setTimestamp(1,messages.getCreatedAt());
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				messages record = new messages(
+				rs.getInt("MESSAGE_ID"),
+				rs.getInt("CONVERSATIONS_ID"),
+				rs.getString("SENDER_ID"),
+				rs.getString("RECEIVER_ID"),
+				rs.getString("MESSAGE_CONTENT"),
+				rs.getTimestamp ("CREATED_AT")
 
 				);
 				messagesList.add(record);
