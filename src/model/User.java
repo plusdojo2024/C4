@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class User implements Serializable {
-	private String employeeId;
+	private String employee_Id;
 	private String password;
 	private String username;
 	private String icon;
@@ -13,10 +13,10 @@ public class User implements Serializable {
 	private int point;
 	private List<String> langList;
 
-	public User(String employeeId, String password, String username, String icon, String birth, String comment,
+	public User(String employee_Id, String password, String username, String icon, String birth, String comment,
 			int point, List<String> langList) {
 		super();
-		this.employeeId = employeeId;
+		this.employee_Id = employee_Id;
 		this.password = password;
 		this.username = username;
 		this.icon = icon;
@@ -26,10 +26,10 @@ public class User implements Serializable {
 		this.langList = langList;
 	}
 
-	public User(String employeeId, String password, String username, String birth, String comment,
+	public User(String employee_Id, String password, String username, String birth, String comment,
 			int point) {
 		super();
-		this.employeeId = employeeId;
+		this.employee_Id = employee_Id;
 		this.password = password;
 		this.username = username;
 
@@ -39,12 +39,12 @@ public class User implements Serializable {
 
 	}
 
-	public User(String employeeId, String password) {
-		this.employeeId = employeeId;
+	public User(String employee_Id, String password) {
+		this.employee_Id = employee_Id;
 		this.password = password;
 	}
-	public User(String employeeId, String password, String username) {
-		this.employeeId = employeeId;
+	public User(String employee_Id, String password, String username) {
+		this.employee_Id = employee_Id;
 		this.password = password;
 		this.username = username;
 	}
@@ -57,11 +57,11 @@ public class User implements Serializable {
 	public User(String username2) {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-	public String getEmployeeId() {
-		return employeeId;
+	public String getemployee_Id() {
+		return employee_Id;
 	}
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
+	public void setemployee_Id(String employee_Id) {
+		this.employee_Id = employee_Id;
 	}
 	public String getPassword() {
 		return password;

@@ -120,27 +120,20 @@ NULL,
 
 SELECT * FROM conversations;
 
+DROP TABLE LANGS;
 DROP TABLE USERS;
 
-DROP TABLE LANGS;
-
 CREATE TABLE  users ( 
-employeeId VARCHAR(5), 
+employee_Id VARCHAR(5), 
 password  VARCHAR(32) NOT NULL, 
 username VARCHAR(50) NOT NULL,
 icon VARCHAR(1024),
 birth VARCHAR(50),
 comment VARCHAR(2000),
 point int(1000),
-PRIMARY KEY  (employeeId) 
+PRIMARY KEY  (employee_Id) 
 ); 
 
-CREATE TABLE langs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    employeeId VARCHAR(5) NOT NULL,
-    langName VARCHAR(20) NOT NULL,
-    FOREIGN KEY (employeeId ) REFERENCES users(employeeId )
-);
 
 INSERT INTO users VALUES ( 
 '0001', 
@@ -162,69 +155,67 @@ INSERT INTO users VALUES (
 7
 );
 
+CREATE TABLE langs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_Id VARCHAR(5) NOT NULL,
+    langName VARCHAR(20) NOT NULL,
+    FOREIGN KEY (employee_Id ) REFERENCES users(employee_Id )
+);
+
 INSERT INTO langs VALUES ( 
 NULL, 
 '0001', 
 'English'
 );
 
-SELECT u.employeeId, l.langName
+
+SELECT u.employee_Id, l.langName
 FROM users u
-LEFT JOIN langs l ON u.employeeId= l.employeeId;
+LEFT JOIN langs l ON u.employee_Id= l.employee_Id;
 
-SELECT u.employeeId, u.username, u.icon, l.langName, u.birth,u.comment,u.point 
+SELECT u.employee_Id, u.username, u.icon, l.langName, u.birth,u.comment,u.point 
 FROM users u 
-LEFT JOIN langs l ON u.employeeId= l.employeeId WHERE u.employeeId='0001';
+LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id='0001';
 
-SELECT u.employeeId, l.langName FROM users u LEFT JOIN langs l ON u.employeeId= l.employeeId WHERE u.employeeId='0003';
+SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id='0003';
 
 
-SELECT u.employeeId, u.username, u.icon, l.langName, u.birth,u.comment,u.point FROM users u LEFT JOIN langs l ON u.employeeId= l.employeeId WHERE u.employeeId='0001';
-
+SELECT u.employee_Id, u.username, u.icon, l.langName, u.birth,u.comment,u.point FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id='0001';
 
 
 /*削除*/
-DROP TABLE NOTICES;
+DROP TABLE NOTICES; 
 
 CREATE TABLE NOTICES (
-    noticesId  INTEGER AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
-    employeeId VARCHAR(5) NOT NULL,
+    notices_id  INTEGER AUTO_INCREMENT,
+    employee_id VARCHAR(5) NOT NULL,
     content VARCHAR(20) NOT NULL,
-    noticeStatus BOOLEAN,
-    noticeDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY (noticesId),
-    FOREIGN KEY(employeeId) -- 外部キーemployeeId
-    REFERENCES users(employeeId) ,
-    FOREIGN KEY(username) -- 外部キー
-    REFERENCES users(username)
+    notice_status BOOLEAN,
+    notice_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (notices_id)
 );
+
 /* テーブルにテスト用のデータを登録する SQL 文 */
+
 INSERT INTO NOTICES (
-    username,
-    employeeId,
+    employee_id,
     content,
-    noticeStatus,
-    noticeDate
+    notice_status,
+    notice_date
 ) VALUES (
-    '田中',
-    '0001',
-    'hello',
-    TRUE,
-    CURRENT_TIMESTAMP
+    '1234',           
+    'hello',                 
+    TRUE,       
+    CURRENT_TIMESTAMP            
 );
-INSERT INTO NOTICES (
-    username,
-    employeeId,
-    content,
-    noticeStatus,
-    noticeDate
-) VALUES (
-    '鈴木',
-    '0002',
-    'こんにちは',
-    FALSE,
-    CURRENT_TIMESTAMP
-);
+
+
+/*INNER JOIN*/
+SELECT notices_id, USERS.employee_id, content,notice_status, notice_date
+FROM USERS
+INNER JOIN NOTICES
+ON USERS.employee_id = NOTICES.employee_id;
+
+/**/
 
 SELECT * FROM NOTICES;

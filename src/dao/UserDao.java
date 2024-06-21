@@ -24,9 +24,9 @@ public class UserDao {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 				// SELECT文を準備する
-				String sql = "SELECT COUNT(*) FROM users WHERE employeeId = ? AND password = ?";
+				String sql = "SELECT COUNT(*) FROM users WHERE employee_Id = ? AND password = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
-				pStmt.setString(1, user.getEmployeeId());
+				pStmt.setString(1, user.getemployee_Id());
 				pStmt.setString(2,user.getPassword());
 
 				// SELECT文を実行し、結果表を取得する
@@ -79,7 +79,7 @@ public class UserDao {
 
 				// SQL文を完成させる
 
-					pStmt.setString(1, user.getEmployeeId());
+					pStmt.setString(1, user.getemployee_Id());
 
 					pStmt.setString(2, user.getPassword());
 
@@ -123,7 +123,7 @@ public class UserDao {
 
 }
 
-	public List<User> select(String employeeId) {
+	public List<User> select(String employee_Id) {
 				Connection conn = null;
 				List<User> userList = new ArrayList<User>();
 
@@ -137,16 +137,16 @@ public class UserDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT *  FROM users WHERE employeeId = ? ";
-			String sqlLang = "SELECT u.employeeId, l.langName FROM users u LEFT JOIN langs l ON u.employeeId= l.employeeId WHERE u.employeeId=? ";
+			String sql = "SELECT *  FROM users WHERE employee_Id = ? ";
+			String sqlLang = "SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id=? ";
 
 //
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
 
 
-			pStmt.setString(1, employeeId);
-			pStmtLang.setString(1, employeeId);
+			pStmt.setString(1, employee_Id);
+			pStmtLang.setString(1, employee_Id);
 			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 
 
@@ -163,7 +163,7 @@ public class UserDao {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				User record = new User(
-				rs.getString("employeeId"),
+				rs.getString("employee_Id"),
 				rs.getString("password"),
 				rs.getString("username"),
 				rs.getString("icon"),
@@ -214,29 +214,29 @@ public class UserDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE users SET username=?, birth=?, comment=?, point=? WHERE employeeId=?";
-//			String sqlDeleteLang = "DELETE FROM langs WHERE employeeId=?";
+			String sql = "UPDATE users SET username=?, birth=?, comment=?, point=? WHERE employee_Id=?";
+//			String sqlDeleteLang = "DELETE FROM langs WHERE employee_Id=?";
 			String sqlLang ="INSERT INTO langs VALUES ( NULL,?, ?) ";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 //			PreparedStatement pStmtDeleteLang = conn.prepareStatement(sqlDeleteLang);
 			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
 
-//			UPDATE users SET username= '山口' WHERE employeeId = '0003';
+//			UPDATE users SET username= '山口' WHERE employee_Id = '0003';
 			// SQL文を完成させる
 				pStmt.setString(1, user.getUsername());
 				pStmt.setString(2, user.getBirth());
 				pStmt.setString(3, user.getComment());
 				pStmt.setInt(4, user.getPoint());
-				pStmt.setString(5, user.getEmployeeId());
+				pStmt.setString(5, user.getemployee_Id());
 
 				;
-//				pStmtDeleteLang.setString(1, user.getEmployeeId());
+//				pStmtDeleteLang.setString(1, user.getemployee_Id());
 //		        pStmtDeleteLang.executeUpdate();
 
 		        if(language != null) {
 				for (String lang : language) {
-		            pStmtLang.setString(1, user.getEmployeeId());
+		            pStmtLang.setString(1, user.getemployee_Id());
 		            pStmtLang.setString(2, lang);
 		            pStmtLang.executeUpdate();
 		        	}
@@ -284,9 +284,9 @@ public class UserDao {
 //			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 //			// SQL文を準備する
 //			String sql = "SELECT *  FROM users WHERE username LIKE ? ";
-////			select  employeeId,username from users;
+////			select  employee_Id,username from users;
 //			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			//pStmt.setString(1, employeeId);
+//			//pStmt.setString(1, employee_Id);
 //			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 //			pStmt.setString(1, "%");
 //			// SQL文を実行し、結果表を取得する
@@ -294,7 +294,7 @@ public class UserDao {
 //			// 結果表をコレクションにコピーする
 //			while (rs.next()) {
 //				User record = new User(
-//				rs.getString("employeeId"),
+//				rs.getString("employee_Id"),
 //				rs.getString("password"),
 //				rs.getString("username"),
 //				rs.getString("icon"),
@@ -341,17 +341,17 @@ public class UserDao {
 //				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 //				// SQL文を準備する
 //				String sql = "SELECT *  FROM users WHERE username LIKE ? ";
-////				select  employeeId,username from users;
+////				select  employee_Id,username from users;
 //				PreparedStatement pStmt = conn.prepareStatement(sql);
 //				pStmt.setString(1, "%");
-//				//pStmt.setString(1, employeeId);
+//				//pStmt.setString(1, employee_Id);
 //				//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 //				// SQL文を実行し、結果表を取得する
 //				ResultSet rs = pStmt.executeQuery();
 //				// 結果表をコレクションにコピーする
 //				while (rs.next()) {
 //					User record = new User(
-//					rs.getString("employeeId"),
+//					rs.getString("employee_Id"),
 //					rs.getString("password"),
 //					rs.getString("username"),
 //					rs.getString("icon"),
