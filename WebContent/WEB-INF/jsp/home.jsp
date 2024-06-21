@@ -16,7 +16,8 @@
 	<!--ヘッダーここから-->
 	<header>
 		<h1 id="logo">
-			<a href="${pageContext.request.contextPath}/HomeServlet"><img src="./img/LinXlogo.jpg" alt="LinX"></a>
+			<a href="${pageContext.request.contextPath}/HomeServlet"><img
+				src="./img/LinXlogo.jpg" alt="LinX"></a>
 		</h1>
 		<form method="post"
 			action="${pageContext.request.contextPath}/HomeServlet">
@@ -42,9 +43,11 @@
 		<!--メインカラムここから-->
 		<div class="main-navi">
 			<div class="main-contents">
+<!--
 				<div class=allpost>
 					<div class=post>ポスト</div>
 				</div>
+-->
 			</div>
 			<div class="channel-content" id="posts">
 				まだ投稿はありません

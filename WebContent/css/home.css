@@ -1,128 +1,131 @@
 /* 全体 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    color: black;
-    line-height: 1.6;
-    font-size: 1.4em;
+	font-family: Arial, sans-serif;
+	background-color: white;
+	color: black;
+	line-height: 1.6;
+	font-size: 1.4em;
 }
 
 /* ヘッダー */
-header>div{
+header>div {
 	text-align: left
 }
 /**/
 header h1#logo img.round-image {
-  width: 150px;
-  height: 100px;
-  border-radius:50%;
-  background-image: url("LinXlogo.jpg");
+	width: 150px;
+	height: 100px;
+	border-radius: 50%;
+	background-image: url("LinXlogo.jpg");
 }
+
 header {
-    background-color: #F7F6F2;
-    color: black;
-    padding: 10px 0;
-    text-align: center;
-    position: relative;
-    border-bottom: 1px solid #ddd;
+	background-color: #F7F6F2;
+	color: black;
+	padding: 10px 0;
+	text-align: center;
+	position: relative;
+	border-bottom: 1px solid #ddd;
 }
 
 header h1#logo img {
-    height: 50px;
-    vertical-align: middle;
+	height: 50px;
+	vertical-align: middle;
 }
 
 header form {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50%;
-    transform: translateY(-50%);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 header form input[type="search"] {
-    padding: 7px 7px;
-    border: 2px solid #ccc;
-    border-radius: 3px;
+	padding: 7px 7px;
+	border: 2px solid #ccc;
+	border-radius: 3px;
+	font-size: 1.2em;
 }
 
 header form input[type="submit"] {
-    padding: 5px 7px;
-    border: 2px solid #ccc;
-    background-color: white;
-    color: #333;
-    border-radius: 3px;
-    cursor: pointer;
+	padding: 5px 7px;
+	border: 2px solid #ccc;
+	background-color: white;
+	color: #333;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 1.2em;
 }
 
 header h2 {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-top: 0;
-    padding: 5px;
-    border: 2px solid #ccc;
-    border-radius: 3px;
-    background-color: white;
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-top: 0;
+	padding: 5px;
+	border: 2px solid #ccc;
+	border-radius: 3px;
+	background-color: white;
 }
 
-/* メインレイアウト */
+/* ボディ */
 main {
-    display: flex;
-    height: calc(100vh - 72px); /* ヘッダーの高さを引いたもの */
+	display: flex;
+	height: calc(100vh - 72px); /* ヘッダーの高さを引いたもの */
 }
 
 /* 左カラム */
 .left-navi {
-    width: 20%;
-    background: #4B6587;
-    color: white;
-    padding: 20px;
+	width: 20%;
+	background: #4B6587;
+	color: white;
+	padding: 20px;
 }
 
 .left-navi ul {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .left-navi ul li {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .left-navi ul li a {
-    display: block;
-    padding: 10px;
-    color: #333;
-    background-color: #F0E5CF;
-    text-decoration: none;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: bold;
+	display: block;
+	padding: 10px;
+	color: #333;
+	background-color: #F0E5CF;
+	text-decoration: none;
+	border-radius: 4px;
+	text-align: center;
+	font-weight: bold;
 }
 
 .left-navi ul li a:hover {
-    background-color: #e0d8d1;
+	background-color: #e0d8d1;
 }
 
 /* メインカラム */
 .main-navi {
-    width: 60%;
-    padding: 20px;
-    background: #F7F6F2;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	width: 60%;
+	padding: 20px;
+	background: #F7F6F2;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .main-contents {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
-
+/*
 .main-contents .allpost {
     margin-bottom: 20px;
     padding: 20px;
@@ -130,116 +133,114 @@ main {
     border: 2px solid black;
     border-radius: 4px;
 }
-
+*/
+/*
 .main-contents .post {
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+*/
 .channel-content {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fafafa;
-    border: 2px solid black;
-    border-radius: 4px;
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #fafafa;
+	border: 2px solid black;
+	border-radius: 4px;
 }
 
 .channel-content .home {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
 }
 
 .channel-content .home div {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
-.channel-content .date,
-.channel-content .comment,
-.channel-content .reaction {
-    font-size: 0.9em;
-    color: #777;
-    border: 2px solid black;
+.channel-content .date, .channel-content .comment, .channel-content .reaction
+	{
+	font-size: 0.9em;
+	color: #777;
+	border: 2px solid black;
 }
 
 .form-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #fafafa;
-    border: 2px solid black;
-    border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+	padding: 20px;
+	background-color: #fafafa;
+	border: 2px solid black;
+	border-radius: 5px;
 }
 
 .form-container textarea {
-    width: 80%;
-    height: 60px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
+	width: 80%;
+	height: 60px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-right: 10px;
+	font-size: 1.2em;
 }
 
 .form-container button {
-    padding: 10px 20px;
-    background-color: #F7F6F2;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	padding: 10px 20px;
+	background-color: #F7F6F2;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1.2em;
 }
 
 .form-container button:hover {
-    background-color: #F0E5CF;
+	background-color: #F0E5CF;
 }
 
 /* 右カラム */
 .right-navi {
-    width: 20%;
-    padding: 20px;
-    background-color: #C8C6C6;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	width: 20%;
+	padding: 20px;
+	background-color: #C8C6C6;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.right-navi .clock,
-.right-navi .weather,
-.right-navi .calendar {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.right-navi .clock, .right-navi .weather, .right-navi .calendar {
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
 }
 
 .right-navi .clock canvas {
-    display: block;
-    margin: 0 auto;
+	display: block;
+	margin: 0 auto;
 }
 
-.right-navi .weather select,
-.right-navi .weather span {
-    display: block;
-    margin-bottom: 5px;
+.right-navi .weather select, .right-navi .weather span {
+	display: block;
+	margin-bottom: 5px;
 }
 
 .right-navi .calendar {
-    text-align: center;
+	text-align: center;
 }
 
 .right-navi .calendar button {
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #F0E5CF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	padding: 5px 10px;
+	margin: 5px;
+	background-color: #F0E5CF;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .right-navi .calendar button:hover {
-    background-color: #F0E5CF;
+	background-color: #F0E5CF;
 }
 
 /* フッター三浦さんに任せます */
-
