@@ -32,6 +32,16 @@ public class HomeServlet extends HttpServlet {
 			response.sendRedirect("/LinX/HomeServlet");
 			return;
 		}*/
+		request.setCharacterEncoding("UTF-8");
+		String search = request.getParameter("search");
+
+		//検索処理を行う
+		HomeDao hDao = new HomeDao();
+		List<Posts> PostList = hDao.search(search);
+
+
+		//検索結果をリクエストスコープに格納する
+		request.setAttribute("PostList", PostList);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);
@@ -45,17 +55,14 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 
 
 		//リクエストパラメータ
 		request.setCharacterEncoding("UTF-8");
 		String content = request.getParameter("content");
-
 		//検索処理を行う
 		HomeDao hDao = new HomeDao();
-		List<Posts> PostList = hDao.select(new Posts());
+		List<Posts> PostList = hDao.select();
 
 
 		//検索結果をリクエストスコープに格納する
@@ -66,4 +73,5 @@ public class HomeServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+
 }
