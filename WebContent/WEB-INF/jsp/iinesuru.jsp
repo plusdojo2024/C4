@@ -24,7 +24,7 @@
 		$.ajax({
 			//どのサーブレットに送るか
 			//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
-			url: '/testC4/IineServlet',
+			url: '/C4/IineServlet',
 			//どのメソッドを使用するか
 			type:"POST",
 			//受け取るデータのタイプ
@@ -54,7 +54,7 @@
 		$.ajax({
 			//どのサーブレットに送るか
 			//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
-			url: '/testC4/IineServlet',
+			url: '/C4/IineServlet',
 			//どのメソッドを使用するか
 			type:"POST",
 			//受け取るデータのタイプ
