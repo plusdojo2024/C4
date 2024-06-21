@@ -273,119 +273,117 @@ public class UserDao {
 
 	}
 //	//↓以下 藤土編集 for account search
-//			//アカウント一覧表示
-//			public List<User> selectAllUsers() {
-//				Connection conn = null;
-//				List<User> userList = new ArrayList<User>();
-//			try {
-//			// JDBCドライバを読み込む
-//			Class.forName("org.h2.Driver");
-//			// データベースに接続する
-//			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
-//			// SQL文を準備する
-//			String sql = "SELECT *  FROM users WHERE username LIKE ? ";
-////			select  employee_Id,username from users;
-//			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			//pStmt.setString(1, employee_Id);
-//			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
-//			pStmt.setString(1, "%");
-//			// SQL文を実行し、結果表を取得する
-//			ResultSet rs = pStmt.executeQuery();
-//			// 結果表をコレクションにコピーする
-//			while (rs.next()) {
-//				User record = new User(
-//				rs.getString("employee_Id"),
-//				rs.getString("password"),
-//				rs.getString("username"),
-//				rs.getString("icon"),
-//				rs.getString("lang"),
-//				rs.getString("birth"),
-//				rs.getString("comment"),
-//				rs.getInt("point")
-//				);
-//				userList.add(record);
-//			}
-//		}
-//		catch (SQLException e) {
-//			e.printStackTrace();
-//			userList = null;
-//		}
-//		catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//			userList = null;
-//		}
-//		finally {
-//			// データベースを切断
-//			if (conn != null) {
-//				try {
-//					conn.close();
-//				}
-//				catch (SQLException e) {
-//					e.printStackTrace();
-//					userList = null;
-//				}
-//			}
-//		}
-//		// 結果を返す
-//		System.out.print(userList);
-//		return userList;
-//	}
+			//アカウント一覧表示
+			public List<User> selectAllUsers() {
+				Connection conn = null;
+				List<User> userList = new ArrayList<User>();
+			try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+			// SQL文を準備する
+			String sql = "SELECT *  FROM users WHERE username LIKE ? ";
+//			select  employee_Id,username from users;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			//pStmt.setString(1, employee_Id);
+			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
+			pStmt.setString(1, "%");
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				User record = new User(
+				rs.getString("employee_Id"),
+				rs.getString("password"),
+				rs.getString("username"),
+				//rs.getString("icon"),
+				rs.getString("birth"),
+				rs.getString("comment"),
+				rs.getInt("point")
+				);
+				userList.add(record);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			userList = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			userList = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					userList = null;
+				}
+			}
+		}
+		// 結果を返す
+		System.out.print(userList);
+		return userList;
+	}
 //		//アカウント検索後
-//		public List<User> selectByUsername(String username) {
-//					Connection conn = null;
-//					List<User> userList = new ArrayList<User>();
-//			try {
-//				// JDBCドライバを読み込む
-//				Class.forName("org.h2.Driver");
-//				// データベースに接続する
-//				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
-//				// SQL文を準備する
-//				String sql = "SELECT *  FROM users WHERE username LIKE ? ";
-////				select  employee_Id,username from users;
-//				PreparedStatement pStmt = conn.prepareStatement(sql);
-//				pStmt.setString(1, "%");
-//				//pStmt.setString(1, employee_Id);
-//				//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
-//				// SQL文を実行し、結果表を取得する
-//				ResultSet rs = pStmt.executeQuery();
-//				// 結果表をコレクションにコピーする
-//				while (rs.next()) {
-//					User record = new User(
-//					rs.getString("employee_Id"),
-//					rs.getString("password"),
-//					rs.getString("username"),
-//					rs.getString("icon"),
-//					rs.getString("lang"),
-//					rs.getString("birth"),
-//					rs.getString("comment"),
-//					rs.getInt("point")
-//					);
-//					userList.add(record);
-//				}
-//			}
-//			catch (SQLException e) {
-//				e.printStackTrace();
-//				userList = null;
-//			}
-//			catch (ClassNotFoundException e) {
-//				e.printStackTrace();
-//				userList = null;
-//			}
-//			finally {
-//				// データベースを切断
-//				if (conn != null) {
-//					try {
-//						conn.close();
-//					}
-//					catch (SQLException e) {
-//						e.printStackTrace();
-//						userList = null;
-//					}
-//				}
-//			}
-//			// 結果を返す
-//			return userList;
-//		}
+		public List<User> selectByUsername(String username) {
+					Connection conn = null;
+					List<User> userList = new ArrayList<User>();
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+				// SQL文を準備する
+				String sql = "SELECT *  FROM users WHERE username LIKE ? ";
+//				select  employee_Id,username from users;
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				pStmt.setString(1, "%");
+				//pStmt.setString(1, employee_Id);
+				//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					User record = new User(
+					rs.getString("employee_Id"),
+					rs.getString("password"),
+					rs.getString("username"),
+					//rs.getString("icon"),
+					rs.getString("birth"),
+					rs.getString("comment"),
+					rs.getInt("point")
+					);
+					userList.add(record);
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				userList = null;
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				userList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						userList = null;
+					}
+				}
+			}
+			// 結果を返す
+			return userList;
+		}
 //	//↑ここまで藤土編集
 //
 

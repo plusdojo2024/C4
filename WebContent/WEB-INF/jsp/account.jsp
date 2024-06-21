@@ -58,7 +58,7 @@
 			        </div>
 			        <div>
 			            <label>ユーザーネーム</label>
-			            <input type="text" name="employeeId" value="${employeeId}" readonly="readonly">
+			            <input type="text" name="employee_Id" value="${employee_Id}" readonly="readonly">
 			        </div>
 			        <div>
 			            <label>コメント</label>
@@ -78,18 +78,17 @@
 		            for (User user : userList) {
 		        %>
 		            <div class="user-profile"
-		            onclick="location.href='/C4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
+		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
 		                <div>
 		                    <label>氏名: </label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
 		                <div>
 		                    <label>ユーザーネーム: </label>
-		                    <span><%= user.getEmployeeId() %></span>
+		                    <span><%= user.getemployee_Id() %></span>
 		                </div>
 		                <div>
 		                    <label>言語: </label>
-		                    <span><%= user.getLang() %></span>
 		                </div>
 		                <div>
 		                    <label>コメント: </label>
@@ -116,18 +115,17 @@
 		            for (User user : searchResults) {
 		        %>
 		            <div class="searchResults-profile"
-		            onclick="location.href='/C4/MessagesServlet?employeeId=<%= user.getEmployeeId() %>'">
+		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
 		                <div>
 		                    <label>氏名: </label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
 		                <div>
 		                    <label>ユーザーネーム: </label>
-		                    <span><%= user.getEmployeeId() %></span>
+		                    <span><%= user.getemployee_Id() %></span>
 		                </div>
 		                <div>
 		                    <label>言語: </label>
-		                    <span><%= user.getLang() %></span>
 		                </div>
 		                <div>
 		                    <label>コメント: </label>
