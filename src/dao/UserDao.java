@@ -214,7 +214,7 @@ public class UserDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE users SET username=?, birth=?, comment=?, point=? icon=? WHERE employeeId=?";
+			String sql = "UPDATE users SET username=?, birth=?, comment=?, point=? WHERE employeeId=?";
 //			String sqlDeleteLang = "DELETE FROM langs WHERE employeeId=?";
 			String sqlLang ="INSERT INTO langs VALUES ( NULL,?, ?) ";
 
@@ -228,9 +228,7 @@ public class UserDao {
 				pStmt.setString(2, user.getBirth());
 				pStmt.setString(3, user.getComment());
 				pStmt.setInt(4, user.getPoint());
-				System.out.print(user.getIcon());
-				pStmt.setString(5, user.getIcon());
-				pStmt.setString(6, user.getEmployeeId());
+				pStmt.setString(5, user.getEmployeeId());
 
 				;
 //				pStmtDeleteLang.setString(1, user.getEmployeeId());

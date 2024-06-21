@@ -26,13 +26,13 @@ public class User implements Serializable {
 		this.langList = langList;
 	}
 
-	public User(String employeeId, String password, String username, String icon, String birth, String comment,
+	public User(String employeeId, String password, String username, String birth, String comment,
 			int point) {
 		super();
 		this.employeeId = employeeId;
 		this.password = password;
 		this.username = username;
-		this.icon = icon;
+
 		this.birth = birth;
 		this.comment = comment;
 		this.point = point;

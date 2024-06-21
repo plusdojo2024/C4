@@ -53,11 +53,11 @@ public class CreateUserServlet extends HttpServlet {
 //				改造ここから
 				if (uDao.insert(new User( new_id,new_pw,username))) {	// 登録成功
 					request.setAttribute("result",
-					new Result("登録成功！", "レコードを登録しました。", "/C4/LoginServlet"));
+					new Result("登録成功！", "レコードを登録しました。", "/LinX/LoginServlet"));
 				}
 				else {												// 登録失敗
 					request.setAttribute("result",
-					new Result("登録失敗！", "レコードを登録できませんでした。", "/C4/LoginServlet"));
+					new Result("登録失敗！", "レコードを登録できませんでした。", "/LinX/LoginServlet"));
 				}
 
 				// 結果ページにフォワードする

@@ -1,10 +1,6 @@
 package servlet;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import dao.UserDao;
 import model.Result;
@@ -55,29 +50,29 @@ public class UpdateServlet extends HttpServlet {
 		}
 
 		//改造
-		 Part filePart = request.getPart("icon");
-		 System.out.println("fp" + filePart);
-	        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-	        String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
-
-	        // Creates the images directory if it does not exist
-	        File uploadDir = new File(uploadPath);
-	        if (!uploadDir.exists()) {
-	            uploadDir.mkdir();
-	        }
-
-	        // Saves the file on the server
-	        try (InputStream inputStream = filePart.getInputStream();
-	             FileOutputStream outputStream = new FileOutputStream(uploadPath + File.separator + fileName)) {
-	            int read;
-	            final byte[] bytes = new byte[1024];
-	            while ((read = inputStream.read(bytes)) != -1) {
-	                outputStream.write(bytes, 0, read);
-	            }
-	        }
-
-	        System.out.println("file" + fileName);
-	        System.out.println("input" + uploadPath);
+//		 Part filePart = request.getPart("icon");
+//		 System.out.println("fp" + filePart);
+//	        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+//	        String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
+//
+//	        // Creates the images directory if it does not exist
+//	        File uploadDir = new File(uploadPath);
+//	        if (!uploadDir.exists()) {
+//	            uploadDir.mkdir();
+//	        }
+//
+//	        // Saves the file on the server
+//	        try (InputStream inputStream = filePart.getInputStream();
+//	             FileOutputStream outputStream = new FileOutputStream(uploadPath + File.separator + fileName)) {
+//	            int read;
+//	            final byte[] bytes = new byte[1024];
+//	            while ((read = inputStream.read(bytes)) != -1) {
+//	                outputStream.write(bytes, 0, read);
+//	            }
+//	        }
+//
+//	        System.out.println("file" + fileName);
+//	        System.out.println("input" + uploadPath);
 
 
 
@@ -87,7 +82,7 @@ public class UpdateServlet extends HttpServlet {
 		String employeeId = request.getParameter("id");
 		String password = request.getParameter("password");
 		String username = request.getParameter("username");
-		String icon = fileName;
+//		String icon = fileName;
 		String birth = request.getParameter("birth");
 		String comment = request.getParameter("comment");
 		int point = Integer.parseInt(request.getParameter("point"));
@@ -104,7 +99,7 @@ public class UpdateServlet extends HttpServlet {
 			// 更新または削除を行う
 			UserDao uDao = new UserDao();
 			if (request.getParameter("submit").equals("更新")) {
-				if (uDao.update(new User(employeeId,password,username,icon,birth,comment,point),langList)) {	// 更新成功
+				if (uDao.update(new User(employeeId,password,username,birth,comment,point),langList)) {	// 更新成功
 					request.setAttribute("result",
 					new Result("更新成功！", "レコードを更新しました。", "/LinX/HomeServlet"));
 				}
