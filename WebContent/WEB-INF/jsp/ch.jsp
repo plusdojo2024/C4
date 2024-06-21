@@ -8,14 +8,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="./css/ch.css">
+<link rel="icon" href="./img/LinXicon.ico" type="image/png">
 <title>チャンネル選択</title>
 </head>
 
 <body>
 	<header>
 		<div class="search-container">
-			<input type="text" id="searchInput" placeholder="チャンネルを検索">
-			<button id="searchButton">検索</button>
+		<form method="post" action="ChServlet">
+			<input type="text" id="searchInput" name="channelName" placeholder="チャンネルを検索">
+			<input type="submit"  name="submit" value="検索">
+		</form>
 		</div>
 	</header>
 	<main>
@@ -23,26 +26,23 @@
 
 		<div class="create-channel">
 			<form method="post" action="ChServlet">
-				<input type="text" id="channelName" name="channelName"
-					placeholder="チャンネル名"> <input type="text"
-					id="channelDescription" name="channelDescription"
-					placeholder="チャンネル説明"> <input type="submit"
-					id="createChannelButton" value="作成">
+				<input type="text" id="channelName" name="channelName" placeholder="チャンネル名">
+				<input type="text" id="channelDescription" name="channelDescription" placeholder="チャンネル説明">
+				<input type="submit" id="createChannelButton"  name="submit" value="作成">
 			</form>
 		</div>
 
 		<c:forEach var="e" items="${chList}">
-			<form method="post" action="ChServlet">
-				<div class="channel-container">
-					<div class="channel-n">
+			<div class="channel-container">
+				<div class="channel-n">
+					<form method="post" action="ChServlet">
+						<input type="hidden" name="channelId" value="${e.channelId}">
 						<input type="hidden" name="channelName" value="${e.chName}">
-						<input type="hidden" name="action" value="view"> <input
-							id="channnel-shinji" type="submit" value="${e.chName}">
-						<button class="delete-button" type="submit" name="action"
-							value="delete">削除</button>
-					</div>
+						<input type="submit" id="channnel-shinji" name="submit" value="${e.chName}">
+						<input type="submit" id="delete-button" name="submit" value="削除">
+					</form>
 				</div>
-			</form>
+			</div>
 		</c:forEach>
 	</main>
 	<footer>

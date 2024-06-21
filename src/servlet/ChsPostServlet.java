@@ -43,7 +43,7 @@ public class ChsPostServlet extends HttpServlet {
 
 
         	ChsDao cDao = new ChsDao();
-        	List<Posts> cardList = cDao.chSelect(channels_id);
+        	List<Posts> cardList = cDao.chPostSelect(channels_id);
 
         	request.setAttribute("cardList", cardList);
             request.setAttribute("channelName", channelName);

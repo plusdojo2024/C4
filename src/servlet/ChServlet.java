@@ -15,46 +15,69 @@ import model.Chs;
 
 @WebServlet("/ChServlet")
 public class ChServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // リクエストパラメータからチャンネル名と説明を取得
-    	request.setCharacterEncoding("UTF-8");
-        String chName = request.getParameter("channelName");
-        String chComment = request.getParameter("channelDescription");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// リクエストパラメータからチャンネル名と説明を取得
+		request.setCharacterEncoding("UTF-8");
+		String chName = request.getParameter("channelName");
+		String chComment = request.getParameter("channelDescription");
+		if (request.getParameter("submit").equals("削除")) {
+			int chId = Integer.parseInt(request.getParameter("channelId"));
+			// 削除アクションの処理
+			ChsDao cDao = new ChsDao();
+			cDao.delete(chId);
+			response.sendRedirect("ChServlet");
+		} else if (request.getParameter("submit").equals("作成")) {
+			// 表示（または更新）アクションの処理
+			// チャンネルをデータベースに保存するなどの処理?
+			// コンソールに出力
+			System.out.println("新しいチャンネルが作成されました！");
+			System.out.println("チャンネル名: " + chName);
+			System.out.println("説明: " + chComment);
 
-        // チャンネルをデータベースに保存するなどの処理?
-        // コンソールに出力
-        System.out.println("新しいチャンネルが作成されました！");
-        System.out.println("チャンネル名: " + chName);
-        System.out.println("説明: " + chComment);
+			ChsDao cDao = new ChsDao();
+			cDao.regist(chName, chComment);
+			//データの準備
+			List<Chs> chList = null;
+			//データベースからすべてのチャンネルを取得する
+			chList = cDao.select();
 
-        ChsDao cDao = new ChsDao();
-        cDao.regist(chName, chComment);
-      //データの準備
-        List<Chs> chList = null;
-		//データベースからすべてのチャンネルを取得する
-        chList = cDao.select();
+			request.setAttribute("chList", chList);
 
-		request.setAttribute("chList", chList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
+			dispatcher.forward(request, response);
+		} else if (request.getParameter("submit").equals(chName)) {
+			//ここの下にsetAttributeを利用する（未記入）
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ChsPostServlet");
+			dispatcher.forward(request, response);
+		} else if (request.getParameter("submit").equals("検索")) {
+			// 検索アクションの処理
+			ChsDao cDao = new ChsDao();
+			List<Chs> chList = null;
+			//データベースから検索したチャンネルを取得する
+			chList = cDao.chSelect(chName);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
-		dispatcher.forward(request, response);
+			request.setAttribute("chList", chList);
 
-    }
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
+			dispatcher.forward(request, response);
+		}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	//データの準備
-    	ChsDao cDao = new ChsDao();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//データの準備
+		ChsDao cDao = new ChsDao();
 		List<Chs> chList = null;
 		//データベースからすべてのチャンネルを取得する
 		chList = cDao.select();
 
 		request.setAttribute("chList", chList);
 
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
 		dispatcher.forward(request, response);
-    }
+	}
 }
