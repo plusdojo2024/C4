@@ -36,6 +36,11 @@ public class UpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("Servlet doGet");
+			HttpSession session = request.getSession();
+			if (session.getAttribute("id") == null) {
+				response.sendRedirect("/C4/LoginServlet");
+				return;
+			}
 	}
 
 	/**
@@ -45,7 +50,7 @@ public class UpdateServlet extends HttpServlet {
 		System.out.println("Servlet doPost");
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/LinX/LoginServlet");
+			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
 
@@ -101,11 +106,11 @@ public class UpdateServlet extends HttpServlet {
 			if (request.getParameter("submit").equals("更新")) {
 				if (uDao.update(new User(employeeId,password,username,birth,comment,point),langList)) {	// 更新成功
 					request.setAttribute("result",
-					new Result("更新成功！", "レコードを更新しました。", "/LinX/HomeServlet"));
+					new Result("更新成功！", "レコードを更新しました。", "/C4/HomeServlet"));
 				}
 				else {												// 更新失敗
 					request.setAttribute("result",
-					new Result("更新失敗！", "レコードを更新できませんでした。", "/LinX/HomeServlet"));
+					new Result("更新失敗！", "レコードを更新できませんでした。", "/C4/HomeServlet"));
 				}
 			}
 

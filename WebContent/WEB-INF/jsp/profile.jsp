@@ -23,7 +23,7 @@
                 <img src="./images/${user.icon}">
             </div>
 
-		<form  method="post" action="/LinX/UpdateServlet">
+		<form  method="post" action="/C4/UpdateServlet">
 
 			<c:forEach var="user" items="${userList}" >
 			<div>

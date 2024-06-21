@@ -57,7 +57,7 @@ public class CreateUserServlet extends HttpServlet {
 				}
 				else {												// 登録失敗
 					request.setAttribute("result",
-					new Result("登録失敗！", "レコードを登録できませんでした。", "/LinX/LoginServlet"));
+					new Result("登録失敗！", "レコードを登録できませんでした。", "/C4/LoginServlet"));
 				}
 
 				// 結果ページにフォワードする

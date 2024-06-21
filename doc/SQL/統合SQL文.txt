@@ -129,7 +129,7 @@ employeeId VARCHAR(5),
 password  VARCHAR(32) NOT NULL, 
 username VARCHAR(50) NOT NULL,
 icon VARCHAR(1024),
-birth TIMESTAMP,
+birth VARCHAR(50),
 comment VARCHAR(2000),
 point int(1000),
 PRIMARY KEY  (employeeId) 
@@ -147,7 +147,7 @@ INSERT INTO users VALUES (
 '0001', 
 '田中', 
 'iconnn',  
-CURRENT_TIMESTAMP, 
+'2002-06-27', 
 'こんにちは', 
 2
 );
@@ -157,7 +157,7 @@ INSERT INTO users VALUES (
 '0002', 
 '鈴木', 
 'iconnn',  
-CURRENT_TIMESTAMP, 
+'1998-12-03', 
 'おはようございます。', 
 7
 );
