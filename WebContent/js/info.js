@@ -40,7 +40,7 @@ function weatherGet(url) {
         });
 }
 
-function timeDateGet() {
+function timeGet() {
     let time = [];
     let now = new Date();
     time[0] = now.getFullYear();
@@ -50,12 +50,6 @@ function timeDateGet() {
     time[4] = now.getHours();
     time[5] = now.getMinutes();
     time[6] = now.getSeconds();
-    let start = new Date(time[0], time[1] - 1, 1);
-    let end = new Date(time[0], time[1],  0);
-    let lastEnd = new Date(time[0], time[1] - 1, 0);
-    time[7] = start.getDay();
-    time[8] = end.getDate();
-    time[9] = lastEnd.getDate();
     return time;
 }
 
@@ -65,13 +59,13 @@ function clockGet() {
     let long = new Image();
     let hand = new Image();
     let cover = new Image();
-    body.src = 'img/CSIRT_body.png';
-    short.src = 'img/CSIRT_short.png';
-    long.src = 'img/CSIRT_long.png';
-    hand.src = 'img/CSIRT_sec.png';
-    cover.src = 'img/CSIRT_cover.png';
+    body.src = './img/CSIRT_body.png';
+    short.src = './img/CSIRT_short.png';
+    long.src = './img/CSIRT_long.png';
+    hand.src = './img/CSIRT_sec.png';
+    cover.src = './img/CSIRT_cover.png';
     let time = [];
-    time = timeDateGet();
+    time = timeGet();
     let canvas = document.getElementById('clock');
     let ctx = canvas.getContext('2d');
     let handHour = ((time[5] / 60) + time[4]) / 12 * 360;
@@ -106,38 +100,73 @@ function weatherView() {
     weatherGet(url);
 }
 
-function calendarView() {
+function calendarView(year, month) {
+    let start = new Date(year, month - 1, 1);
+    let end = new Date(year, month,  0);
+    let lastEnd = new Date(year, month - 1, 0);
+    let startDay = start.getDay();
+    let endDate = end.getDate();
+    let lastEndDate = lastEnd.getDate();
     let calendarHtml = '';
     let dayCount = 1;
-    let date = [];
-    date = timeDateGet();
-    calendarHtml += '<h1>' + date[0]  + '/' + date[1] + '</h1>';
+    calendarHtml += '<h1>' + year  + '/' + month + '</h1>';
+    calendarHtml += '<input type="hidden" id="year" value="' + year + '"></input>' + '<input type="hidden" id="month" value="' + month + '"></input>';
     calendarHtml += '<table>';
     for (let i = 0; i < days.length; i++) {
         calendarHtml += '<td>' + days[i] + '</td>';
     }
-    
+
     for (let i = 0; i < 6; i++) {
         calendarHtml += '<tr>';
         for (let j = 0; j < 7; j++) {
-            if (i == 0 && j < date[7]) {
-                let num = date[9] - date[7] + j + 1;
+            if (i == 0 && j < startDay) {
+                let num = lastEndDate - startDay + j + 1;
                 calendarHtml += '<td class="is-disabled">' + num + '</td>';
-            } else if (dayCount > date[8]) {
-                let num = dayCount - date[8];
+            } else if (dayCount > endDate) {
+                let num = dayCount - endDate;
                 calendarHtml += '<td class="is-disabled">' + num + '</td>';
                 dayCount++;
             } else {
-                calendarHtml += '<td>' + dayCount + '</td>';
+                calendarHtml += `<td class="calendar_td" data-date="${year}/${month}/${dayCount}">${dayCount}</td>`;
                 dayCount++;
             }
         }
         calendarHtml += '</tr>';
     }
     calendarHtml += '</table>'
-    
+
     document.querySelector('#calendar').innerHTML = calendarHtml
 }
+
+function lastCalendar() {
+    let year = document.getElementById("year").value;
+    let month = document.getElementById("month").value;
+    document.querySelector('#calendar').innerHTML = '';
+    month--;
+        if (month < 1) {
+            year--;
+            month = 12;
+        }
+    calendarView(year, month);
+}
+
+function nextCalendar() {
+    let year = document.getElementById("year").value;
+    let month = document.getElementById("month").value;
+    document.querySelector('#calendar').innerHTML = '';
+    month++;
+        if (month > 12) {
+            year++;
+            month = 1;
+        }
+    calendarView(year, month);
+}
+
+document.addEventListener("click", function(e) {
+    if(e.target.classList.contains("calendar_td")) {
+        alert('クリックした日付は' + e.target.dataset.date + 'です');
+    }
+});
 
 window.onload = function () {
     let time = [];
@@ -155,7 +184,7 @@ window.onload = function () {
     }
 
     window.setInterval(function () {
-        time = timeDateGet();
+        time = timeGet();
         document.getElementById('date').textContent = time[0] + "/" + time[1].toString().padStart(2, " ") + "/" + time[2].toString().padStart(2, " ") + "(" + days[time[3]] + ")" + time[4].toString().padStart(2, "0") + ":" + time[5].toString().padStart(2, "0") + ":" + time[6].toString().padStart(2, "0");
         if (time[5] === 0 && time[6] === 0) {
             weatherView();
@@ -165,10 +194,9 @@ window.onload = function () {
 
     from = "100000";
     url = "https://www.jma.go.jp/bosai/forecast/data/forecast/" + from + ".json";
-    timeDateGet();
     weatherGet(url);
-
-    calendarView();
+    time = timeGet();
+    calendarView(time[0], time[1]);
 };
 
 document.getElementById("from").onchange = function () {
