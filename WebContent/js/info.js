@@ -150,6 +150,25 @@ function lastCalendar() {
     calendarView(year, month);
 }
 
+function postForm(value) {
+
+    var form = document.createElement('form');
+    var request = document.createElement('input');
+
+    form.method = 'POST';
+    form.action = '/C4/HomeServlet';
+
+    request.type = 'hidden';
+    request.name = 'date';
+    request.value = value;
+
+    form.appendChild(request);
+    document.body.appendChild(form);
+
+    form.submit();
+
+};
+
 function nextCalendar() {
     let year = document.getElementById("year").value;
     let month = document.getElementById("month").value;
@@ -161,12 +180,6 @@ function nextCalendar() {
         }
     calendarView(year, month);
 }
-
-document.addEventListener("click", function(e) {
-    if(e.target.classList.contains("calendar_td")) {
-        alert('クリックした日付は' + e.target.dataset.date + 'です');
-    }
-});
 
 window.onload = function () {
     let time = [];
@@ -202,3 +215,10 @@ window.onload = function () {
 document.getElementById("from").onchange = function () {
     weatherView();
 };
+
+document.addEventListener("click", function(e) {
+	postForm(e.target.dataset.date);
+    if(e.target.classList.contains("calendar_td")) {
+        alert('クリックした日付は' + e.target.dataset.date + 'です');
+    }
+});

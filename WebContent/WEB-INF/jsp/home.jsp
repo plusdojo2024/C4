@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/ch.css">
 <link rel="stylesheet" href="./css/home.css">
 <link rel="icon" href="./img/LinXicon.ico" type="image/png">
 <title>ホーム</title>
@@ -13,12 +15,10 @@
 <body>
 	<!--ヘッダーここから-->
 	<header>
-		<div>
-			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
-			</h1>
-		</div>
-		<form method="get"
+		<h1 id="logo">
+			<a href="${pageContext.request.contextPath}/HomeServlet"><img src="./img/LinXlogo.jpg" alt="LinX"></a>
+		</h1>
+		<form method="post"
 			action="${pageContext.request.contextPath}/HomeServlet">
 			<input type="search" name="search" placeholder="キーワードを入力"> <input
 				type="submit" name="submit" value="検索">
@@ -57,6 +57,7 @@
 					<div class=date>日付</div>
 					<div class=comment>コメント</div>
 					<div class=reaction>リアクション</div>
+					<hr>
 				</c:forEach>
 			</div>
 			<div class="form-container">

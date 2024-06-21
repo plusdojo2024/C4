@@ -83,7 +83,7 @@
 		</form>
 	</main>
 	<footer>
-		<a href="/LinX/HomeServlet">ホームページ</a>
+		<a href="/C4/HomeServlet">ホームページ</a>
 	</footer>
 </body>
 </html>
