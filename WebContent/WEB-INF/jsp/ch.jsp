@@ -207,19 +207,19 @@
         </form>
     </div>
 
-    <c:if test="${empty chList}">
-    	<p>一致するデータはありません。</p>
-	</c:if>
-	<c:forEach var="e" items="${chList}" >
-		<form method="post" action="ChsPostServlet">
-    		<div class="channel-container">
-        		<div class="channel-n">
-            		<input id="channnel-shinji" type="submit" value="${e.chName}">
-            		<button class="delete-button">削除</button>
-        		</div>
-    		</div>
-    	</form>
-	</c:forEach>
+    <c:forEach var="e" items="${chList}" >
+    <form method="post" action="ChServlet">
+        <div class="channel-container">
+            <div class="channel-n">
+                <input type="hidden" name="channelName" value="${e.chName}">
+                <input type="hidden" name="action" value="view">
+                <input id="channnel-shinji" type="submit" value="${e.chName}">
+                <button class="delete-button" type="submit" name="action" value="delete">削除</button>
+            </div>
+        </div>
+    </form>
+</c:forEach>
+
     <!-- <script src="js/ch.js"></script> -->
 </body>
 
