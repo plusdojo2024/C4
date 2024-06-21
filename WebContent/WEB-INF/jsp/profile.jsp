@@ -16,6 +16,13 @@
         <c:if test="${empty userList}">
 			<p>一致するデータはありません。</p>
 		</c:if>
+
+		<div>
+                <label for="icon">プロフィール写真</label>
+                <input type="file" id="icon" name="icon" accept="images/*">
+                <img src="./images/${user.icon}">
+            </div>
+
 		<form  method="post" action="/LinX/UpdateServlet">
 
 			<c:forEach var="user" items="${userList}" >
@@ -28,16 +35,11 @@
             	<input type="text" id="username" name="username" value="${user.username}" >
         	</div>
 
-        	<%-- <div>
-        		<label for="lang">話せる言語</label>
-            	<input type="text" id="lang" name="lang" value="${user.lang}" >
-        	</div> --%>
-
-        	<!--改造  -->
-			<div>
-        		<label for="lang">話せる言語</label>
-            	<input type="text" id="lang" name="lang" value="${user.lang}" >
-        	</div>
+			<label for="lang">話せる言語</label>
+			 <c:forEach var="lang" items="${user.langList}">
+                  <input type="text" id="lang" name="lang" value="${lang}" >
+             	<%-- <span>${lang}</span> --%>
+             </c:forEach>
 
 
         	<div>
@@ -54,20 +56,22 @@
             	<input type="text" id="point" name="point" value="${user.point}" >
         	</div>
 
-        	<input type="checkbox" name="languages" value="English"> English/英語<br>
-        	<input type="checkbox" name="languages" value="Japanese"> Japanese/日本語<br>
-        	<input type="checkbox" name="languages" value="Burma">Burma/ビルマ語<br>
+
+
+        	<input type="checkbox" name="languages" value="English"> English/英語
+        	<input type="checkbox" name="languages" value="Japanese"> Japanese/日本語
+        	<input type="checkbox" name="languages" value="Burma">Burma/ビルマ語
         	<input type="checkbox" name="languages" value="Chinese"> Chinese/中国語<br>
-        	<input type="checkbox" name="languages" value="Korean"> Korean/韓国語<br>
-        	<input type="checkbox" name="languages" value="Vietnamese"> Vietnamese/ベトナム語<br>
-        	<input type="checkbox" name="languages" value="Malay"> Malay/マレー語<br>
+        	<input type="checkbox" name="languages" value="Korean"> Korean/韓国語
+        	<input type="checkbox" name="languages" value="Vietnamese"> Vietnamese/ベトナム語
+        	<input type="checkbox" name="languages" value="Malay"> Malay/マレー語
         	<input type="checkbox" name="languages" value="Thai">Thai/タイ語<br>
-        	<input type="checkbox" name="languages" value="Spanish">Spanish/スペイン語<br>
-        	<input type="checkbox" name="languages" value="German"> German/ドイツ語<br>
+        	<input type="checkbox" name="languages" value="Spanish">Spanish/スペイン語
+        	<input type="checkbox" name="languages" value="German"> German/ドイツ語
         	<input type="checkbox" name="languages" value="Russian"> Russian/ロシア語<br>
-        	<input type="checkbox" name="languages" value="Italian"> Italian/イタリア語<br>
-        	<input type="checkbox" name="languages" value="Portuguese"> Portuguese/ポルトガル語<br>
-        	<input type="checkbox" name="languages" value="Arabic"> Arabic/アラビア語<br>
+        	<input type="checkbox" name="languages" value="Italian"> Italian/イタリア語
+        	<input type="checkbox" name="languages" value="Portuguese"> Portuguese/ポルトガル語
+        	<input type="checkbox" name="languages" value="Arabic"> Arabic/アラビア語
         	<input type="checkbox" name="languages" value="French"> French/フランス語<br>
 
          	<button type="submit" name="submit" value="更新">編集</button>
@@ -80,7 +84,7 @@
 		</form>
 
 
-		<a href="/C4/HomeServlet">ホームページ</a>
+		<a href="/LinX/HomeServlet">ホームページ</a>
 
 </main>
 
