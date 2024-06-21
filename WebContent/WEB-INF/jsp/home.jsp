@@ -14,19 +14,17 @@
 <body>
 	<!--ヘッダーここから-->
 	<header>
-		<div>
-			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img
-					src="./img/LinXlogo.jpg" alt="LinX"></a>
-			</h1>
-			<form method="get"
-				action="${pageContext.request.contextPath}/HomeServlet">
-				<input type="search" name="search" placeholder="キーワードを入力"> <input
-					type="submit" name="submit" value="検索">
-			</form>
+		<h1 id="logo">
+			<a href="${pageContext.request.contextPath}/HomeServlet"><img
+				src="./img/LinXlogo.jpg" alt="LinX"></a>
+		</h1>
+		<form method="get"
+			action="${pageContext.request.contextPath}/HomeServlet">
+			<input type="search" name="search" placeholder="キーワードを入力"> <input
+				type="submit" name="submit" value="検索">
+		</form>
 
-			<h2>ランキング</h2>
-		</div>
+		<h2>ランキング</h2>
 	</header>
 	<!--ヘッダーここまで-->
 	<!--メインーここから-->
@@ -42,28 +40,31 @@
 		<!--左のカラムここまで-->
 
 		<!--メインカラムここから-->
-		<div class="main-contents">
-			<div class=allpost>
-				<div class=post>ポスト</div>
+		<div class="main-navi">
+			<div class="main-contents">
+				<div class=allpost>
+					<div class=post>ポスト</div>
+				</div>
+			</div>
+			<div class="channel-content" id="posts">
+				まだ投稿はありません
+				<c:forEach var="e" items="${PostList}">
+					<div class="home">
+						<div></div>
+						<div>${e.content}</div>
+						<div>${e.created_at}</div>
+					</div>
+					<div class=date>日付</div>
+					<div class=comment>コメント</div>
+					<div class=reaction>リアクション</div>
+				</c:forEach>
+			</div>
+			<div class="form-container">
+				<textarea id="text" placeholder="投稿内容"></textarea>
+				<button onclick="addPost()">投稿</button>
 			</div>
 		</div>
-		<div class="channel-content" id="posts">
-			まだ投稿はありません
-			<c:forEach var="e" items="${PostList}">
-				<div class="home">
-					<div></div>
-					<div>${e.content}</div>
-					<div>${e.created_at}</div>
-				</div>
-				<div class=date>日付</div>
-				<div class=comment>コメント</div>
-				<div class=reaction>リアクション</div>
-			</c:forEach>
-		</div>
-		<div class="form-container">
-			<textarea id="text" placeholder="投稿内容"></textarea>
-			<button onclick="addPost()">投稿</button>
-		</div>
+		<!--メインカラムここまで-->
 
 		<!--右のカラムここから-->
 		<div class="right-navi">
@@ -92,10 +93,8 @@
 	<!--メインーここまで-->
 	<!-- フッター（ここから） -->
 	<footer>
-		<div>
-			<div class=makepost>
-				<a href="${pageContext.request.contextPath}/ChsPostServlet">投稿</a>
-			</div>
+		<div class=makepost>
+			<a href="${pageContext.request.contextPath}/ChsPostServlet">投稿</a>
 		</div>
 	</footer>
 	<!-- フッター（ここまで） -->
