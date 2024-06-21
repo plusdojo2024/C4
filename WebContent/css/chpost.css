@@ -1,0 +1,46 @@
+@charset "UTF-8";
+body {
+    /* 全体の設定 */
+    font-family: Arial, sans-serif; /* フォントファミリー設定 */
+    display: flex; /* Flexboxを使用してコンテンツを中央揃え */
+    flex-direction: column; /* 縦方向にコンテンツを配置 */
+    align-items: center; /* コンテンツを中央に揃える */
+    background-color: #f0f0f0; /* 背景色設定 */
+    margin: 0; /* 余白なし */
+    padding: 20px; /* 内側の余白 */
+}
+
+.post-container {
+    /* 投稿コンテナの設定 */
+    width: 90%; /* 幅は90% */
+    max-width: 600px; /* 最大幅は600px */
+    background-color: white; /* 背景色は白 */
+    border: 1px solid #ccc; /* 枠線 */
+    padding: 20px; /* 内側の余白 */
+    margin-bottom: 20px; /* 下の余白 */
+    border-radius: 10px; /* 角丸 */
+}
+
+.post {
+    /* 各投稿の設定 */
+    margin-bottom: 10px; /* 投稿同士の間隔 */
+    border-bottom: 1px solid #eee; /* 下線 */
+    padding-bottom: 10px; /* 下の余白 */
+}
+
+.post:last-child {
+    /* 最後の投稿の設定 */
+    border-bottom: none; /* 最後の投稿の下線を消す */
+}
+
+.post-title {
+    /* 投稿タイトルの設定 */
+    font-size: 18px; /* フォントサイズ */
+    font-weight: bold; /* 太字 */
+}
+
+.post-content {
+    /* 投稿内容の設定 */
+    margin-top: 5px; /* 上の余白 */
+    font-size: 14px; /* フォントサイズ */
+}

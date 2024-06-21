@@ -48,7 +48,7 @@ public class ChsPostServlet extends HttpServlet {
         	request.setAttribute("cardList", cardList);
             request.setAttribute("channelName", channelName);
             // chPost.jspにフォワード
-            request.getRequestDispatcher("/WEB-INF/jsp/chPost.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/chpost.jsp").forward(request, response);
         } else {
             // チャンネル名が無効な場合、ch.jspにリダイレクト
             //response.sendRedirect(request.getContextPath() + "/WEB-INF/jsp/ch.jsp");

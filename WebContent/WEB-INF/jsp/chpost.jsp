@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${chName}チャンネル</title>
-<link rel="stylesheet" href="./css/ch.css">
+<link rel="stylesheet" href="./css/chpost.css">
 <link rel="icon" href="./img/LinXicon.ico" type="image/png">
 </head>
 <body>
