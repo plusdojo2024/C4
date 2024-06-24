@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -33,12 +34,13 @@ public class HomeServlet extends HttpServlet {
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
+
 		request.setCharacterEncoding("UTF-8");
+		List<Posts> PostList = new ArrayList<Posts>();
 
 		//検索処理を行う
 		HomeDao hDao = new HomeDao();
-		List<Posts> PostList = hDao.select();
-		System.out.print(PostList);
+		PostList = hDao.select();
 
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);
@@ -56,15 +58,27 @@ public class HomeServlet extends HttpServlet {
 		//リクエストパラメータ
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
-		String content = request.getParameter("content");
-		//検索処理を行う
+		String post = request.getParameter("post");
+		List<Posts> PostList = new ArrayList<Posts>();
 		HomeDao hDao = new HomeDao();
-		List<Posts> PostList = hDao.select();
 
-		//検索処理を行う
-		//HomeDao hDao = new HomeDao();
-		//List<Posts> PostList = hDao.search(search);
-		//System.out.print(PostList);
+		if (request.getParameter("submit").equals("検索")) {
+			String search = request.getParameter("search");
+			//検索処理を行う
+			PostList = hDao.search(search);
+		} else if (request.getParameter("submit").equals("投稿")) {
+			int employee_id = Integer.parseInt(request.getParameter("employee_id"));
+			String content = request.getParameter("content");
+			int comments = Integer.parseInt(request.getParameter("comments"));
+			int file_id = Integer.parseInt(request.getParameter("file_id"));
+			String created_at = null;
+
+			hDao.insert(new Posts(0, 0, employee_id, content, comments, 0, file_id, created_at));
+			PostList = hDao.select();
+		}else {
+			//検索処理を行う
+			PostList = hDao.select();
+		}
 
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);

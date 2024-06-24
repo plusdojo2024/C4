@@ -40,7 +40,7 @@ public class HomeDao {
 				rs.getInt("channels_id"),
 				rs.getInt("employee_id"),
 				rs.getString("content"),
-				rs.getInt("comments"),
+				rs.getInt("comments_id"),
 				rs.getInt("reaction_id"),
 				rs.getInt("file_id"),
 				rs.getString("created_at")
@@ -87,42 +87,34 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Bc VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Bc VALUES (NULL, 0, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			if (post.getChannels_id() != 0) {
-				pStmt.setInt(1, post.getChannels_id());
-			}
-			else {
-				pStmt.setInt(1, 0);
-			}
+			pStmt.setInt(1, post.getEmployee_id());
 
-			pStmt.setInt(2, post.getEmployee_id());
-
-			pStmt.setString(3, post.getContent());
+			pStmt.setString(2, post.getContent());
 
 			if (post.getComments() != 0) {
-				pStmt.setInt(4, post.getComments());
+				pStmt.setInt(3, post.getComments());
+			}
+			else {
+				pStmt.setInt(3, 0);
+			}
+
+			if (post.getReaction_id() != 0) {
+				pStmt.setInt(4, post.getReaction_id());
 			}
 			else {
 				pStmt.setInt(4, 0);
 			}
 
-			if (post.getReaction_id() != 0) {
-				pStmt.setInt(5, post.getReaction_id());
+			if (post.getFile_id() != 0) {
+				pStmt.setInt(5, post.getFile_id());
 			}
 			else {
 				pStmt.setInt(5, 0);
 			}
-
-			if (post.getFile_id() != 0) {
-				pStmt.setInt(6, post.getFile_id());
-			}
-			else {
-				pStmt.setInt(6, 0);
-			}
-			pStmt.setString(7, post.getCreated_at());
 
 
 			// SQL文を実行する

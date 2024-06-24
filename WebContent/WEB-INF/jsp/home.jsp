@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./css/home.css">
+<link rel="stylesheet" href="./css/popup.css">
 <link rel="icon" href="./img/LinXicon.ico" type="image/png">
 <title>ホーム</title>
 <script src="./js/list.js"></script>
@@ -15,14 +16,12 @@
 	<header>
 		<div>
 			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img
-					class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
+				<a href="${pageContext.request.contextPath}/HomeServlet"><img class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
 			</h1>
 		</div>
-		<form method="get"
-			action="${pageContext.request.contextPath}/HomeServlet">
-			<input type="search" name="search" placeholder="キーワードを入力"> <input
-				type="submit" name="submit" value="検索">
+		<form method="POST" action="${pageContext.request.contextPath}/HomeServlet">
+			<input type="search" name="search" placeholder="キーワードを入力">
+			<input type="submit"  name="submit" value="検索">
 		</form>
 
 		<h2>ランキング</h2>
@@ -42,15 +41,10 @@
 
 		<!--メインカラムここから-->
 		<div class="main-navi">
-			<div class="main-contents">
-				<div class=allpost>
-					<!--
- 					<div class=post>ポスト</div>
--->
-				</div>
-			</div>
 			<div class="channel-content" id="posts">
-				まだ投稿はありません
+				<c:if test="${empty PostList}">
+					<p>まだ投稿はありません</p>
+				</c:if>
 				<c:forEach var="e" items="${PostList}">
 					<div class="home">
 						<div class=post-date>投稿日時：${e.created_at}</div>
@@ -61,10 +55,6 @@
 						</div>
 					</div>
 				</c:forEach>
-			</div>
-			<div class="form-container">
-				<textarea id="text" placeholder="投稿内容"></textarea>
-				<button onclick="addPost()">投稿</button>
 			</div>
 		</div>
 		<!--メインカラムここまで-->
@@ -77,7 +67,7 @@
 				<hr>
 			</div>
 			<div class="weather">
-				<select id="from"></select><br> 
+				<select id="from"></select><br>
 				天気:<span id="fromWeather"></span><br>
 				気温:<span id="placeWeather"></span><br>
 				<hr>
@@ -97,13 +87,18 @@
 	<!--メインーここまで-->
 	<!-- フッター（ここから） -->
 	<footer>
-		<div class=makepost>
-			<a href="${pageContext.request.contextPath}/ChsPostServlet">投稿</a>
-		</div>
+		<button onclick="view()">投稿する</button>
+        <div id="popup" class="popup">
+        <form method="POST" action="${pageContext.request.contextPath}/HomeServlet">
+			<textarea id="text" name="post" placeholder="投稿内容"></textarea>
+			<input type="submit"  name="submit" value="投稿">
+		</form>
+			<button onclick="hide()">閉じる</button>
+        </div>
 	</footer>
 	<!-- フッター（ここまで） -->
-	<script src="./js/chPost.js"></script>
 	<script src="./js/info.js"></script>
+	<script src="./js/popup.js"></script>
 </body>
 
 </html>

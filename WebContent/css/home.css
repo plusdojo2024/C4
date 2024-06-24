@@ -1,5 +1,6 @@
+@charset "UTF-8";
+
 /* 全体 */
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 * {
 	margin: 0;
 	padding: 0;
@@ -23,7 +24,6 @@ header h1#logo img.round-image {
 	width: 150px;
 	height: 100px;
 	border-radius: 50%;
-	background-image: url("LinXlogo.jpg");
 }
 
 header {

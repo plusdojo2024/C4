@@ -217,8 +217,8 @@ document.getElementById("from").onchange = function () {
 };
 
 document.addEventListener("click", function(e) {
-	postForm(e.target.dataset.date);
     if(e.target.classList.contains("calendar_td")) {
         alert('クリックした日付は' + e.target.dataset.date + 'です');
+        postForm(e.target.dataset.date);
     }
 });
