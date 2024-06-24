@@ -17,7 +17,7 @@ body {
 header>div {
 	text-align: left
 }
-/**/
+
 header h1#logo img.round-image {
 	width: 150px;
 	height: 100px;
@@ -79,6 +79,7 @@ header h2 {
 /* ボディ */
 main {
 	display: flex;
+
 	height: calc(100vh - 72px); /* ヘッダーの高さを引いたもの */
 }
 
