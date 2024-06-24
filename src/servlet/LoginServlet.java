@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,10 +57,12 @@ public class LoginServlet extends HttpServlet {
 
 			// 検索処理を行う
 			UserDao bDao = new UserDao();
-			List<User> userList = bDao.select(employeeId);
+//			List<User> userList = bDao.select(employeeId);
+			User user = bDao.select(employeeId);
 
 			// 検索結果をリクエストスコープに格納する
-			request.setAttribute("userList", userList);
+//			request.setAttribute("userList", userList);
+			request.setAttribute("user", user);
 
 
 			// 結果ページにフォワードする

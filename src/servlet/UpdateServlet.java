@@ -35,7 +35,7 @@ public class UpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println("Servlet doGet");
+
 			HttpSession session = request.getSession();
 			if (session.getAttribute("id") == null) {
 				response.sendRedirect("/C4/LoginServlet");
@@ -47,37 +47,13 @@ public class UpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Servlet doPost");
+
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
 
-		//改造
-//		 Part filePart = request.getPart("icon");
-//		 System.out.println("fp" + filePart);
-//	        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//	        String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
-//
-//	        // Creates the images directory if it does not exist
-//	        File uploadDir = new File(uploadPath);
-//	        if (!uploadDir.exists()) {
-//	            uploadDir.mkdir();
-//	        }
-//
-//	        // Saves the file on the server
-//	        try (InputStream inputStream = filePart.getInputStream();
-//	             FileOutputStream outputStream = new FileOutputStream(uploadPath + File.separator + fileName)) {
-//	            int read;
-//	            final byte[] bytes = new byte[1024];
-//	            while ((read = inputStream.read(bytes)) != -1) {
-//	                outputStream.write(bytes, 0, read);
-//	            }
-//	        }
-//
-//	        System.out.println("file" + fileName);
-//	        System.out.println("input" + uploadPath);
 
 
 

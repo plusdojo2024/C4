@@ -123,9 +123,10 @@ public class UserDao {
 
 }
 
-	public List<User> select(String employee_Id) {
+	public User select(String employee_Id) {
 				Connection conn = null;
-				List<User> userList = new ArrayList<User>();
+//				List<User> userList = new ArrayList<User>();
+				User user = null;
 
 
 
@@ -162,7 +163,7 @@ public class UserDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				User record = new User(
+				user = new User(
 				rs.getString("employee_Id"),
 				rs.getString("password"),
 				rs.getString("username"),
@@ -174,16 +175,18 @@ public class UserDao {
 
 
 				);
-				userList.add(record);
+//				userList.add(record);
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
-			userList = null;
+//			userList = null;
+			user = null;
 		}
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			userList = null;
+//			userList = null;
+			user = null;
 		}
 		finally {
 			// データベースを切断
@@ -193,13 +196,15 @@ public class UserDao {
 				}
 				catch (SQLException e) {
 					e.printStackTrace();
-					userList = null;
+//					userList = null;
+					user = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return userList;
+//		return userList;
+		return user;
 	}
 //	public boolean update(User user,String[] language)
 	public boolean update(User user,String[] language) {
@@ -272,6 +277,63 @@ public class UserDao {
 
 
 	}
+
+	//Photo Upload Methods
+
+	//ここまで
+
+	public boolean updatePhoto(String employeeId, String password, String username, String icon) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "UPDATE users SET icon=? WHERE employee_Id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+				pStmt.setString(1, icon);
+
+
+
+
+			pStmt.setString(2,employeeId);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+
 //	//↓以下 藤土編集 for account search
 			//アカウント一覧表示
 			public List<User> selectAllUsers() {

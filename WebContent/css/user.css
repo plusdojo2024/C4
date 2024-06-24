@@ -1,0 +1,152 @@
+
+/* すべてのページに適用される設定 */
+* {
+    box-sizing: border-box;
+    /* background-color:#FFFFFF;  */
+  }
+
+/* すべてのページに適用される　‐ヘッダー */
+
+/* すべてのページに適用される　メイン */
+body {
+    margin: 0 0 0 0;
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+
+  }
+
+/* すべてのページに適用される　フッター */
+
+
+/* login Page */
+/* regist Page */
+.body_bgcolor {
+    /* background-color:#C8C6C6 ; */
+    color: white;
+}
+
+
+.login {
+    width: 382px;
+    /* overflow: hidden; */
+    margin: auto;
+    margin: 20 0 0 450px;
+    padding: 80px;
+    background:#4B6587 ;
+    border-radius: 15px ;
+
+  }
+
+  #login-header {
+    text-align: center;
+    color:#4B6587;
+    padding: 18px;
+
+  }
+
+#error_message {
+    color : rgb(230, 14, 14);
+    font-size:20px ;
+  }
+
+a {
+    color: white;
+
+}
+
+a:hover {
+    color: #F0E5CF;
+}
+
+/* profile page */
+/*
+img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+}  */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main {
+    background: #4B6587;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    color : white;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="date"], input[type="file"], input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profile-pic-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-pic {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+#error_message {
+    color: red;
+    font-weight: bold;
+}
