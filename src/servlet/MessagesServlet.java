@@ -25,7 +25,7 @@ public class MessagesServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
     	/*HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/simpleBC/LoginServlet");
+			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}*/
 		int conversationsId = 1;
@@ -33,6 +33,9 @@ public class MessagesServlet extends HttpServlet {
 		MessagesDao mDao = new MessagesDao();
 		List<messages> messagesList = mDao.select(conversationsId);
 
+		String id = "0001";//(String)session.getAttribute("id");
+
+		request.setAttribute("id", id);
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", messagesList);
 		request.setAttribute("conversationsId", conversationsId);
@@ -66,6 +69,10 @@ public class MessagesServlet extends HttpServlet {
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", messagesList);
+
+		String id = "0001";//(String)session.getAttribute("id");
+
+		request.setAttribute("id", id);
 
 		/*// メッセージを相手メッセージと自分のメッセージに分ける
 				List<messages> myMessages = new ArrayList<messages>();
