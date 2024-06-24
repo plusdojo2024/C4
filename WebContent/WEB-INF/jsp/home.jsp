@@ -15,7 +15,8 @@
 	<header>
 		<div>
 			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
+				<a href="${pageContext.request.contextPath}/HomeServlet"><img
+					class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
 			</h1>
 		</div>
 		<form method="get"
@@ -43,7 +44,7 @@
 		<div class="main-navi">
 			<div class="main-contents">
 				<div class=allpost>
-<!--
+					<!--
  					<div class=post>ポスト</div>
 -->
 				</div>
@@ -52,13 +53,13 @@
 				まだ投稿はありません
 				<c:forEach var="e" items="${PostList}">
 					<div class="home">
-						<div></div>
-						<div>${e.content}</div>
-						<div class=date>${e.created_at}</div>
+						<div class=post-date>投稿日時：${e.created_at}</div>
+						<div class="post-content">${e.content}</div>
+						<div class="post-footer">
+							<div class=comment>コメント</div>
+							<div class=reaction>リアクション</div>
+						</div>
 					</div>
-					<div>日付</div>
-					<div class=comment>コメント</div>
-					<div class=reaction>リアクション</div>
 				</c:forEach>
 			</div>
 			<div class="form-container">
@@ -76,7 +77,8 @@
 				<hr>
 			</div>
 			<div class="weather">
-				<select id="from"></select><br> 天気:<span id="fromWeather"></span><br>
+				<select id="from"></select><br> 
+				天気:<span id="fromWeather"></span><br>
 				気温:<span id="placeWeather"></span><br>
 				<hr>
 				今日:<span id="todayWeather"></span><br> <span id="todayTemps"></span><br>

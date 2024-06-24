@@ -161,7 +161,7 @@ main {
 .channel-content .date, .channel-content .comment, .channel-content .reaction
 	{
 	font-size: 0.9em;
-	color: #777;
+	color: black;
 	border: 2px solid black;
 }
 
@@ -177,7 +177,7 @@ main {
 }
 
 .form-container textarea {
-	width: 80%;
+	width: auto;
 	height: 60px;
 	padding: 10px;
 	border: 1px solid #ccc;
