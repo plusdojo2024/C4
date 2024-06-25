@@ -65,7 +65,7 @@ main {
 /* 左ナビゲーション（サイドバー）のスタイル */
 .left-navi {
 
-    width: 33%; /* 幅を33%に設定 */
+    width: 22%; /* 幅設定 */
     background-color: #4B6587; /* 背景色を設定 */
     color: white; /* テキストカラーを白に設定 */
     padding: 20px; /* パディングを設定 */
@@ -99,6 +99,37 @@ main {
     background-color: #C8C6C6; /* ホバー時の背景色を設定 */
 }
 
+
+.left-navi {
+	width: 20%;
+	background: #4B6587;
+	color: white;
+	padding: 20px;
+}
+
+.left-navi ul {
+	list-style: none;
+	padding: 0;
+}
+
+.left-navi ul li {
+	margin-bottom: 10px;
+}
+
+.left-navi ul li a {
+	display: block;
+	padding: 10px;
+	color: #333;
+	background-color: #F0E5CF;
+	text-decoration: none;
+	border-radius: 4px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.left-navi ul li a:hover {
+	background-color: #e0d8d1;
+}
 /* メインコンテンツエリアのスタイル */
 .main-navi {
     flex: 1; /* フレックスの成長率を設定 */
