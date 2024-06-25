@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/C4/css/dm.css">
+<link rel="stylesheet" href="/Linx/css/dm.css">
 <title>Chat</title>
 <link rel="icon" href="./img/LinXicon.ico" type="image/png">
 </head>
@@ -28,9 +28,6 @@
 	</div>
 	<!--左のカラムここまで-->
 
-	<div class="opponent">
-		<a href="">相手の名前</a>
-	</div>
 
 
 	<!-- メインチャットここから -->
@@ -48,7 +45,9 @@
     </div>-->
 
 	<div id="room">
-
+      <div class="opponent">
+		<a href="">相手の名前</a>
+	  </div>
 		<c:if test="${empty cardList}">
 			<p class="no-data-message">初めての会話相手です！</p>
 		</c:if>
@@ -67,15 +66,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-
-	</div>
-	</main>
-	<!-- メインチャットここまで -->
-
-
-	<!-- フッター（ここから） -->
-	<footer>
-		<div>
+        <div>
 			<form action="MessagesServlet" method="post">
 				<input type="hidden" name="conversationsId"
 					value="${conversationsId}">
@@ -84,6 +75,14 @@
 				<input type="submit" value="送信" class="submit-button">
 			</form>
 		</div>
+	</div>
+	</main>
+	<!-- メインチャットここまで -->
+
+
+	<!-- フッター（ここから） -->
+	<footer>
+
 	</footer>
 	<!-- フッター（ここまで） -->
 
