@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MessageDao;
-import model.conversations;
+import dao.MessagesDao;
+import model.messages;
 
 /**
  * Servlet implementation class SelectConvServlet
@@ -45,7 +45,7 @@ public class SelectConvServlet extends HttpServlet {
 	        //conversations_idを取得
 	        ConvDao cDao = new ConvDao();
 
-	        List<User> SelectConv = cDao.selectByconversations_id(conversations_id);
+	        List<> SelectConv = cDao.selectByconversations_id(conversations_id);
 	        System.out.print(SelectConv);
 
 	        // 結果をリクエストスコープに格納
