@@ -13,7 +13,9 @@
 </head>
 
 <body>
-	<header></header>
+	<header>
+
+	</header>
 	<main>
 	<!--左のカラムここから-->
 	<div class="left-navi">
@@ -29,6 +31,7 @@
 	<div class="opponent">
 		<a href="">相手の名前</a>
 	</div>
+
 
 	<!-- メインチャットここから -->
 	<!--  一応コメントしてるだけ。なくても大丈夫
