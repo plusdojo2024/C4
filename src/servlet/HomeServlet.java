@@ -28,14 +28,20 @@ public class HomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
+			//ログインしてなかったら下記のサーブレットに遷移する
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
-
-		request.setCharacterEncoding("UTF-8");
+//ログアウト処理
+        if ("invalidate".equals(request.getParameter("action"))) {
+            session.invalidate();
+            response.sendRedirect("/C4/LoginServlet");
+            return;
+        }		request.setCharacterEncoding("UTF-8");
 		List<Posts> PostList = new ArrayList<Posts>();
 
 		//検索処理を行う

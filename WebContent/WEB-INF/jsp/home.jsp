@@ -16,12 +16,14 @@
 	<header>
 		<div>
 			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
+				<a href="${pageContext.request.contextPath}/HomeServlet"><img
+					class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
 			</h1>
 		</div>
-		<form method="POST" action="${pageContext.request.contextPath}/HomeServlet">
-			<input type="search" name="search" placeholder="キーワードを入力">
-			<input type="submit"  name="submit" value="検索">
+		<form method="POST"
+			action="${pageContext.request.contextPath}/HomeServlet">
+			<input type="search" name="search" placeholder="キーワードを入力"> <input
+				type="submit" name="submit" value="検索">
 		</form>
 
 		<h2>ランキング</h2>
@@ -35,6 +37,8 @@
 				<li><a href="${pageContext.request.contextPath}/HomeServlet">タイムライン</a></li>
 				<li><a href="${pageContext.request.contextPath}/ChServlet">チャンネル</a></li>
 				<li><a href="${pageContext.request.contextPath}/AccountServlet">アカウント</a></li>
+				<li><a href="${pageContext.request.contextPath}/LoginServlet"
+					class="logout-button" onclick="confirmLogout(event)">ログアウト</a></li>
 			</ul>
 		</div>
 		<!--左のカラムここまで-->
@@ -62,19 +66,18 @@
 		<!--右のカラムここから-->
 		<div class="right-navi">
 			<div class="clock">
-				<canvas id="clock" width="400" height="400"></canvas>
+				<!-- <canvas id="clock" width="400" height="400"></canvas> -->
 				<br> <span id="date"></span><br>
 				<hr>
 			</div>
-			<div class="weather">
-				<select id="from"></select><br>
-				天気:<span id="fromWeather"></span><br>
+			<!-- <div class="weather">
+				<select id="from"></select><br> 天気:<span id="fromWeather"></span><br>
 				気温:<span id="placeWeather"></span><br>
 				<hr>
 				今日:<span id="todayWeather"></span><br> <span id="todayTemps"></span><br>
 				<br> 明日:<span id="tomorrowWeather"></span><br> <span
 					id="tomorrowTemps"></span><br>
-			</div>
+			</div> -->
 			<div class="calendar">
 				<button id="lastMonth" type="button" onclick="lastCalendar()">前の月</button>
 				<button id="nextMonth" type="button" onclick="nextCalendar()">次の月</button>
@@ -86,19 +89,26 @@
 	</main>
 	<!--メインーここまで-->
 	<!-- フッター（ここから） -->
+<!-- 投稿用ポップアップ -->
 	<footer>
-		<button onclick="view()">投稿する</button>
-        <div id="popup" class="popup">
-        <form method="POST" action="${pageContext.request.contextPath}/HomeServlet">
-			<textarea id="text" name="post" placeholder="投稿内容"></textarea>
-			<input type="submit"  name="submit" value="投稿">
-		</form>
-			<button onclick="hide()">閉じる</button>
-        </div>
+<button class="post-btn" onclick="view()">投稿</button> <!-- 投稿ボタン -->
+		<div id="popup" class="popup-overlay">
+			<div class="popup-content">
+				<form method="POST"
+					action="${pageContext.request.contextPath}/HomeServlet">
+					<textarea id="text" name="post" placeholder="投稿内容"></textarea>
+					<input type="submit" name="submit" value="投稿">
+				</form>
+				<button onclick="hide()">閉じる</button>
+			</div>
+		</div>
 	</footer>
 	<!-- フッター（ここまで） -->
+
+
 	<script src="./js/info.js"></script>
 	<script src="./js/popup.js"></script>
+	<script src="./js/home.js"></script>
 </body>
 
 </html>

@@ -183,7 +183,7 @@ function nextCalendar() {
 
 window.onload = function () {
     let time = [];
-    let from, url;
+    /*let from, url;
 
     for (let i = 0; i < places.length; i++) {
         let opt = document.createElement("option");
@@ -194,27 +194,27 @@ window.onload = function () {
             opt.setAttribute("selected", true);
         }
         document.getElementById("from").appendChild(opt);
-    }
+    }*/
 
     window.setInterval(function () {
         time = timeGet();
         document.getElementById('date').textContent = time[0] + "/" + time[1].toString().padStart(2, " ") + "/" + time[2].toString().padStart(2, " ") + "(" + days[time[3]] + ")" + time[4].toString().padStart(2, "0") + ":" + time[5].toString().padStart(2, "0") + ":" + time[6].toString().padStart(2, "0");
-        if (time[5] === 0 && time[6] === 0) {
+        /*if (time[5] === 0 && time[6] === 0) {
             weatherView();
         }
-        clockGet();
+        clockGet();*/
     }, 1000);
 
-    from = "100000";
+    /*from = "100000";
     url = "https://www.jma.go.jp/bosai/forecast/data/forecast/" + from + ".json";
-    weatherGet(url);
+    weatherGet(url);*/
     time = timeGet();
     calendarView(time[0], time[1]);
 };
 
-document.getElementById("from").onchange = function () {
+/*document.getElementById("from").onchange = function () {
     weatherView();
-};
+};*/
 
 document.addEventListener("click", function(e) {
     if(e.target.classList.contains("calendar_td")) {
