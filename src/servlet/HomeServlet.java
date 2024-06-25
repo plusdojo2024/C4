@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ChsDao;
 //自分がインポートしました
 import dao.HomeDao;
 import dao.UserDao;
+import model.Chs;
 import model.LoginUser;
 import model.Posts;
 
@@ -64,6 +66,7 @@ public class HomeServlet extends HttpServlet {
 		//リクエストパラメータ
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
+		int chId = Integer.parseInt(request.getParameter("chId"));
 		String post = request.getParameter("post");
 		HttpSession session = request.getSession();
 		LoginUser user = (LoginUser)session.getAttribute("id");
@@ -85,7 +88,7 @@ public class HomeServlet extends HttpServlet {
 			int file_id = 0;
 			String created_at = null;
 
-			hDao.insert(new Posts(0, 0, employee_id, post, comments, 0, file_id, created_at));
+			hDao.insert(new Posts(0, chId, employee_id, post, comments, 0, file_id, created_at));
 			PostList = hDao.select();
 		}else {
 			//検索処理を行う
@@ -95,10 +98,18 @@ public class HomeServlet extends HttpServlet {
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);
 
-		//結果をページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-		dispatcher.forward(request, response);
 
+		if (chId != 0) {
+			ChsDao cDao = new ChsDao();
+			Chs ch = cDao.chOneSelect(chId);
+			request.setAttribute("ch", ch);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ChsPostServlet");
+			dispatcher.forward(request, response);
+		} else {
+			//結果をページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

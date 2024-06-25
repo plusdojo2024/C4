@@ -1,3 +1,5 @@
+DROP TABLE IINE;
+
 DROP TABLE posts;
 
 CREATE TABLE posts (
@@ -222,3 +224,36 @@ ON USERS.employee_id = NOTICES.employee_id;
 /**/
 
 SELECT * FROM NOTICES;
+
+CREATE TABLE iine ( 
+    iineId INT AUTO_INCREMENT PRIMARY KEY, 
+    employee_Id VARCHAR(5) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    post_id INT ,
+
+    FOREIGN KEY(employee_Id) -- 外部キーemployeeId
+    REFERENCES users(employee_Id) ,
+    FOREIGN KEY(username) -- 外部キーusername
+    REFERENCES users(username),
+    FOREIGN KEY(post_id) -- 外部キーpost_id
+    REFERENCES posts(post_id)
+);
+
+/*
+INSERT INTO iine (employee_Id, username, post_id)
+SELECT employee_Id,(SELECT username FROM USERS WHERE username = '田中'), post_id
+FROM posts
+WHERE post_id = 2
+ORDER BY created_at DESC
+LIMIT 1;
+*/
+
+INSERT INTO iine VALUES(
+    1,
+    '0002',
+    '鈴木',
+    1
+);
+
+
+SELECT * FROM IINE;

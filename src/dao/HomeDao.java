@@ -87,33 +87,35 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO POSTS VALUES (NULL, 0, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO POSTS VALUES (NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setString(1, post.getEmployee_id());
+			pStmt.setInt(1, post.getChannels_id());
 
-			pStmt.setString(2, post.getContent());
+			pStmt.setString(2, post.getEmployee_id());
+
+			pStmt.setString(3, post.getContent());
 
 			if (post.getComments() != 0) {
-				pStmt.setInt(3, post.getComments());
-			}
-			else {
-				pStmt.setInt(3, 0);
-			}
-
-			if (post.getReaction_id() != 0) {
-				pStmt.setInt(4, post.getReaction_id());
+				pStmt.setInt(4, post.getComments());
 			}
 			else {
 				pStmt.setInt(4, 0);
 			}
 
-			if (post.getFile_id() != 0) {
-				pStmt.setInt(5, post.getFile_id());
+			if (post.getReaction_id() != 0) {
+				pStmt.setInt(5, post.getReaction_id());
 			}
 			else {
 				pStmt.setInt(5, 0);
+			}
+
+			if (post.getFile_id() != 0) {
+				pStmt.setInt(6, post.getFile_id());
+			}
+			else {
+				pStmt.setInt(6, 0);
 			}
 
 

@@ -1,12 +1,10 @@
 package model;
 
-import java.sql.Timestamp;
-
 public class Chs {
     private int channelId;
     private String chName;
     private String chComment;
-    private Timestamp createdAt;
+    private String createdAt;
 
     public Chs(int channelId, String chName, String chComment, String createdAt) {
         this.channelId = channelId;
@@ -40,11 +38,11 @@ public class Chs {
         this.chComment = chComment;
     }
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

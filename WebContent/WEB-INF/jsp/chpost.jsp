@@ -54,6 +54,7 @@
 			<div class="popup-content">
 				<form method="POST"
 					action="${pageContext.request.contextPath}/HomeServlet">
+					<input type="hidden" name="chId" value="${chId}">
 					<textarea id="text" name="post" placeholder="投稿内容"></textarea>
 					<input type="submit" name="submit" value="投稿">
 				</form>

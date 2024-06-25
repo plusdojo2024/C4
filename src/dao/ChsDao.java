@@ -19,13 +19,13 @@ public class ChsDao {
 		List<Chs> chList = new ArrayList<Chs>();
 		try {
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// JDChsドライバを読み込む
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
 			String sql = "SELECT * FROM CHANNELS ORDER BY created_At DESC";
@@ -77,10 +77,10 @@ public class ChsDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT *FROM posts WHERE channels_id LIKE ?";
+			String sql = "SELECT * FROM posts WHERE channels_id LIKE ? ORDER BY created_At DESC";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -95,14 +95,15 @@ public class ChsDao {
 			//カラム名を合わせる
 			while (rs.next()) {
 				Posts record = new Posts(
-						rs.getInt("CHANNEL_ID"),
-						rs.getInt("CHANNEL_ID"),
-						rs.getString("CHANNEL_ID"),
-						rs.getString("CHNAME"),
-						rs.getInt("CHANNEL_ID"),
-						rs.getInt("CHANNEL_ID"),
-						rs.getInt("CHANNEL_ID"),
-						rs.getString("CHNAME"));
+				rs.getInt("post_id"),
+				rs.getInt("channels_id"),
+				rs.getString("employee_id"),
+				rs.getString("content"),
+				rs.getInt("comments_id"),
+				rs.getInt("reaction_id"),
+				rs.getInt("file_id"),
+				rs.getString("created_at")
+				);
 				cardList.add(record);
 			}
 		} catch (SQLException e) {
@@ -137,7 +138,7 @@ public class ChsDao {
 				Class.forName("org.h2.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 				// SQL文を準備する
 				String sql = "SELECT * FROM CHANNELS WHERE CHNAME LIKE ?";
@@ -183,6 +184,59 @@ public class ChsDao {
 			return chList;
 		}
 
+		public Chs chOneSelect(int chId) {
+			Connection conn = null;
+			Chs ch = null;
+			try {
+
+				// JDChsドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+				// SQL文を準備する
+				String sql = "SELECT * FROM CHANNELS WHERE CHANNEL_ID = ?";
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+
+				pStmt.setInt(1, chId);
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				//カラム名を合わせる
+				rs.next();
+					ch = new Chs(
+						rs.getInt("Channel_Id"),
+						rs.getString("chName"),
+						rs.getString("chComment"),
+						rs.getString("created_At"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+				ch = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				ch = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						ch = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return ch;
+		}
+
 	public boolean delete(int chId) {
 		Connection conn = null;
 		boolean result = false;
@@ -193,7 +247,7 @@ public class ChsDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
 			String sql = "DELETE FROM CHANNELS WHERE CHANNEL_ID = ?";
@@ -238,7 +292,7 @@ public class ChsDao {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4_LinX", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
 			String sql = "INSERT INTO CHANNELS (CHANNEL_ID, CHNAME, CHCOMMENT,CREATED_AT ) VALUES(null, ?, ?, CURRENT_TIMESTAMP);";
@@ -268,5 +322,54 @@ public class ChsDao {
 
 		// 結果を返す
 		return result;
+	}
+
+	public List<String> booking() {
+		Connection conn = null;
+		List<String> booking = new ArrayList<String>();
+		try {
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// JDChsドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM USERS WHERE employee_Id = ? HAVING BY booking = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				String record = rs.getString("booking");
+				booking.add(record);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			booking = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			booking = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					booking = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return booking;
+
 	}
 }
