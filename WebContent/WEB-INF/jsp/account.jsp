@@ -44,10 +44,11 @@
 		<div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
-		    <h1>my prof</h1>
+		    <h1>自分のプロフィール</h1>
 		    <hr>
 		    <form method="post" action="AccountServlet">
-		        <div class="myprof">
+		        <div class="myprof"
+				>
 			        <div>
 			            <label>アイコン</label>
 			            <input type="file" name="icon">
