@@ -1,92 +1,125 @@
 body {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	padding-bottom: 30px;
-	box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+  }
+  /* 左カラム */
+.left-navi {
+    width: 20%;
+    background: #4B6587;
+    color: white;
+    padding: 20px;
 }
 
-.opponent {
-	background-color: #f0f0f0; /* 背景色を灰色に設定 */
-	padding: 10px;
-	border-bottom: 1px solid #ccc; /* 下部に細いボーダーラインを設定 */
-	margin-bottom: 20px; /* 下部のマージンを追加してチャットバブルとの間隔を空ける */
+.left-navi ul {
+    list-style: none;
+    padding: 0;
+}
+
+.left-navi ul li {
+    margin-bottom: 10px;
+}
+
+.left-navi ul li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    background-color: #F0E5CF;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.left-navi ul li a:hover {
+    background-color: #e0d8d1;
+}
+
+  .opponent {
+    background-color: #f0f0f0; /* 背景色を灰色に設定 */
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* 下部に細いボーダーラインを設定 */
+    margin-bottom: 20px; /* 下部のマージンを追加してチャットバブルとの間隔を空ける */
 }
 
 .opponent a {
-	text-decoration: none; /* リンクの下線を削除 */
-	color: #333; /* テキストの色を黒色に設定 */
-	font-weight: bold; /* フォントを太字にする */
-	font-size: 18px; /* フォントサイズを調整 */
+    text-decoration: none; /* リンクの下線を削除 */
+    color: #333; /* テキストの色を黒色に設定 */
+    font-weight: bold; /* フォントを太字にする */
+    font-size: 18px; /* フォントサイズを調整 */
 }
 
 .message-form {
-	display: flex;
-	flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-#room {
-	width: 100%;
-	min-height: 100vh;
-	overflow: scroll;
-	background-color: #f0f0f0;
-}
+ #room {
+    width: 100%;
+    min-height: 100vh;
+    overflow: scroll;
+    background-color:  #f0f0f0;
+  }
 /* チャットバブルのスタイル */
 .chat-bubble {
-	background-color: #fff; /* 背景を白色に設定 */
-	color: #333; /* テキストを黒色に設定 */
-	width: 40%;
-	padding: 10px;
-	border-radius: 10px;
-	margin-bottom: 10px;
-	border: 2px solid #000; /* 黒色のボーダーを追加 */
-	box-sizing: border-box; /* ボックスモデルを border-box に設定 */
+    background-color: #fff; /* 背景を白色に設定 */
+    color: #333; /* テキストを黒色に設定 */
+    width:40%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #000; /* 黒色のボーダーを追加 */
+    box-sizing: border-box; /* ボックスモデルを border-box に設定 */
 }
 
 .chat-bubble input[type="text"] {
-	background-color: transparent;
-	border: none;
-	color: inherit;
-	width: 100%;
-	box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .chat-bubble input[type="text"]:read-only {
-	color: rgba(0, 0, 0, 0.7); /* 読み取り専用時の文字色を設定 */
+    color: rgba(0, 0, 0, 0.7); /* 読み取り専用時の文字色を設定 */
 }
 
 .chat-bubble input[type="text"]:focus {
-	outline: none;
+    outline: none;
 }
 
+
+
 textarea {
-	flex: 1; /* テキストエリアを均等に伸ばす */
-	margin-right: 10px; /* テキストエリアと送信ボタンの間隔 */
-	border: 2px solid black; /* 黒色のボーダー */
-	width: calc(100% - 110px); /* テキストエリアの幅を計算して設定 */
-	padding: 10px; /* 余白 */
-	box-sizing: border-box; /* ボックスモデルを border-box に設定 */
-	float: left; /* 左にフロート */
+    flex: 1; /* テキストエリアを均等に伸ばす */
+    margin-right: 10px; /* テキストエリアと送信ボタンの間隔 */
+    border: 2px solid black; /* 黒色のボーダー */
+    width: calc(100% - 110px); /* テキストエリアの幅を計算して設定 */
+    padding: 10px; /* 余白 */
+    box-sizing: border-box; /* ボックスモデルを border-box に設定 */
+    float: left; /* 左にフロート */
 }
 
 .submit-button {
-	background-color: red; /* 赤い背景色 */
-	color: black; /* 黒色のテキスト */
-	border: 2px solid black; /* 黒色のボーダー */
-	padding: 10px 20px; /* 余白 */
-	cursor: pointer; /* ポインターを表示 */
-	transition: background-color 0.3s ease; /* ホバー時のアニメーション */
-	border-radius: 5px; /* 角を丸める */
-	width: 100px; /* 送信ボタンの幅を設定 */
-	margin-top: 20px; /* 上側のマージンを追加して位置を下げる */
-	padding: 10px; /* 余白 */
-	box-sizing: border-box; /* ボックスモデルを border-box に設定 */
-	float: left; /* 左にフロート */
-	cursor: pointer; /* ポインターを表示 */
+    background-color: red; /* 赤い背景色 */
+    color: black; /* 黒色のテキスト */
+    border: 2px solid black; /* 黒色のボーダー */
+    padding: 10px 20px; /* 余白 */
+    cursor: pointer; /* ポインターを表示 */
+    transition: background-color 0.3s ease; /* ホバー時のアニメーション */
+    border-radius: 5px; /* 角を丸める */
+    width: 100px; /* 送信ボタンの幅を設定 */
+    margin-top: 20px; /* 上側のマージンを追加して位置を下げる */
+    padding: 10px; /* 余白 */
+    box-sizing: border-box; /* ボックスモデルを border-box に設定 */
+    float: left; /* 左にフロート */
+    cursor: pointer; /* ポインターを表示 */
 }
 
 .submit-button:hover {
-	background-color: #ff3333; /* ホバー時の色 */
+    background-color:  #ff3333; /* ホバー時の色 */
 }
 
 .box-left {
@@ -111,5 +144,7 @@ textarea {
 }
 
 .green {
-	background-color: yellowgreen;
+	background-color:#F0E5CF;
+;
+	;
 }

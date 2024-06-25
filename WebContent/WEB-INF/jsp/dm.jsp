@@ -7,11 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/Linx/css/dm.css">
+<link rel="stylesheet" href="/C4/css/dm.css">
 <title>Chat</title>
+<link rel="icon" href="./img/LinXicon.ico" type="image/png">
 </head>
 
 <body>
+	<header></header>
+	<main>
 	<!--左のカラムここから-->
 	<div class="left-navi">
 		<ul class="menu">
@@ -28,7 +31,8 @@
 	</div>
 
 	<!-- メインチャットここから -->
-	<!--  一応コメントしてるだけ。なくても大丈夫 <div id="room">
+	<!--  一応コメントしてるだけ。なくても大丈夫
+	<div id="room">
 
         <div class="box-left">
             <p class="message-box white">こんにちは</p>
@@ -40,29 +44,29 @@
 
     </div>-->
 
-
 	<div id="room">
 
 		<c:if test="${empty cardList}">
-			<p class="no-data-message">一致するデータはありません。</p>
+			<p class="no-data-message">初めての会話相手です！</p>
 		</c:if>
 
 		<c:forEach var="e" items="${cardList}">
 			<c:choose>
 				<c:when test="${e.senderId == id}">
-					<div class="chat-bubble box-right message-box green">
-						<input type="text" name="messageContent" value="${e.messageContent}" readonly="readonly">
+					<div class="box-left">
+						<p class="message-box white">${e.messageContent}</p>
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="chat-bubble box-left message-box white">
-						<input type="text" name="messageContent" value="${e.messageContent}" readonly="readonly">
+					<div class="box-right">
+						<p class="message-box green">${e.messageContent}</p>
 					</div>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 
 	</div>
+	</main>
 	<!-- メインチャットここまで -->
 
 
