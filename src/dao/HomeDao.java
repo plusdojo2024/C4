@@ -38,7 +38,7 @@ public class HomeDao {
 				Posts record = new Posts(
 				rs.getInt("post_id"),
 				rs.getInt("channels_id"),
-				rs.getInt("employee_id"),
+				rs.getString("employee_id"),
 				rs.getString("content"),
 				rs.getInt("comments_id"),
 				rs.getInt("reaction_id"),
@@ -87,11 +87,11 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-			String sql = "INSERT INTO Bc VALUES (NULL, 0, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+			String sql = "INSERT INTO POSTS VALUES (NULL, 0, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, post.getEmployee_id());
+			pStmt.setString(1, post.getEmployee_id());
 
 			pStmt.setString(2, post.getContent());
 
@@ -261,7 +261,7 @@ public class HomeDao {
 				Posts record = new Posts(
 				rs.getInt("POST_ID"),
 				rs.getInt("CHANNELS_ID"),
-				rs.getInt("EMPLOYEE_ID"),
+				rs.getString("EMPLOYEE_ID"),
 				rs.getString("CONTENT"),
 				rs.getInt("COMMENTS_ID"),
 				rs.getInt("REACTION_ID"),

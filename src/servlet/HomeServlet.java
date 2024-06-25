@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 //自分がインポートしました
 import dao.HomeDao;
+import dao.UserDao;
+import model.LoginUser;
 import model.Posts;
 
 /**
@@ -26,11 +28,9 @@ public class HomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			//ログインしてなかったら下記のサーブレットに遷移する
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
@@ -59,21 +59,27 @@ public class HomeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
 		String post = request.getParameter("post");
+		HttpSession session = request.getSession();
+		LoginUser user = (LoginUser)session.getAttribute("id");
+		String employee_id = user.getId();
 		List<Posts> PostList = new ArrayList<Posts>();
 		HomeDao hDao = new HomeDao();
 
-		if (request.getParameter("submit").equals("検索")) {
+
+		if (date != null) {
+			UserDao uDao = new UserDao();
+			uDao.booking(date, employee_id);
+			PostList = hDao.select();
+		} else if (request.getParameter("submit").equals("検索")) {
 			String search = request.getParameter("search");
 			//検索処理を行う
 			PostList = hDao.search(search);
 		} else if (request.getParameter("submit").equals("投稿")) {
-			int employee_id = Integer.parseInt(request.getParameter("employee_id"));
-			String content = request.getParameter("content");
-			int comments = Integer.parseInt(request.getParameter("comments"));
-			int file_id = Integer.parseInt(request.getParameter("file_id"));
+			int comments = 0;
+			int file_id = 0;
 			String created_at = null;
 
-			hDao.insert(new Posts(0, 0, employee_id, content, comments, 0, file_id, created_at));
+			hDao.insert(new Posts(0, 0, employee_id, post, comments, 0, file_id, created_at));
 			PostList = hDao.select();
 		}else {
 			//検索処理を行う

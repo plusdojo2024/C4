@@ -7,7 +7,7 @@ public class Posts implements Serializable{
 
 	private int post_id;
 	private int channels_id;
-	private int employee_id;
+	private String employee_id;
 	private String content;
 	private int comments;
 	private int reaction_id;
@@ -19,7 +19,7 @@ public class Posts implements Serializable{
 
 	}
 
-	public Posts(int post_id, int channels_id, int employee_id, String content, int comments, int reaction_id, int file_id, String created_at) {
+	public Posts(int post_id, int channels_id, String employee_id, String content, int comments, int reaction_id, int file_id, String created_at) {
 		super();
 		this.post_id = post_id;
 		this.channels_id = channels_id;
@@ -47,11 +47,11 @@ public class Posts implements Serializable{
 		this.channels_id = channels_id;
 	}
 
-	public int getEmployee_id() {
+	public String getEmployee_id() {
 		return employee_id;
 	}
 
-	public void setEmployee_id(int employee_id) {
+	public void setEmployee_id(String employee_id) {
 		this.employee_id = employee_id;
 	}
 

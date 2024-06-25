@@ -97,7 +97,7 @@ public class ChsDao {
 				Posts record = new Posts(
 						rs.getInt("CHANNEL_ID"),
 						rs.getInt("CHANNEL_ID"),
-						rs.getInt("CHANNEL_ID"),
+						rs.getString("CHANNEL_ID"),
 						rs.getString("CHNAME"),
 						rs.getInt("CHANNEL_ID"),
 						rs.getInt("CHANNEL_ID"),

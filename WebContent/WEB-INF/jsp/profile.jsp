@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>プロフィール | LinX </title>
     <link rel="stylesheet" type="text/css" href="css/user.css"  >
+    <link rel="stylesheet" href="./css/popup.css">
     <link rel="icon" href="./img/LinXicon.ico" type="image/png">
 </head>
 <body>
@@ -53,6 +54,25 @@
 				<c:forEach var="lang" items="${user.langList}">
 					<input type="text" id="lang" name="lang" value="${lang}">
                 </c:forEach>
+                <button type="button" onclick="view()">言語選択</button>
+                <div id="popup" class="popup">
+        			<input type="checkbox" name="languages" value="English"> English/英語
+        			<input type="checkbox" name="languages" value="Japanese"> Japanese/日本語
+        			<input type="checkbox" name="languages" value="Burma">Burma/ビルマ語
+        			<input type="checkbox" name="languages" value="Chinese"> Chinese/中国語<br>
+					<input type="checkbox" name="languages" value="Korean"> Korean/韓国語
+        			<input type="checkbox" name="languages" value="Vietnamese"> Vietnamese/ベトナム語
+        			<input type="checkbox" name="languages" value="Malay"> Malay/マレー語
+        			<input type="checkbox" name="languages" value="Thai">Thai/タイ語<br>
+					<input type="checkbox" name="languages" value="Spanish">Spanish/スペイン語
+        			<input type="checkbox" name="languages" value="German"> German/ドイツ語
+        			<input type="checkbox" name="languages" value="Russian"> Russian/ロシア語<br>
+					<input type="checkbox" name="languages" value="Italian"> Italian/イタリア語
+        			<input type="checkbox" name="languages" value="Portuguese"> Portuguese/ポルトガル語
+        			<input type="checkbox" name="languages" value="Arabic"> Arabic/アラビア語
+        			<input type="checkbox" name="languages" value="French"> French/フランス語<br>
+					<button type="button" onclick="hide()">完了</button>
+        		</div>
 			</div>
 
             <div class="form-group">
@@ -66,35 +86,15 @@
 				<label for="point">ポイント</label> <input type="text" id="point" name="point" value="${user.point}">
 			</div>
 
-			<!--
-			<input type="checkbox" name="languages" value="English"> English/英語
-        	<input type="checkbox" name="languages" value="Japanese"> Japanese/日本語
-        	<input type="checkbox" name="languages" value="Burma">Burma/ビルマ語
-        	<input type="checkbox" name="languages" value="Chinese"> Chinese/中国語<br>
-			<input type="checkbox" name="languages" value="Korean"> Korean/韓国語
-        	<input type="checkbox" name="languages" value="Vietnamese"> Vietnamese/ベトナム語
-        	<input type="checkbox" name="languages" value="Malay"> Malay/マレー語
-        	<input type="checkbox" name="languages" value="Thai">Thai/タイ語<br>
-			<input type="checkbox" name="languages" value="Spanish">Spanish/スペイン語
-        	<input type="checkbox" name="languages" value="German"> German/ドイツ語
-        	<input type="checkbox" name="languages" value="Russian"> Russian/ロシア語<br>
-			<input type="checkbox" name="languages" value="Italian"> Italian/イタリア語
-        	<input type="checkbox" name="languages" value="Portuguese"> Portuguese/ポルトガル語
-        	<input type="checkbox" name="languages" value="Arabic"> Arabic/アラビア語
-        	<input type="checkbox" name="languages" value="French"> French/フランス語<br>
-			  -->
-
 			<button type="submit" class="btn btn-secondary" name="submit" value="更新">編集</button>
 
 			<span id="error_message"></span>
 
 		</form>
-
-
-
 	</main>
 	<footer>
 		<a href="/C4/HomeServlet">ホームページ</a>
 	</footer>
+	<script src="./js/popup.js"></script>
 </body>
 </html>
