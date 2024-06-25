@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ChsDao;
+import model.Chs;
 import model.Posts;
 
 @WebServlet("/ChsPostServlet")
@@ -59,8 +61,17 @@ public class ChsPostServlet extends HttpServlet {
 
     // POSTリクエストを処理するメソッド
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String chName = request.getParameter("channelName");
-    	request.setAttribute("chName", chName);
+    	Chs ch = (Chs)request.getAttribute("ch");
+    	int channels_id = ch.getChannelId();
+    	String chName = ch.getChName();
+    	String chComment = ch.getChComment();
+    	ChsDao cDao = new ChsDao();
+    	List<Posts> PostList = new ArrayList<Posts>();
+    	PostList = cDao.chPostSelect(channels_id);
+    	request.setAttribute("PostList", PostList);
+    	request.setAttribute("channelName", chName);
+    	request.setAttribute("chId", channels_id);
+    	request.setAttribute("chComment", chComment);
     	request.getRequestDispatcher("/WEB-INF/jsp/chpost.jsp").forward(request, response);
     }
 }
