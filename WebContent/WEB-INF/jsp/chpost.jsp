@@ -15,6 +15,7 @@
 	<header>
 		<h1>${channelName}チャンネル</h1>
 		<div class="description">ここは${channelName}情報を共有するチャンネルです。投稿やコメントを通じて交流しましょう！</div>
+		<p>${chComment}</p>
 	</header>
 	<main>
 	<!--左のカラムここから-->

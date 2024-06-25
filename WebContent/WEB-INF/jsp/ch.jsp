@@ -48,8 +48,6 @@
 	<footer>
 		<!-- ここはフッター編集時にはこのコメントを削除 -->
 	</footer>
-
-	<!-- <script src="js/ch.js"></script> -->
 </body>
 
 </html>

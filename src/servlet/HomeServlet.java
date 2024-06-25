@@ -66,7 +66,7 @@ public class HomeServlet extends HttpServlet {
 		//リクエストパラメータ
 		request.setCharacterEncoding("UTF-8");
 		String date = request.getParameter("date");
-		int chId = Integer.parseInt(request.getParameter("chId"));
+		int chId = 0;
 		String post = request.getParameter("post");
 		HttpSession session = request.getSession();
 		LoginUser user = (LoginUser)session.getAttribute("id");
@@ -84,6 +84,7 @@ public class HomeServlet extends HttpServlet {
 			//検索処理を行う
 			PostList = hDao.search(search);
 		} else if (request.getParameter("submit").equals("投稿")) {
+			chId = Integer.parseInt(request.getParameter("chId"));
 			int comments = 0;
 			int file_id = 0;
 			String created_at = null;
