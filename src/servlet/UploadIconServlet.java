@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.UserDao;
-import model.Result;
 
 /**
  * Servlet implementation class UploadIconServlet
@@ -84,18 +83,16 @@ public class UploadIconServlet extends HttpServlet {
 		UserDao uDao = new UserDao();
 		if (request.getParameter("submit").equals("変更")) {
 			if(uDao.updatePhoto(employeeId,password,username,fileName)) {
-				request.setAttribute("result",
-				new Result("更新成功！", "レコードを更新しました。", "/C4/HomeServlet"));
-			} else {
-				request.setAttribute("result",
-				new Result("更新失敗！", "レコードを更新できませんでした。", "/C4/HomeServlet"));
+
+				// 結果ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
+				dispatcher.forward(request, response);
+
+
 			}
 		}
 
 
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-		dispatcher.forward(request, response);
 
 
 

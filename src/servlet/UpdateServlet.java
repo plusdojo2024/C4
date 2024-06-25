@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
-import model.Result;
 import model.User;
 
 /**
@@ -55,8 +54,6 @@ public class UpdateServlet extends HttpServlet {
 		}
 
 
-
-
         //ここまで
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -68,10 +65,6 @@ public class UpdateServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		int point = Integer.parseInt(request.getParameter("point"));
 		String[] langList = request.getParameterValues("languages");
-//		System.out.println("upadating employeeId" + employeeId);
-//		System.out.println("upadating name" + username);
-//		System.out.println("upadating birth" + birth);
-//		System.out.println("upadating lang" + lang);
 
 //		if (langList == null) {
 //			langList = new String[0]; // Initialize to empty array if null
@@ -81,21 +74,14 @@ public class UpdateServlet extends HttpServlet {
 			UserDao uDao = new UserDao();
 			if (request.getParameter("submit").equals("更新")) {
 				if (uDao.update(new User(employeeId,password,username,birth,comment,point),langList)) {	// 更新成功
-					request.setAttribute("result",
-					new Result("更新成功！", "レコードを更新しました。", "/C4/HomeServlet"));
+
+					// 結果ページにフォワードする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
+					dispatcher.forward(request, response);
+
 				}
-				else {												// 更新失敗
-					request.setAttribute("result",
-					new Result("更新失敗！", "レコードを更新できませんでした。", "/C4/HomeServlet"));
-				}
+
 			}
-
-
-
-			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-			dispatcher.forward(request, response);
-
 
 
 

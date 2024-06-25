@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"  href="/simpleBC/css/style.css">
+<link rel="stylesheet" type="text/css">
 <title>LinX</title>
 </head>
 
@@ -12,7 +12,6 @@
 
 
   	<div style=" margin-top: 180px; margin-bottom: 200px;">
-  		<img src="img/report.svg">
   		<h1>${result.title}</h1>
 		<p>${result.message}</p>
 		<a href="${result.backTo}">戻る</a>

@@ -31,9 +31,12 @@ body {
     /* overflow: hidden; */
     margin: auto;
     margin: 20 0 0 450px;
-    padding: 80px;
+    padding: 80px 0px 80px 0px;
     background:#4B6587 ;
     border-radius: 15px ;
+    /* margin-bottom: 70px; */
+    /* padding-right: 0px;
+    padding-left: 0px; */
 
   }
 
@@ -87,8 +90,9 @@ main {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 900px;
     width: 100%;
+
 }
 
 .form-group {
@@ -116,10 +120,10 @@ input[type="text"], input[type="date"], input[type="file"], input[type="password
     gap: 10px;
 }
 
-.profile-pic {
-    max-width: 100px;
-    border-radius: 50%;
-}
+/* .profile-pic {
+    max-width: 150px;
+    border-radius: 20%;
+} */
 
 .btn {
     padding: 10px 20px;
@@ -140,6 +144,7 @@ input[type="text"], input[type="date"], input[type="file"], input[type="password
 .btn-secondary {
     background-color: #6c757d;
     color: white;
+    margin-bottom : 20px;
 }
 
 .btn-secondary:hover {
@@ -150,3 +155,37 @@ input[type="text"], input[type="date"], input[type="file"], input[type="password
     color: red;
     font-weight: bold;
 }
+
+
+
+.profile-pic-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+.profile-pic {
+            max-width: 150px; /* Adjust size as needed */
+            max-height: 150px; /* Adjust size as needed */
+            border-radius: 20%;
+        }
+.profile-pic-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease;
+        }
+.profile-pic-wrapper:hover .profile-pic-overlay {
+            opacity: 1; /* Show overlay on hover */
+        }
+
+
+

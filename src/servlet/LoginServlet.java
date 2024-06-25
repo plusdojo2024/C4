@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.LoginUser;
-import model.Result;
 import model.User;
 
 
@@ -44,45 +43,35 @@ public class LoginServlet extends HttpServlet {
 
 		// ログイン処理を行う
 		UserDao uDao = new UserDao();
-		if (uDao.isLoginOK(new User(id, pw))) {	// ログイン成功
+		boolean isValid = uDao.isLoginOK(new User(id, pw));
+
+		if (isValid) {	// ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("id", new LoginUser(id));
 
 			//改造
 			String employeeId = request.getParameter("id");
-
-			System.out.println(employeeId);
-
-
 			// 検索処理を行う
 			UserDao bDao = new UserDao();
-//			List<User> userList = bDao.select(employeeId);
 			User user = bDao.select(employeeId);
 
 			// 検索結果をリクエストスコープに格納する
-//			request.setAttribute("userList", userList);
 			request.setAttribute("user", user);
 
-
-			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
 			dispatcher.forward(request, response);
 
 		}
-		else {									// ログイン失敗
-			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
-			request.setAttribute("result",
-			new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/C4/LoginServlet"));
+		else {
 
 			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}
+
+
 	}
-
-
-
 
 
 }

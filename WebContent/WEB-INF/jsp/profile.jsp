@@ -16,25 +16,30 @@
 	<header>
 
 	</header>
-	<main>
+	<main style=" margin-top: 250px">
 		 <!-- Photo Update Form -->
 		<form method="post" action="/C4/UploadIconServlet"  enctype="multipart/form-data">
 
-			<div class="form-group">
+			<div>
 				<input type="text" id="id" name="id" hidden="hidden" value="${user.employee_Id}">
 			</div>
 
-			<div class="form-group">
+			<%-- <div class="form-group">
                 <div class="profile-pic-wrapper">
+					 <img src="./images/${user.icon}" class="profile-pic">
+				    <input type="file" id="icon" name="icon" accept="images/*" >
 
-				    <input type="file" id="icon" name="icon" accept="images/*">
-				    <img src="./images/${user.icon}" class="profile-pic">
-                  <%--   <img src="./images/${user.icon} alt="Profile Picture" class="profile-pic"> --%>
                 </div>
+			</div> --%>
 
+ 			 <div class="form-group">
+                <div class="profile-pic-wrapper" onclick="document.getElementById('icon').click();">
+                     <img src="./images/${user.icon}" class="profile-pic" alt="Profile Picture">
+                     <div class="profile-pic-overlay">アップロード</div>
+                     <input type="file" id="icon" name="icon" accept="image/*" style="display: none;">
 
-			</div>
-
+                </div>
+            </div>
 			<button type="submit" class="btn btn-secondary" name="submit" value="変更">変更</button>
 		</form>
 
@@ -83,18 +88,19 @@
 			</div>
 
 			<div class="form-group">
-				<label for="point">ポイント</label> <input type="text" id="point" name="point" value="${user.point}">
+				<label for="point">ポイント</label> <input type="text" id="point" name="point" value="${user.point}" readonly="readonly">
 			</div>
 
-			<button type="submit" class="btn btn-secondary" name="submit" value="更新">編集</button>
-
+			<button type="submit" class="btn btn-secondary" name="submit" value="更新">編集</button><br>
+			<a href="/C4/HomeServlet">ホームページ</a>
 			<span id="error_message"></span>
 
 		</form>
 	</main>
 	<footer>
-		<a href="/C4/HomeServlet">ホームページ</a>
+
 	</footer>
 	<script src="./js/popup.js"></script>
+
 </body>
 </html>

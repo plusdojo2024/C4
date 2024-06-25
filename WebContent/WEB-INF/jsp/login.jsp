@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>ログイン | LinX </title>
     <link rel="stylesheet" type="text/css" href="css/user.css"  >
+
 </head>
 <body class="body_bgcolor">
 	<header id="login-header">
@@ -20,7 +21,7 @@
                   <tr>
                     <td>
                       <label>社員 ID
-                      <input type="text" name="id">
+                      <input type="text" name="id" id="id" required>
                       </label><br>
                     </td>
                   </tr>
@@ -28,7 +29,7 @@
                   <tr>
                     <td>
                       <label>パスワード
-                      <input type="password" name="pw">
+                      <input type="password" name="pw" id="pw" required>
                       </label><br>
                     </td>
                   </tr>
@@ -36,14 +37,15 @@
                   <tr>
                     <td colspan="2">
                       <input type="submit" name="login" value="ログイン">
-                      <input type="reset" name="reset" value="リセット">
+                      <input type="reset" name="reset" value="リセット"><br>
                       <b><span id="error_message"></span></b>
+
                     <td>
                   </tr>
                 </table>
 
                 <div >
-                    <a  href="/LinX/CreateUserServlet">アカウントを作成</a>
+                    <a  href="/C4/CreateUserServlet">アカウントを作成</a>
                 </div>
           </form>
       </div>
@@ -53,22 +55,7 @@
     <footer>
 
     </footer>
-    <script>
-	    let form_obj = document.getElementById('login_form');
-	    let error_message_obj = document.getElementById('error_message');
-
-	    form_obj.onsubmit = function () {
-	      if(!form_obj.id.value || !form_obj.pw.value){
-	        error_message_obj.textContent = '🚩 IDとパスワードを入力してください❗️';
-	        return false;
-	      }
-	      error_message_obj.textContent = null;
-	    }
-
-	    form_obj.onreset = function () {
-	      error_message_obj.textContent = null;
-	    }
-  </script>
+    <script src="./js/user.js"></script>
 
 </body>
 </html>
