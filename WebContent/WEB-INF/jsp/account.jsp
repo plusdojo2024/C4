@@ -18,9 +18,9 @@
 			<a href="${pageContext.request.contextPath}/HomeServlet"><img
 				src="./img/LinXlogo.jpg" alt="LinX"></a>
 		</h1>
-		<form method="get"
-			action="${pageContext.request.contextPath}/HomeServlet">
-			<input type="search" name="search" placeholder="キーワードを入力"> <input
+		<form method="post"
+			action="${pageContext.request.contextPath}/AccountServlet">
+			<input type="search" name="username" placeholder="キーワードを入力"> <input
 				type="submit" name="submit" value="検索">
 		</form>
 
@@ -44,7 +44,9 @@
 		<div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
-		    <h1>自分のプロフィール</h1>
+			<h1> <a href="${pageContext.request.contextPath}/profile.jsp">Myプロフィール</a></h1>
+
+		    <!--<h1>Myプロフィール 編集</h1>
 		    <hr>
 		    <form method="post" action="AccountServlet">
 		        <div class="myprof"
@@ -67,19 +69,19 @@
 			        </div>
 				 </div>
 		    </form>
-
+			-->
 
 		    <hr>
 		    <!-- アカウント一覧表示 -->
-		    <h1>all prof</h1>
+		    <h1>全てのアカウント</h1>
 		    <div class="all-prof">
 		        <%
 		        List<User> userList = (List<User>) request.getAttribute("userList");
 		        if (userList != null && !userList.isEmpty()) {
 		            for (User user : userList) {
 		        %>
-		            <div class="user-profile"
-		            onclick="location.href='/C4/SelectConvServlet?user_id=<%= user.getemployee_Id() %>'">
+		            <div class="user-profile">
+
 		                <div>
 		                    <label>氏名: </label>
 		                    <span><%= user.getUsername() %></span>
@@ -118,18 +120,18 @@
 		            <div class="searchResults-profile"
 		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
 		                <div>
-		                    <label>氏名: </label>
+		                    <label>氏名</label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
 		                <div>
-		                    <label>ユーザーネーム: </label>
+		                    <label>ユーザーネーム</label>
 		                    <span><%= user.getemployee_Id() %></span>
 		                </div>
 		                <div>
-		                    <label>言語: </label>
+		                    <label>言語</label>
 		                </div>
 		                <div>
-		                    <label>コメント: </label>
+		                    <label>コメント</label>
 		                    <span><%= user.getComment() %></span>
 		                </div>
 		                <hr>
