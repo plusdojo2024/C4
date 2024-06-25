@@ -131,6 +131,7 @@ icon VARCHAR(1024),
 birth VARCHAR(50),
 comment VARCHAR(2000),
 point int(1000),
+booking CHAR(10),
 PRIMARY KEY  (employee_Id) 
 ); 
 
@@ -142,7 +143,8 @@ INSERT INTO users VALUES (
 'iconnn',  
 '2002-06-27', 
 'こんにちは', 
-2
+2,
+null
 );
 
 INSERT INTO users VALUES ( 
@@ -152,7 +154,8 @@ INSERT INTO users VALUES (
 'iconnn',  
 '1998-12-03', 
 'おはようございます。', 
-7
+7,
+null
 );
 
 CREATE TABLE langs (
