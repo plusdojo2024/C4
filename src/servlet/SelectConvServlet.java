@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.MessagesDao;
-import model.messages;
+import dao.UserDao;
 
 /**
  * Servlet implementation class SelectConvServlet
@@ -34,28 +32,22 @@ public class SelectConvServlet extends HttpServlet {
     /**
      * アカウントから特定のDMに遷移
      */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String userId = request.getParameter("user_id");
 
-	        // リクエストパラメータを取得
-	        request.setCharacterEncoding("UTF-8");
-	        String conversations_id = request.getParameter("conversations_id");
-	        //System.out.print(conversations_id);
+        UserDao userDao = new UserDao();
+        int conversationId = userDao.getConversationIdByUserId(userId);
 
-	        //conversations_idを取得
-	        ConvDao cDao = new ConvDao();
-
-	        List<> SelectConv = cDao.selectByconversations_id(conversations_id);
-	        System.out.print(SelectConv);
-
-	        // 結果をリクエストスコープに格納
-	        request.setAttribute("SelectConv",SelectConv );
-
-	        // JSPにフォワード
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/DM.jsp");
-	        dispatcher.forward(request, response);
-	    }
-
-	}
-
+        if (conversationId != -1) {
+            request.setAttribute("conversationsId", conversationId);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dm.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            // エラーメッセージを設定して、アカウントページに戻す
+            request.setAttribute("errorMessage", "会話が見つかりませんでした。");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/account.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 }

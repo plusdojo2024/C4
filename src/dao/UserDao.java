@@ -403,8 +403,9 @@ public class UserDao {
 				// SQL文を準備する
 				String sql = "SELECT *  FROM users WHERE username LIKE ? ";
 //				select  employee_Id,username from users;
+
 				PreparedStatement pStmt = conn.prepareStatement(sql);
-				pStmt.setString(1, "%");
+				pStmt.setString(1, "%"+ username + "%");
 				//pStmt.setString(1, employee_Id);
 				//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 				// SQL文を実行し、結果表を取得する
@@ -446,7 +447,42 @@ public class UserDao {
 			// 結果を返す
 			return userList;
 		}
-//	//↑ここまで藤土編集
+
+// ConversationIdを取得
+		public int getConversationIdByUserId(String userId) {
+	        Connection conn = null;
+	        int conversationId = -1;
+	        try {
+	            // JDBCドライバを読み込む
+	            Class.forName("org.h2.Driver");
+	            // データベースに接続する
+	            conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+	            // SQL文を準備する
+	            String sql = "SELECT conversations_id FROM conversations WHERE user1_id = ? OR user2_id = ?";
+	            PreparedStatement pStmt = conn.prepareStatement(sql);
+	            pStmt.setString(1, userId);
+	            pStmt.setString(2, userId);
+	            // SQL文を実行し、結果表を取得する
+	            ResultSet rs = pStmt.executeQuery();
+	            if (rs.next()) {
+	                conversationId = rs.getInt("conversations_id");
+	            }
+	        } catch (SQLException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // データベースを切断
+	            if (conn != null) {
+	                try {
+	                    conn.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        return conversationId;
+	    }
+
+//	↑ここまで藤土編集
 		public boolean booking(String date, String id) {
 			Connection conn = null;
 			boolean result = false;

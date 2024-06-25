@@ -79,7 +79,7 @@
 		            for (User user : userList) {
 		        %>
 		            <div class="user-profile"
-		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
+		            onclick="location.href='/C4/SelectConvServlet?user_id=<%= user.getemployee_Id() %>'">
 		                <div>
 		                    <label>氏名: </label>
 		                    <span><%= user.getUsername() %></span>
