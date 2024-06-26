@@ -21,9 +21,11 @@
 	<!--左のカラムここから-->
 		<div class="left-navi">
 			<ul id="nav">
-				<li><a href="${pageContext.request.contextPath}/HomeServlet">タイムライン</a></li>
-				<li><a href="${pageContext.request.contextPath}/ChServlet">チャンネル</a></li>
-				<li><a href="${pageContext.request.contextPath}/AccountServlet">アカウント</a></li>
+				<li><a href="${pageContext.request.contextPath}/HomeServlet">TIMELINE</a></li>
+				<li><a href="${pageContext.request.contextPath}/ChServlet">CHANNEL</a></li>
+				<li><a href="${pageContext.request.contextPath}/AccountServlet">ACCOUNT</a></li>
+				<li><a href="${pageContext.request.contextPath}/LoginServlet"
+					class="logout-button" onclick="confirmLogout(event)">LOGOUT</a></li>
 			</ul>
 		</div>
 		<!--左のカラムここまで-->

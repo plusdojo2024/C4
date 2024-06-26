@@ -80,7 +80,6 @@ header h2 {
 /* ボディ */
 main {
 	display: flex;
-
 	height: calc(100vh - 72px); /* ヘッダーの高さを引いたもの */
 }
 
@@ -158,9 +157,33 @@ main {
 .channel-content .home div {
 	margin-bottom: 5px;
 }
+.home{
+	display: felx;
+}
 
-.channel-content .date, .channel-content .comment, .channel-content .reaction
-	{
+.post-date {
+	width: 30%;
+}
+
+.post-
+.post-footer{
+	display: flex;
+}
+.comment {
+	width: 70%;
+	font-size: 0.9em;
+	color: black;
+	border: 2px solid black;
+}
+
+.reaction {
+	width: 20%;
+	font-size: 0.9em;
+	color: black;
+	border: 2px solid black;
+}
+
+.channel-content .date, .channel-content, .channel-content {
 	font-size: 0.9em;
 	color: black;
 	border: 2px solid black;
@@ -246,23 +269,21 @@ main {
 }
 
 /*ポップアップのデザイン*/
-
 .post-btn {
-  position: fixed;        /* 画面に固定する */
-  bottom: 10%;            /* 画面の下から10%の位置に配置する */
-  right: 25%;             /* 画面の右から25%の位置に配置する */
-  width: 70px;            /* 幅を70pxに設定する */
-  height: 70px;           /* 高さを70pxに設定する */
-  line-height: 70px;      /* テキストを垂直方向に中央揃えする */
-  color: white;           /* テキストの色を白に設定する */
-  font-weight: bold;      /* テキストを太字に設定する */
-  font-size: 25px;        /* フォントサイズを30pxに設定する */
-  background: #4B6587;       /* 背景色をアクアに設定する */
-  border-radius: 50%;     /* ボタンを円形にする */
-  text-align: center;     /* テキストを中央揃えする */
-  border: none;           /* ボタンのデフォルトの枠線を削除する */
-  cursor: pointer;        /* ホバー時のカーソルをポインタにする */
+	position: fixed; /* 画面に固定する */
+	bottom: 10%; /* 画面の下から10%の位置に配置する */
+	right: 25%; /* 画面の右から25%の位置に配置する */
+	width: 70px; /* 幅を70pxに設定する */
+	height: 70px; /* 高さを70pxに設定する */
+	line-height: 70px; /* テキストを垂直方向に中央揃えする */
+	color: white; /* テキストの色を白に設定する */
+	font-weight: bold; /* テキストを太字に設定する */
+	font-size: 25px; /* フォントサイズを30pxに設定する */
+	background: #4B6587; /* 背景色をアクアに設定する */
+	border-radius: 50%; /* ボタンを円形にする */
+	text-align: center; /* テキストを中央揃えする */
+	border: none; /* ボタンのデフォルトの枠線を削除する */
+	cursor: pointer; /* ホバー時のカーソルをポインタにする */
 }
-
 
 /* フッター三浦さんに任せます */

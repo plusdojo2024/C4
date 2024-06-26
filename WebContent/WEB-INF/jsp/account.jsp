@@ -14,17 +14,19 @@
 <body>
 <!--ヘッダーここから-->
 	<header>
+		<div>
 		<h1 id="logo">
 			<a href="${pageContext.request.contextPath}/HomeServlet"><img
 				src="./img/LinXlogo.jpg" alt="LinX"></a>
 		</h1>
+		</div>
 		<form method="post"
 			action="${pageContext.request.contextPath}/AccountServlet">
-			<input type="search" name="username" placeholder="キーワードを入力"> <input
-				type="submit" name="submit" value="検索">
+			<input type="search" name="username" placeholder="キーワードを入力">
+			<input type="submit" name="submit" value="検索">
 		</form>
 
-		<h2>ランキング</h2>
+
 	</header>
 	<!--ヘッダーここまで-->
 
@@ -33,18 +35,18 @@
 		<!--左のカラムここから-->
 		<div class="left-navi">
 			<ul id="nav">
-				<li><a href="${pageContext.request.contextPath}/HomeServlet">タイムライン</a></li>
-				<li><a href="${pageContext.request.contextPath}/ChServlet">チャンネル</a></li>
-				<li><a href="${pageContext.request.contextPath}/AccountServlet">アカウント</a></li>
+				<li><a href="${pageContext.request.contextPath}/HomeServlet">TIMELINE</a></li>
+				<li><a href="${pageContext.request.contextPath}/ChServlet">CHANNEL</a></li>
+				<li><a href="${pageContext.request.contextPath}/AccountServlet">ACCOUNT</a></li>
 			</ul>
 		</div>
 		<!--左のカラムここまで-->
 
 		<!--メインカラムここから-->
-		<div class="main-navi">
+		 <div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
-			<h1> <a href="${pageContext.request.contextPath}/profile.jsp">Myプロフィール</a></h1>
+			<h1> <a href="${pageContext.request.contextPath}/LoginServlet">Myプロフィール</a></h1>
 
 		    <!--<h1>Myプロフィール 編集</h1>
 		    <hr>
@@ -72,6 +74,7 @@
 			-->
 
 		    <hr>
+
 		    <!-- アカウント一覧表示 -->
 		    <h1>全てのアカウント</h1>
 		    <div class="all-prof">
@@ -83,18 +86,18 @@
 		            <div class="user-profile">
 
 		                <div>
-		                    <label>氏名: </label>
+		                    <label>氏名 </label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
 		                <div>
-		                    <label>ユーザーネーム: </label>
+		                    <label>ユーザーネーム </label>
 		                    <span><%= user.getemployee_Id() %></span>
 		                </div>
 		                <div>
-		                    <label>言語: </label>
+		                    <label>言語 </label>
 		                </div>
 		                <div>
-		                    <label>コメント: </label>
+		                    <label>コメント </label>
 		                    <span><%= user.getComment() %></span>
 		                </div>
 		                <hr>
@@ -110,7 +113,7 @@
 		    </div>
 
 		    <!-- アカウント検索結果表示 -->
-		    <h1>searchResults prof</h1>
+		    <h1>検索結果</h1>
 		    <div class="searchResults-prof">
 		        <%
 		        List<User> searchResults = (List<User>) request.getAttribute("searchResults");
@@ -146,6 +149,19 @@
 		        %>
 		    </div>
 	</div>
+
+ 	<%-- <c:if test="${empty userList}">
+		<p>一致するデータはありません。</p>
+	</c:if>
+ 	<c:forEach var="user" items="${userList}">
+
+	 	<!-- <br> -->
+        <div class="form-group">
+				<label for="id">社員ID</label> <input type="text" id="id" name="id" value="${user.employee_Id}" readonly="readonly">
+			</div>
+		<img src="./images/${user.icon}" class="profile-pic" alt="Profile Picture">
+
+ 	</c:forEach> --%>
 
 	</main>
 	</body>
