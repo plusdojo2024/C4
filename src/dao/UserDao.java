@@ -74,7 +74,7 @@ public class UserDao {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 				// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-				String sql = "INSERT INTO users VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO users VALUES ( ?, ?, ?, ?, ?, ?, ?, NULL)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -89,7 +89,6 @@ public class UserDao {
 					pStmt.setString(5, user.getBirth());
 
 					pStmt.setString(6, user.getComment());
-
 
 					pStmt.setInt(7, user.getPoint());
 
@@ -138,15 +137,18 @@ public class UserDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT *  FROM users WHERE employee_Id = ? ";
-			String sqlLang = "SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id=? ";
-
-//
+			/*String sql = "SELECT *  FROM users WHERE employee_Id = ? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
-
-
+			pStmt.setString(1, employee_Id);*/
+			//point
+			String sql = "SELECT e.EMPLOYEE_ID, e.PASSWORD, e.USERNAME, e.ICON, e.BIRTH, e.COMMENT, COALESCE(post_counts.PostCount, 0)*10 AS POINT, e.BOOKING FROM Users e LEFT JOIN (SELECT EMPLOYEE_ID, COUNT(POST_ID) AS PostCount FROM POSTS WHERE EMPLOYEE_ID = ? GROUP BY EMPLOYEE_ID) post_counts ON e.EMPLOYEE_ID = post_counts.EMPLOYEE_ID WHERE e.EMPLOYEE_ID = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, employee_Id);
+			pStmt.setString(2, employee_Id);
+
+
+			String sqlLang = "SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id=? ";
+			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
 			pStmtLang.setString(1, employee_Id);
 			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 

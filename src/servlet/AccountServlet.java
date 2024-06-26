@@ -28,9 +28,10 @@ public class AccountServlet extends HttpServlet {
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}
+
     	UserDao userDao = new UserDao();
         List<User> userList = userDao.selectAllUsers();
-        System.out.print(userList);
+        System.out.print("User List ..."+ userList);
 
         // 全ユーザー情報をリクエストスコープに格納
         request.setAttribute("userList", userList);

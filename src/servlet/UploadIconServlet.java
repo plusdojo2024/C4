@@ -81,7 +81,7 @@ public class UploadIconServlet extends HttpServlet {
 			if(uDao.updatePhoto(employeeId,password,username,fileName)) {
 
 				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginServlet");
 				dispatcher.forward(request, response);
 
 

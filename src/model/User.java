@@ -38,6 +38,19 @@ public class User implements Serializable {
 		this.point = point;
 
 	}
+	//Select All method .. constructor
+	/*	public User(String employee_Id, String password, String username,String icon, String birth, String comment,
+				int point) {
+			super();
+			this.employee_Id = employee_Id;
+			this.password = password;
+			this.username = username;
+			this.icon = icon;
+			this.birth = birth;
+			this.comment = comment;
+			this.point = point;
+
+		}*/
 
 	public User(String employee_Id, String password) {
 		this.employee_Id = employee_Id;
@@ -54,9 +67,9 @@ public class User implements Serializable {
 	}
 
 
-	public User(String username2) {
+	/*public User(String username2) {
 		// TODO 自動生成されたコンストラクター・スタブ
-	}
+	}*/
 	public String getemployee_Id() {
 		return employee_Id;
 	}

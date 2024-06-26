@@ -43,7 +43,7 @@
 		<!--左のカラムここまで-->
 
 		<!--メインカラムここから-->
-		<div class="main-navi">
+		 <div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
 			<h1> <a href="${pageContext.request.contextPath}/LoginServlet">Myプロフィール</a></h1>
@@ -74,6 +74,7 @@
 			-->
 
 		    <hr>
+
 		    <!-- アカウント一覧表示 -->
 		    <h1>全てのアカウント</h1>
 		    <div class="all-prof">
@@ -148,6 +149,19 @@
 		        %>
 		    </div>
 	</div>
+
+ 	<%-- <c:if test="${empty userList}">
+		<p>一致するデータはありません。</p>
+	</c:if>
+ 	<c:forEach var="user" items="${userList}">
+
+	 	<!-- <br> -->
+        <div class="form-group">
+				<label for="id">社員ID</label> <input type="text" id="id" name="id" value="${user.employee_Id}" readonly="readonly">
+			</div>
+		<img src="./images/${user.icon}" class="profile-pic" alt="Profile Picture">
+
+ 	</c:forEach> --%>
 
 	</main>
 	</body>
