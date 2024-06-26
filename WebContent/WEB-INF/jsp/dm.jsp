@@ -66,7 +66,15 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-        <div>
+
+	</div>
+	</main>
+	<!-- メインチャットここまで -->
+
+
+	<!-- フッター（ここから） -->
+	<footer>
+      <div>
 			<form action="MessagesServlet" method="post">
 				<input type="hidden" name="conversationsId"
 					value="${conversationsId}">
@@ -75,14 +83,6 @@
 				<input type="submit" value="送信" class="submit-button">
 			</form>
 		</div>
-	</div>
-	</main>
-	<!-- メインチャットここまで -->
-
-
-	<!-- フッター（ここから） -->
-	<footer>
-
 	</footer>
 	<!-- フッター（ここまで） -->
 
