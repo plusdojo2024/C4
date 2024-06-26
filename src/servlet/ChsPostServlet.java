@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ChsDao;
 import model.Chs;
@@ -20,7 +21,13 @@ public class ChsPostServlet extends HttpServlet {
 
     // GETリクエストを処理するメソッド
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // リクエストパラメータからチャンネル名を取得
+    	HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			//ログインしてなかったら下記のサーブレットに遷移する
+			response.sendRedirect("/C4/LoginServlet");
+			return;
+		}
+    	// リクエストパラメータからチャンネル名を取得
         //String channelName = request.getParameter("channelName");
     	// テスト用
     	String channelName = "任意のチャンネル名";

@@ -1,7 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,9 +33,18 @@ public class TestRandomServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 Date nowDate = new Date();
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		 String fnd = sdf.format(nowDate);
 		ChsDao cDao = new ChsDao();
-		String booking = null;
-		;
+		List<String> booking = cDao.booking(fnd);
+		if (booking.size() < 5) {
+			request.setAttribute("testMess", "5人以下のため生成されませんでした");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			;
+		}
 	}
 
 }

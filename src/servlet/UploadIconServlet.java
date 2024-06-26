@@ -30,12 +30,8 @@ public class UploadIconServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Servlet doGet");
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/C4/LoginServlet");
-			return;
-		}
+		response.sendRedirect("/C4/LoginServlet");
+		return;
 	}
 
 	/**

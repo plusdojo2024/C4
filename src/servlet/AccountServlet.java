@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
@@ -21,7 +22,13 @@ public class AccountServlet extends HttpServlet {
      * アクセス時にaccount.jspを表示
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDao userDao = new UserDao();
+    	HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			//ログインしてなかったら下記のサーブレットに遷移する
+			response.sendRedirect("/C4/LoginServlet");
+			return;
+		}
+    	UserDao userDao = new UserDao();
         List<User> userList = userDao.selectAllUsers();
         System.out.print(userList);
 

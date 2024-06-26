@@ -324,7 +324,7 @@ public class ChsDao {
 		return result;
 	}
 
-	public List<String> booking() {
+	public List<String> booking(String date) {
 		Connection conn = null;
 		List<String> booking = new ArrayList<String>();
 		try {
@@ -338,9 +338,11 @@ public class ChsDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM USERS WHERE employee_Id = ? HAVING BY booking = ?";
+			String sql = "SELECT * FROM USERS WHERE booking = ?";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, date);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();

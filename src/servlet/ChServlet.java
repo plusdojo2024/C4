@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ChsDao;
 import model.Chs;
@@ -17,8 +18,7 @@ import model.Chs;
 public class ChServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータからチャンネル名と説明を取得
 		request.setCharacterEncoding("UTF-8");
 		String chName = request.getParameter("channelName");
@@ -67,8 +67,13 @@ public class ChServlet extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			//ログインしてなかったら下記のサーブレットに遷移する
+			response.sendRedirect("/C4/LoginServlet");
+			return;
+		}
 		//データの準備
 		ChsDao cDao = new ChsDao();
 		List<Chs> chList = null;

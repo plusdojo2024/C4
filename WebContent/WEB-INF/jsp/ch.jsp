@@ -46,7 +46,7 @@
 		</c:forEach>
 	</main>
 	<footer>
-		<!-- ここはフッター編集時にはこのコメントを削除 -->
+		<p>${testMess}</p>
 	</footer>
 </body>
 
