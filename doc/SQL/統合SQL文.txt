@@ -5,7 +5,7 @@ DROP TABLE posts;
 CREATE TABLE posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,  
     channels_id INT NOT NULL,  
-    employee_id INT NOT NULL,  
+    employee_id VARCHAR(5) NOT NULL,  
     content VARCHAR(1000),  
     comments_id INT, 
     reaction_id INT,  
@@ -15,8 +15,8 @@ CREATE TABLE posts (
 
 INSERT INTO posts (post_id, channels_id, employee_id, content, comments_id, reaction_id, file_id, created_at)
 VALUES 
-(NULL, 0, 1, 'タイムラインです。', 0, 0, 0, '2020-10-11 18:10:00'),
-(NULL, 1, 2, 'チャンネルです。', 0, 0, 0, '2019-8-21 12:50:00');
+(NULL, 0, '0001', 'タイムラインです。', 0, 0, 0, '2020-10-11 18:10:00'),
+(NULL, 1, '0002', 'チャンネルです。', 0, 0, 0, '2019-8-21 12:50:00');
 
 SELECT * FROM posts;
 /*POSTSテーブルが同じchannels_idを取得するSQL文*/
