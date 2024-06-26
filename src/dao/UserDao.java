@@ -27,7 +27,8 @@ public class UserDao {
 				String sql = "SELECT COUNT(*) FROM users WHERE employee_Id = ? AND password = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				pStmt.setString(1, user.getemployee_Id());
-				pStmt.setString(2,user.getPassword());
+
+				pStmt.setString(2, user.getPassword());
 
 				// SELECT文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -74,24 +75,20 @@ public class UserDao {
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 				// SQL文を準備する（AUTO_INCREMENTのNUMBER列にはNULLを指定する）
-				String sql = "INSERT INTO users VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO users VALUES ( ?, ?, ?, ?, ?, ?, ?, NULL)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
 
-					pStmt.setString(1, user.getemployee_Id());
+				pStmt.setString(1, user.getemployee_Id());
 
-					pStmt.setString(2, user.getPassword());
+				pStmt.setString(2, user.getPassword());
 
-					pStmt.setString(3, user.getUsername());
-					pStmt.setString(4, user.getIcon());
-
-					pStmt.setString(5, user.getBirth());
-
-					pStmt.setString(6, user.getComment());
-
-
-					pStmt.setInt(7, user.getPoint());
+				pStmt.setString(3, user.getUsername());
+				pStmt.setString(4, user.getIcon());
+				pStmt.setString(5, user.getBirth());
+				pStmt.setString(6, user.getComment());
+				pStmt.setInt(7, user.getPoint());
 
 
 

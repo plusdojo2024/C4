@@ -127,7 +127,7 @@ DROP TABLE USERS;
 
 CREATE TABLE  users ( 
 employee_Id VARCHAR(5), 
-password  VARCHAR(32) NOT NULL, 
+password  VARCHAR(256) NOT NULL, 
 username VARCHAR(50) NOT NULL,
 icon VARCHAR(1024),
 birth VARCHAR(50),
@@ -158,6 +158,61 @@ INSERT INTO users VALUES (
 'おはようございます。', 
 7,
 null
+);
+
+INSERT INTO users VALUES ( 
+'0101', 
+'0101', 
+'シンジ', 
+'iconnn',  
+'2002-06-27', 
+'逃げちゃだめだ', 
+2,
+'2024/06/30'
+);
+
+INSERT INTO users VALUES ( 
+'0102', 
+'0102', 
+'レイ', 
+'iconnn',  
+'2002-06-27', 
+'私が守るもの', 
+2,
+'2024/06/30'
+);
+
+INSERT INTO users VALUES ( 
+'0103', 
+'0103', 
+'アスカ', 
+'iconnn',  
+'2002-06-27', 
+'あんた馬鹿ぁ？', 
+2,
+'2024/06/30'
+);
+
+INSERT INTO users VALUES ( 
+'0104', 
+'0104', 
+'渚', 
+'iconnn',  
+'2002-06-27', 
+'リリンが生み出した素晴らしい文化だ', 
+2,
+'2024/06/30'
+);
+
+INSERT INTO users VALUES ( 
+'0105', 
+'0105', 
+'マリ', 
+'iconnn',  
+'2002-06-27', 
+'私の役割って', 
+2,
+'2024/06/30'
 );
 
 CREATE TABLE langs (
