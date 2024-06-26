@@ -84,7 +84,8 @@
 		            for (User user : userList) {
 		        %>
 		            <div class="user-profile">
-						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture">
+						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture"
+						onclick="location.href='/MessagesServlet'">
 		                <div>
 		                    <label>氏名 </label>
 		                    <span><%= user.getUsername() %></span>
@@ -121,7 +122,7 @@
 		            for (User user : searchResults) {
 		        %>
 		            <div class="searchResults-profile"
-		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
+		            onclick="location.href='/MessagesServlet'">
 		                <div>
 		                    <label>氏名</label>
 		                    <span><%= user.getUsername() %></span>
