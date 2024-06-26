@@ -349,7 +349,7 @@ public class ChsDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				String record = rs.getString("booking");
+				String record = rs.getString("EMPLOYEE_ID");
 				booking.add(record);
 			}
 		} catch (SQLException e) {

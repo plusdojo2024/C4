@@ -44,13 +44,18 @@ public class HomeServlet extends HttpServlet {
             return;
         }		request.setCharacterEncoding("UTF-8");
 		List<Posts> PostList = new ArrayList<Posts>();
+		LoginUser user = (LoginUser)session.getAttribute("id");
+		String employee_id = user.getId();
 
 		//検索処理を行う
 		HomeDao hDao = new HomeDao();
 		PostList = hDao.select();
+		UserDao uDao = new UserDao();
+		String name = uDao.getName(employee_id);
 
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);
+		request.setAttribute("username", name);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 		dispatcher.forward(request, response);
@@ -92,6 +97,9 @@ public class HomeServlet extends HttpServlet {
 		}else {
 			//検索処理を行う
 			PostList = hDao.select();
+			UserDao uDao = new UserDao();
+			String name = uDao.getName(employee_id);
+			request.setAttribute("username", name);
 		}
 
 		//検索結果をリクエストスコープに格納する
