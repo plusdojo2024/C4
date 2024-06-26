@@ -28,6 +28,7 @@ public class MessagesServlet extends HttpServlet {
 			response.sendRedirect("/C4/LoginServlet");
 			return;
 		}*/
+    	
 		int conversationsId = 1;
 
 		MessagesDao mDao = new MessagesDao();

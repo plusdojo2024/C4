@@ -89,17 +89,7 @@
 		                    <label>氏名 </label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
-		                <div>
-		                    <label>ユーザーネーム </label>
-		                    <span><%= user.getemployee_Id() %></span>
-		                </div>
-		                <div>
-		                    <label>言語 </label>
-		                </div>
-		                <div>
-		                    <label>コメント </label>
-		                    <span><%= user.getComment() %></span>
-		                </div>
+
 		                <hr>
 		            </div>
 		        <%
