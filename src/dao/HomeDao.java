@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,9 @@ import model.Posts;
 
 public class HomeDao {
 	// 引数paramで検索項目を指定し、検索結果のリストを返す
+//	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.ssssss");
+
+
 	public List<Posts> search(String search) {
 		Connection conn = null;
 		List<Posts> PostList = new ArrayList<Posts>();
@@ -260,6 +264,7 @@ public class HomeDao {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
+//				Date a = sdf.parse("CREATED_AT");
 				Posts record = new Posts(
 				rs.getInt("POST_ID"),
 				rs.getInt("CHANNELS_ID"),
