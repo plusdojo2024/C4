@@ -1,32 +1,23 @@
-function RanUseNnm() {
-    //参加人数
-    let user = 5
-    let nums = [user];
-
-    let i = 0;
-    check : while (i < user) {
-        let ran = (Math.floor(Math.random() * 1000)) + 1;
-        if (ran > 500) {
-            continue;
-        } 
-        //確認用
-        console.log(ran);
-        for (let j = 0; j < i; j++) {
-            if (ran === nums[j]) {
-                continue check;
-            }
-        }
-        nums[i] = ran;
-        i++;
-    }
-    //確認用
-    console.log(nums);
-    return nums;
+function timeGet() {
+    let time = [];
+    let now = new Date();
+    time[0] = now.getFullYear();
+    time[1] = now.getMonth() + 1;
+    time[2] = now.getDate();
+    time[3] = now.getDay();
+    time[4] = now.getHours();
+    time[5] = now.getMinutes();
+    time[6] = now.getSeconds();
+    return time;
 }
 
-//自分で作った入れたい配列に代入する
-//以下一例
-let test = [];
-console.log(test);
-test = RanUseNnm();
-console.log(test);
+window.onload = function () {
+	let time = [];
+    window.setInterval(function () {
+        time = timeGet();
+        if (time[4] === 0 && time[5] === 0 && time[6] === 0) {
+            //;
+        }
+        clockGet();
+    }, 1000);
+};

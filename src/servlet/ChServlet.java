@@ -63,6 +63,12 @@ public class ChServlet extends HttpServlet {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
 			dispatcher.forward(request, response);
+		} else {
+			List<Chs> chList = null;
+			chList = cDao.select();
+			request.setAttribute("chList", chList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ch.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	}

@@ -46,8 +46,12 @@
 		</c:forEach>
 	</main>
 	<footer>
+		<form method="post" action="TestRandomServlet">
+			<input type="submit" value="テストランダム生成">
+		</form>
 		<p>${testMess}</p>
 	</footer>
+	<script src="./js/testRandom.js"></script>
 </body>
 
 </html>
