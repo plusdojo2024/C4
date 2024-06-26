@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MessagesDao;
 import model.messages;
@@ -23,12 +22,12 @@ public class MessagesServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession session = request.getSession();
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+    	/*HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			//ログインしてなかったら下記のサーブレットに遷移する
 			response.sendRedirect("/C4/LoginServlet");
 			return;
-		}
+		}*/
 		int conversationsId = 1;
 
 		MessagesDao mDao = new MessagesDao();
@@ -53,9 +52,16 @@ public class MessagesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		/*HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/simpleBC/LoginServlet");
+			return;
+		}*/
 		MessagesDao mDao = new MessagesDao();
 		request.setCharacterEncoding("UTF-8");
 		int conversationsId = Integer.parseInt(request.getParameter("conversationsId"));
+		request.setAttribute("conversationsId", conversationsId);
 		String message = request.getParameter("message");
 
 		mDao.regist(conversationsId,message);
