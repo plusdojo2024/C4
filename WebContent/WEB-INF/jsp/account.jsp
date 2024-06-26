@@ -84,7 +84,7 @@
 		            for (User user : userList) {
 		        %>
 		            <div class="user-profile">
-
+						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture">
 		                <div>
 		                    <label>氏名 </label>
 		                    <span><%= user.getUsername() %></span>

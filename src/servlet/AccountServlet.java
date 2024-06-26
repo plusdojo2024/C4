@@ -30,7 +30,7 @@ public class AccountServlet extends HttpServlet {
 		}
 
     	UserDao userDao = new UserDao();
-        List<User> userList = userDao.selectAllUsers();
+        List<User> userList = userDao.selectAll();
         System.out.print("User List ..."+ userList);
 
         // 全ユーザー情報をリクエストスコープに格納

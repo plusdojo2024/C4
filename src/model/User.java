@@ -39,7 +39,7 @@ public class User implements Serializable {
 
 	}
 	//Select All method .. constructor
-	/*	public User(String employee_Id, String password, String username,String icon, String birth, String comment,
+	public User(String employee_Id, String password, String username,String icon, String birth, String comment,
 				int point) {
 			super();
 			this.employee_Id = employee_Id;
@@ -50,7 +50,7 @@ public class User implements Serializable {
 			this.comment = comment;
 			this.point = point;
 
-		}*/
+		}
 
 	public User(String employee_Id, String password) {
 		this.employee_Id = employee_Id;
