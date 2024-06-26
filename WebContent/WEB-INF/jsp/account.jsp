@@ -14,17 +14,19 @@
 <body>
 <!--ヘッダーここから-->
 	<header>
+		<div>
 		<h1 id="logo">
 			<a href="${pageContext.request.contextPath}/HomeServlet"><img
 				src="./img/LinXlogo.jpg" alt="LinX"></a>
 		</h1>
+		</div>
 		<form method="post"
 			action="${pageContext.request.contextPath}/AccountServlet">
-			<input type="search" name="username" placeholder="キーワードを入力"> <input
-				type="submit" name="submit" value="検索">
+			<input type="search" name="username" placeholder="キーワードを入力">
+			<input type="submit" name="submit" value="検索">
 		</form>
 
-		<h2>ランキング</h2>
+
 	</header>
 	<!--ヘッダーここまで-->
 
@@ -83,18 +85,18 @@
 		            <div class="user-profile">
 
 		                <div>
-		                    <label>氏名: </label>
+		                    <label>氏名 </label>
 		                    <span><%= user.getUsername() %></span>
 		                </div>
 		                <div>
-		                    <label>ユーザーネーム: </label>
+		                    <label>ユーザーネーム </label>
 		                    <span><%= user.getemployee_Id() %></span>
 		                </div>
 		                <div>
-		                    <label>言語: </label>
+		                    <label>言語 </label>
 		                </div>
 		                <div>
-		                    <label>コメント: </label>
+		                    <label>コメント </label>
 		                    <span><%= user.getComment() %></span>
 		                </div>
 		                <hr>
@@ -110,7 +112,7 @@
 		    </div>
 
 		    <!-- アカウント検索結果表示 -->
-		    <h1>searchResults prof</h1>
+		    <h1>検索結果</h1>
 		    <div class="searchResults-prof">
 		        <%
 		        List<User> searchResults = (List<User>) request.getAttribute("searchResults");
