@@ -537,6 +537,52 @@ public class UserDao {
 
 		}
 
+		public String getName(String id) {
+			Connection conn = null;
+			String name = null;
+	try {
+		// JDBCドライバを読み込む
+		Class.forName("org.h2.Driver");
+		// データベースに接続する
+		conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+		// SQL文を準備する
+		String sql = "SELECT *  FROM users WHERE employee_id = ? ";
+//		select  employee_Id,username from users;
+
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setString(1, id);
+		//pStmt.setString(1, employee_Id);
+		//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
+		// SQL文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+		// 結果表をコレクションにコピーする
+		rs.next();
+			name = rs.getString("username");
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+		name = null;
+	}
+	catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		name = null;
+	}
+	finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+				name = null;
+			}
+		}
+	}
+	// 結果を返す
+	return name;
+}
+
 
 
 
