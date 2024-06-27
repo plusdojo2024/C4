@@ -28,7 +28,7 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM POSTS WHERE CHANNELS_ID = 0 AND CONTENT LIKE ? ORDER BY CREATED_AT desc";
+			String sql = "SELECT * FROM USERS INNER JOIN POSTS ON USERS.EMPLOYEE_ID = POSTS.EMPLOYEE_ID WHERE CHANNELS_ID = 0 AND CONTENT LIKE ? ORDER BY CREATED_AT desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			//検索するためのDAOを作成
@@ -47,7 +47,8 @@ public class HomeDao {
 				rs.getInt("comments_id"),
 				rs.getInt("reaction_id"),
 				rs.getInt("file_id"),
-				rs.getString("created_at")
+				rs.getString("created_at"),
+				rs.getString("USERNAME")
 				);
 				PostList.add(record);
 			}

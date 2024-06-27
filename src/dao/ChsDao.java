@@ -80,7 +80,7 @@ public class ChsDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM posts WHERE channels_id LIKE ? ORDER BY created_At DESC";
+			String sql = "SELECT * FROM USERS INNER JOIN POSTS ON USERS.EMPLOYEE_ID = POSTS.EMPLOYEE_ID WHERE channels_id LIKE ? ORDER BY created_At DESC";
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -102,7 +102,8 @@ public class ChsDao {
 				rs.getInt("comments_id"),
 				rs.getInt("reaction_id"),
 				rs.getInt("file_id"),
-				rs.getString("created_at")
+				rs.getString("created_at"),
+				rs.getString("USERNAME")
 				);
 				cardList.add(record);
 			}
