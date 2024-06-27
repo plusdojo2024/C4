@@ -53,7 +53,7 @@ public class UpdateServlet extends HttpServlet {
 				if (uDao.update(employeeId,username,birth,comment,point,langList)) {	// 更新成功
 
 					// 結果ページにフォワードする
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/AccountServlet");
 					dispatcher.forward(request, response);
 
 				}
