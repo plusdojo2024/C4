@@ -178,3 +178,18 @@ main {
 	font-weight: bold; /* フォントをボールドに設定 */
 	margin-right: 10px; /* 右マージンを設定 */
 }
+
+/* tgh  */
+.profile-pic {
+            max-width: 100px; /* Adjust size as needed */
+            max-height: 100px; /* Adjust size as needed */
+            border-radius: 20%;
+        }
+
+.container{
+     display: flex;
+     align-items: center;
+}
+.container img{
+     margin-right: 10px;
+ }
