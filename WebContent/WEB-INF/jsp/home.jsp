@@ -20,6 +20,7 @@
 					class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
 			</h1>
 		</div>
+		<span>${username}</span>
 		<form method="POST"
 			action="${pageContext.request.contextPath}/HomeServlet">
 			<input type="search" name="search" placeholder="キーワードを入力"> <input
@@ -51,6 +52,7 @@
 				</c:if>
 				<c:forEach var="e" items="${PostList}">
 					<div class="home">
+						<div class=name></div>
 						<div class=post-date>投稿日時：${e.created_at}</div>
 						<div class="post-content">${e.content}</div>
 						<div class="post-footer">

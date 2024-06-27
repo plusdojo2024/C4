@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
-import model.User;
 
 /**
  * Servlet implementation class UpdateServlet
@@ -20,14 +19,6 @@ import model.User;
 @MultipartConfig(maxFileSize = 16177215) // 16MB
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,7 +36,6 @@ public class UpdateServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String employeeId = request.getParameter("id");
-		String password = request.getParameter("password");
 		String username = request.getParameter("username");
 //		String icon = fileName;
 		String birth = request.getParameter("birth");
@@ -60,10 +50,10 @@ public class UpdateServlet extends HttpServlet {
 			// 更新または削除を行う
 			UserDao uDao = new UserDao();
 			if (request.getParameter("submit").equals("更新")) {
-				if (uDao.update(new User(employeeId,password,username,birth,comment,point),langList)) {	// 更新成功
+				if (uDao.update(employeeId,username,birth,comment,point,langList)) {	// 更新成功
 
 					// 結果ページにフォワードする
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginServlet");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeServlet");
 					dispatcher.forward(request, response);
 
 				}

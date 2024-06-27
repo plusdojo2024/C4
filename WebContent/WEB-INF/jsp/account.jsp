@@ -46,7 +46,7 @@
 		 <div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
-			<h1> <a href="${pageContext.request.contextPath}/LoginServlet">Myプロフィール</a></h1>
+			<h1> <a href="${pageContext.request.contextPath}/ProfileServlet">Myプロフィール</a></h1>
 
 		    <!--<h1>Myプロフィール 編集</h1>
 		    <hr>
