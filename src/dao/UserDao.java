@@ -1,5 +1,7 @@
 package dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import java.util.List;
 import model.User;
 
 public class UserDao {
+
 	// ログインできるならtrueを返す
 		public boolean isLoginOK(User user) {
 			Connection conn = null;
@@ -28,7 +31,16 @@ public class UserDao {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				pStmt.setString(1, user.getemployee_Id());
 
-				pStmt.setString(2, user.getPassword());
+				String pw = user.getPassword();
+				MessageDigest md = MessageDigest.getInstance("SHA-256");
+				md.update(pw.getBytes());
+				byte[] sha256 = md.digest();
+				StringBuffer sb = new StringBuffer();
+				for (int i=0; i<sha256.length; i++) {
+					sb.append(String.format("%02x", sha256[i]&0xff));
+				}
+				pStmt.setString(2, sb.toString());
+				//pStmt.setString(2, user.getPassword());
 
 				// SELECT文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -46,6 +58,8 @@ public class UserDao {
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				loginResult = false;
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
 			}
 			finally {
 				// データベースを切断
@@ -82,7 +96,16 @@ public class UserDao {
 
 				pStmt.setString(1, user.getemployee_Id());
 
-				pStmt.setString(2, user.getPassword());
+				String pw = user.getPassword();
+				MessageDigest md = MessageDigest.getInstance("SHA-256");
+				md.update(pw.getBytes());
+				byte[] sha256 = md.digest();
+				StringBuffer sb = new StringBuffer();
+				for (int i=0; i<sha256.length; i++) {
+					sb.append(String.format("%02x", sha256[i]&0xff));
+				}
+				pStmt.setString(2, sb.toString());
+				//pStmt.setString(2, user.getPassword());
 
 				pStmt.setString(3, user.getUsername());
 				pStmt.setString(4, user.getIcon());
@@ -101,6 +124,8 @@ public class UserDao {
 				e.printStackTrace();
 			}
 			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
 			finally {
@@ -135,21 +160,20 @@ public class UserDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT *  FROM users WHERE employee_Id = ? ";
-			String sqlLang = "SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id=? ";
-
-//
+			String sql = "SELECT e.EMPLOYEE_ID, e.PASSWORD, e.USERNAME, e.ICON, e.BIRTH, e.COMMENT, COALESCE(post_counts.PostCount, 0)*10 AS POINT, e.BOOKING FROM Users e LEFT JOIN (SELECT EMPLOYEE_ID, COUNT(POST_ID) AS PostCount FROM POSTS WHERE EMPLOYEE_ID = ? GROUP BY EMPLOYEE_ID) post_counts ON e.EMPLOYEE_ID = post_counts.EMPLOYEE_ID WHERE e.EMPLOYEE_ID = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
-
-
 			pStmt.setString(1, employee_Id);
+			pStmt.setString(2, employee_Id);
+			ResultSet rs = pStmt.executeQuery();
+
+			String sqlLang = "SELECT u.employee_Id, l.langName FROM users u LEFT JOIN langs l ON u.employee_Id= l.employee_Id WHERE u.employee_Id=? ";
+			PreparedStatement pStmtLang = conn.prepareStatement(sqlLang);
 			pStmtLang.setString(1, employee_Id);
 			//String sql = "SELECT * FROM users WHERE employee_id = '0005'";
 
 
 			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+
 			ResultSet rsLang = pStmtLang.executeQuery();
 
 			// Collect languages
