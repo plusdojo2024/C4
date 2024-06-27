@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MessagesDao;
+import model.LoginUser;
 import model.messages;
 
 
@@ -23,30 +25,28 @@ public class MessagesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-    	/*HttpSession session = request.getSession();
+    	HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
+			//ログインしてなかったら下記のサーブレットに遷移する
 			response.sendRedirect("/C4/LoginServlet");
 			return;
-		}*/
-    	
-		int conversationsId = 1;
+		}
+		LoginUser user = (LoginUser)session.getAttribute("id");
+		String send_id = user.getId();
+    	String employee_Id = request.getParameter("employee_Id");
+    	MessagesDao mDao = new MessagesDao();
+		int conversationsId = mDao.getConv(send_id, employee_Id);
 
-		MessagesDao mDao = new MessagesDao();
 		List<messages> messagesList = mDao.select(conversationsId);
 
-		String id = "0001";//(String)session.getAttribute("id");
-
-		request.setAttribute("id", id);
+		request.setAttribute("id", send_id);
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", messagesList);
 		request.setAttribute("conversationsId", conversationsId);
 
-
-
-
-				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dm.jsp");
-				dispatcher.forward(request, response);
+		// 結果ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dm.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

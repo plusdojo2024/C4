@@ -142,6 +142,58 @@ public class MessagesDao {
 		// 結果を返す
 		return result;
 	}
+
+	public int getConv(String sendId, String Id) {
+		Connection conn = null;
+		int convId = 0;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM CONVERSATIONS  WHERE USER1_ID = ? AND USER2_ID = ?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる
+
+			pStmt.setString(1,sendId);
+			pStmt.setString(2,Id);
+
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			rs.next();
+				convId = rs.getInt("CONVERSATIONS_ID");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			convId = 0;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			convId = 0;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					convId = 0;
+				}
+			}
+		}
+
+		// 結果を返す
+		return convId;
+	}
 /*
 	// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(Bc card) {
