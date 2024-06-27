@@ -22,6 +22,18 @@
 		</div>
 	</header>
 	<main>
+	<!--左のカラムここから-->
+		<div class="left-navi">
+			<ul id="nav">
+				<li><a href="${pageContext.request.contextPath}/HomeServlet">TIMELINE</a></li>
+				<li><a href="${pageContext.request.contextPath}/ChServlet">CHANNEL</a></li>
+				<li><a href="${pageContext.request.contextPath}/AccountServlet">ACCOUNT</a></li>
+			</ul>
+		</div>
+		<!--左のカラムここまで-->
+
+		<!--メインカラムここから-->
+		<div class="main-navi">
 		<h1>チャンネル選択</h1>
 
 		<div class="create-channel">
@@ -44,6 +56,7 @@
 				</div>
 			</div>
 		</c:forEach>
+		</div>
 	</main>
 	<footer>
 		<form method="post" action="TestRandomServlet">

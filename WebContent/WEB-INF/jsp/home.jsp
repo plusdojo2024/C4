@@ -54,8 +54,8 @@
 						<div class=post-date>投稿日時：${e.created_at}</div>
 						<div class="post-content">${e.content}</div>
 						<div class="post-footer">
-							<div class=comment></div>
-							<div class=reaction></div>
+						<div class=comment></div>
+						<div class=reaction></div>
 						</div>
 					</div>
 				</c:forEach>
