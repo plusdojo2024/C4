@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
-import model.Result;
 import model.User;
 
 
@@ -52,16 +51,18 @@ public class CreateUserServlet extends HttpServlet {
 				UserDao uDao = new UserDao();
 //				改造ここから
 				if (uDao.insert(new User( new_id,new_pw,username))) {	// 登録成功
-					request.setAttribute("result",
-					new Result("登録成功！", "レコードを登録しました。", "/C4/LoginServlet"));
+					// 結果ページにフォワードする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/C4/loginServlet");
+					dispatcher.forward(request, response);
 				}
 				else {												// 登録失敗
-					request.setAttribute("result",
-					new Result("登録失敗！", "レコードを登録できませんでした。", "/C4/LoginServlet"));
+					// 結果ページにフォワードする
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
+					dispatcher.forward(request, response);
 				}
 
 				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/C4/LoginServlet");
 				dispatcher.forward(request, response);
 	}
 
