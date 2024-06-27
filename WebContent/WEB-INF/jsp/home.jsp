@@ -61,8 +61,8 @@
 						<div class="post-content">${e.content}</div>
 						<div class="post-footer">
 							<div class=comment>
-								<button class="post-btn" onclick="view${e.post_id}()">コメント</button>
-								<!-- 投稿ボタン -->
+								<button class="com-btn" onclick="view${e.post_id}()">コメント</button>
+								<!-- コメントボタン -->
 								<div id="popup-com${e.post_id}" class="popup-overlay">
 									<div class="popup-content">
 										<form method="POST"
