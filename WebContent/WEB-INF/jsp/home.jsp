@@ -52,7 +52,7 @@
 				</c:if>
 				<c:forEach var="e" items="${PostList}">
 					<div class="home">
-						<div class=name></div>
+						<div class=name>${e.username}</div>
 						<div class=post-date>投稿日時：${e.created_at}</div>
 						<div class="post-content">${e.content}</div>
 						<div class="post-footer">

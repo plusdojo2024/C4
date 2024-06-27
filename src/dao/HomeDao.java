@@ -256,7 +256,7 @@ public class HomeDao {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
 
 			// SQL文を準備する
-			String sql = "SELECT * FROM POSTS WHERE CHANNELS_ID = 0 ORDER BY CREATED_AT desc";
+			String sql = "SELECT * FROM USERS INNER JOIN POSTS ON USERS.EMPLOYEE_ID = POSTS.EMPLOYEE_ID WHERE CHANNELS_ID = 0 ORDER BY CREATED_AT DESC;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を実行し、結果表を取得する
@@ -273,7 +273,8 @@ public class HomeDao {
 				rs.getInt("COMMENTS_ID"),
 				rs.getInt("REACTION_ID"),
 				rs.getInt("FILE_ID"),
-				rs.getString("CREATED_AT")
+				rs.getString("CREATED_AT"),
+				rs.getString("USERNAME")
 				);
 				PostList.add(record);
 			}
@@ -301,55 +302,5 @@ public class HomeDao {
 
 		// 結果を返す
 		return PostList;
-	}
-
-	public List<String> postNameSelect() {
-		Connection conn = null;
-		List<String> NameList = new ArrayList<String>();
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
-
-			// SQL文を準備する
-			String sql = "SELECT USERNAME FROM USERS INNER JOIN POSTS ON USERS.EMPLOYEE_ID = POSTS.EMPLOYEE_ID WHERE CHANNELS_ID = 0 ORDER BY CREATED_AT DESC;";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-
-			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
-
-			// 結果表をコレクションにコピーする
-			while (rs.next()) {
-//				Date a = sdf.parse("CREATED_AT");
-				String record = rs.getString("USERNAME");
-				NameList.add(record);
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-			NameList = null;
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			NameList = null;
-		}
-		finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				}
-				catch (SQLException e) {
-					e.printStackTrace();
-					NameList = null;
-				}
-			}
-		}
-
-		// 結果を返す
-		return NameList;
 	}
 }
