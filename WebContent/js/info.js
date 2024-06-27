@@ -218,7 +218,8 @@ window.onload = function () {
 
 document.addEventListener("click", function(e) {
     if(e.target.classList.contains("calendar_td")) {
-        alert('クリックした日付は' + e.target.dataset.date + 'です');
-        postForm(e.target.dataset.date);
+		if (confirm(e.target.dataset.date + 'に予約しますか？')) {
+			postForm(e.target.dataset.date);
+		}
     }
 });

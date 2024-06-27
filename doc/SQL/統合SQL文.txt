@@ -140,7 +140,7 @@ PRIMARY KEY  (employee_Id)
 
 INSERT INTO users VALUES ( 
 '0001', 
-'0001', 
+'888b19a43b151683c87895f6211d9f8640f97bdc8ef32f03dbe057c8f5e56d32', 
 '田中', 
 'iconnn',  
 '2002-06-27', 
@@ -151,7 +151,7 @@ null
 
 INSERT INTO users VALUES ( 
 '0002', 
-'0002', 
+'4fac6dbe26e823ed6edf999c63fab3507119cf3cbfb56036511aa62e258c35b4', 
 '鈴木', 
 'iconnn',  
 '1998-12-03', 
@@ -162,7 +162,7 @@ null
 
 INSERT INTO users VALUES ( 
 '0101', 
-'0101', 
+'07334386287751ba02a4588c1a0875dbd074a61bd9e6ab7c48d244eacd0c99e0', 
 'シンジ', 
 'iconnn',  
 '2002-06-27', 
@@ -173,7 +173,7 @@ INSERT INTO users VALUES (
 
 INSERT INTO users VALUES ( 
 '0102', 
-'0102', 
+'f19ccf1eb395a4d74606c59b491ecd0a37b5f26eae0ec55c33bbd2743c658b26', 
 'レイ', 
 'iconnn',  
 '2002-06-27', 
@@ -184,7 +184,7 @@ INSERT INTO users VALUES (
 
 INSERT INTO users VALUES ( 
 '0103', 
-'0103', 
+'06843e3f58776ec2eb5e0cc7a44a3c3fc1b4b9af2e75504da3d299dc566cc395', 
 'アスカ', 
 'iconnn',  
 '2002-06-27', 
@@ -195,7 +195,7 @@ INSERT INTO users VALUES (
 
 INSERT INTO users VALUES ( 
 '0104', 
-'0104', 
+'aeb32cfe00d196040e9758c276853282721fbd222038a54e9ae04d6686066e1b', 
 '渚', 
 'iconnn',  
 '2002-06-27', 
@@ -206,7 +206,7 @@ INSERT INTO users VALUES (
 
 INSERT INTO users VALUES ( 
 '0105', 
-'0105', 
+'81dc948cd3fa9ec2064515b4267ef9a339993233dbdc0e984ce7b0fde6e1a0a9', 
 'マリ', 
 'iconnn',  
 '2002-06-27', 
@@ -214,6 +214,8 @@ INSERT INTO users VALUES (
 2,
 '2024/06/30'
 );
+
+SELECT * FROM USERS;
 
 CREATE TABLE langs (
     id INT AUTO_INCREMENT PRIMARY KEY,
