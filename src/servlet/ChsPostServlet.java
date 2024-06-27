@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ChsDao;
+import dao.HomeDao;
 import model.Chs;
 import model.Posts;
 
@@ -31,8 +32,14 @@ public class ChsPostServlet extends HttpServlet {
     	String chName = ch.getChName();
     	String chComment = ch.getChComment();
     	ChsDao cDao = new ChsDao();
+    	HomeDao hDao = new HomeDao();
     	List<Posts> PostList = new ArrayList<Posts>();
     	PostList = cDao.chPostSelect(channels_id);
+    	for (Posts p : PostList) {
+			if (p.getComments() != 0) {
+				p.setComuser(hDao.comUser(p.getComments()));
+			}
+		}
     	request.setAttribute("PostList", PostList);
     	request.setAttribute("channelName", chName);
     	request.setAttribute("chId", channels_id);

@@ -14,6 +14,7 @@ public class Posts implements Serializable{
 	private int file_id;
 	private String created_at;
 	private String username;
+	private String comuser;
 
 
 	public Posts() {
@@ -114,5 +115,13 @@ public class Posts implements Serializable{
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getComuser() {
+		return comuser;
+	}
+
+	public void setComuser(String comuser) {
+		this.comuser = comuser;
 	}
 }

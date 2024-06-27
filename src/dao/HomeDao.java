@@ -304,4 +304,53 @@ public class HomeDao {
 		// 結果を返す
 		return PostList;
 	}
+
+	public String comUser(int comId) {
+		Connection conn = null;
+		String comUser = null;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/C4", "sa", "");
+
+			// SQL文を準備する
+			String sql = "SELECT * FROM USERS INNER JOIN POSTS ON USERS.EMPLOYEE_ID = POSTS.EMPLOYEE_ID WHERE CHANNELS_ID = 0 AND POST_ID = ? ORDER BY CREATED_AT DESC;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, comId);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			rs.next();
+			comUser = rs.getString("USERNAME");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			comUser = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			comUser = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					comUser = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return comUser;
+	}
 }
