@@ -53,6 +53,11 @@ public class HomeServlet extends HttpServlet {
 		UserDao uDao = new UserDao();
 		String name = uDao.getName(employee_id);
 
+		for (Posts p : PostList) {
+			if (p.getComments() != 0) {
+				p.setComuser(hDao.comUser(p.getComments()));
+			}
+		}
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);
 		request.setAttribute("username", name);
@@ -94,6 +99,14 @@ public class HomeServlet extends HttpServlet {
 
 			hDao.insert(new Posts(0, chId, employee_id, post, comments, 0, file_id, created_at));
 			PostList = hDao.select();
+		} else if (request.getParameter("submit").equals("コメント")) {
+			chId = Integer.parseInt(request.getParameter("chId"));
+			int comments = Integer.parseInt(request.getParameter("postId"));
+			int file_id = 0;
+			String created_at = null;
+
+			hDao.insert(new Posts(0, chId, employee_id, post, comments, 0, file_id, created_at));
+			PostList = hDao.select();
 		}else {
 			//検索処理を行う
 			PostList = hDao.select();
@@ -102,6 +115,11 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("username", name);
 		}
 
+		for (Posts p : PostList) {
+			if (p.getComments() != 0) {
+				p.setComuser(hDao.comUser(p.getComments()));
+			}
+		}
 		//検索結果をリクエストスコープに格納する
 		request.setAttribute("PostList", PostList);
 

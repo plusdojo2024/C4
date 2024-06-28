@@ -228,7 +228,7 @@ public class UserDao {
 		return user;
 	}
 //	public boolean update(User user,String[] language)
-	public boolean update(User user,String[] language) {
+	public boolean update(String employeeId,String username,String birth,String comment,int point,String[] language) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -250,11 +250,11 @@ public class UserDao {
 
 //			UPDATE users SET username= '山口' WHERE employee_Id = '0003';
 			// SQL文を完成させる
-				pStmt.setString(1, user.getUsername());
-				pStmt.setString(2, user.getBirth());
-				pStmt.setString(3, user.getComment());
-				pStmt.setInt(4, user.getPoint());
-				pStmt.setString(5, user.getemployee_Id());
+				pStmt.setString(1, username);
+				pStmt.setString(2, birth);
+				pStmt.setString(3, comment);
+				pStmt.setInt(4, point);
+				pStmt.setString(5, employeeId);
 
 				;
 //				pStmtDeleteLang.setString(1, user.getemployee_Id());
@@ -262,7 +262,7 @@ public class UserDao {
 
 		        if(language != null) {
 				for (String lang : language) {
-		            pStmtLang.setString(1, user.getemployee_Id());
+		            pStmtLang.setString(1, employeeId);
 		            pStmtLang.setString(2, lang);
 		            pStmtLang.executeUpdate();
 		        	}

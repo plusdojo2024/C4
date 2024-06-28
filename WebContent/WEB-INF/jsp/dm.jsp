@@ -55,13 +55,13 @@
 		<c:forEach var="e" items="${cardList}">
 			<c:choose>
 				<c:when test="${e.senderId == id}">
-					<div class="box-left">
-						<p class="message-box white">${e.messageContent}</p>
+					<div class="box-right">
+						<p class="message-box green">${e.messageContent}</p>
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="box-right">
-						<p class="message-box green">${e.messageContent}</p>
+					<div class="box-left">
+						<p class="message-box white">${e.messageContent}</p>
 					</div>
 				</c:otherwise>
 			</c:choose>

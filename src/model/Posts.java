@@ -13,6 +13,8 @@ public class Posts implements Serializable{
 	private int reaction_id;
 	private int file_id;
 	private String created_at;
+	private String username;
+	private String comuser;
 
 
 	public Posts() {
@@ -29,6 +31,18 @@ public class Posts implements Serializable{
 		this.reaction_id = reaction_id;
 		this.file_id = file_id;
 		this.created_at = created_at;
+	}
+	public Posts(int post_id, int channels_id, String employee_id, String content, int comments, int reaction_id, int file_id, String created_at, String username) {
+		super();
+		this.post_id = post_id;
+		this.channels_id = channels_id;
+		this.employee_id = employee_id;
+		this.content = content;
+		this.comments = comments;
+		this.reaction_id = reaction_id;
+		this.file_id = file_id;
+		this.created_at = created_at;
+		this.username = username;
 	}
 
 	public int getPost_id() {
@@ -95,4 +109,19 @@ public class Posts implements Serializable{
 		this.created_at = created_at;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getComuser() {
+		return comuser;
+	}
+
+	public void setComuser(String comuser) {
+		this.comuser = comuser;
+	}
 }

@@ -268,6 +268,22 @@ main {
 	background-color: #F0E5CF;
 }
 
-
+/*ポップアップのデザイン*/
+.post-btn {
+	position: fixed; /* 画面に固定する */
+	bottom: 10%; /* 画面の下から10%の位置に配置する */
+	right: 25%; /* 画面の右から25%の位置に配置する */
+	width: 70px; /* 幅を70pxに設定する */
+	height: 70px; /* 高さを70pxに設定する */
+	line-height: 70px; /* テキストを垂直方向に中央揃えする */
+	color: white; /* テキストの色を白に設定する */
+	font-weight: bold; /* テキストを太字に設定する */
+	font-size: 25px; /* フォントサイズを30pxに設定する */
+	background: #4B6587; /* 背景色をアクアに設定する */
+	border-radius: 50%; /* ボタンを円形にする */
+	text-align: center; /* テキストを中央揃えする */
+	border: none; /* ボタンのデフォルトの枠線を削除する */
+	cursor: pointer; /* ホバー時のカーソルをポインタにする */
+}
 
 /* フッター三浦さんに任せます */

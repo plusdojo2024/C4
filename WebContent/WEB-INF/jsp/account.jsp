@@ -15,12 +15,11 @@
 <!--ヘッダーここから-->
 	<header>
 		<div>
-			<h1 id="logo">
-				<a href="${pageContext.request.contextPath}/HomeServlet"><img
-					class="round-image" src="./img/LinXlogo.jpg" alt="LinX"></a>
-			</h1>
+		<h1 id="logo">
+			<a href="${pageContext.request.contextPath}/HomeServlet"><img
+				src="./img/LinXlogo.jpg" alt="LinX"></a>
+		</h1>
 		</div>
-
 		<form method="post"
 			action="${pageContext.request.contextPath}/AccountServlet">
 			<input type="search" name="username" placeholder="キーワードを入力">
@@ -39,8 +38,6 @@
 				<li><a href="${pageContext.request.contextPath}/HomeServlet">TIMELINE</a></li>
 				<li><a href="${pageContext.request.contextPath}/ChServlet">CHANNEL</a></li>
 				<li><a href="${pageContext.request.contextPath}/AccountServlet">ACCOUNT</a></li>
-				<li><a href="${pageContext.request.contextPath}/LoginServlet"
-					class="logout-button" onclick="confirmLogout(event)">LOGOUT</a></li>
 			</ul>
 		</div>
 		<!--左のカラムここまで-->
@@ -49,7 +46,7 @@
 		 <div class="main-navi">
 
 			<!-- 自分のプロフィール表示 -->
-			<h3> <a href="${pageContext.request.contextPath}/LoginServlet">Myプロフィール</a></h3>
+			<h1> <a href="${pageContext.request.contextPath}/ProfileServlet">Myプロフィール</a></h1>
 
 		    <!--<h1>Myプロフィール 編集</h1>
 		    <hr>
@@ -79,15 +76,14 @@
 		    <hr>
 
 		    <!-- アカウント一覧表示 -->
-		    <h3>全てのアカウント</h3>
+		    <h1>全てのアカウント</h1>
 		    <div class="all-prof">
 		        <%
 		        List<User> userList = (List<User>) request.getAttribute("userList");
 		        if (userList != null && !userList.isEmpty()) {
 		            for (User user : userList) {
 		        %>
-
-		            <%-- <div class="user-profile">
+		            <div class="user-profile">
 						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture">
 		                <div>
 		                    <label>氏名 </label>
@@ -104,20 +100,9 @@
 		                    <label>コメント </label>
 		                    <span><%= user.getComment() %></span>
 		                </div>
- --%>
-		          <div class="user-profile">
 
-		            <div>
-		                 <span><%= user.getUsername() %></span>
-
-					</div>
-					<div class="container">
-						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture"
-						onclick="location.href='/MessagesServlet'">
-						<span><%= user.getComment() %></span>
-					</div>
-
-		          </div>
+		                <hr>
+		            </div>
 		        <%
 		            }
 		        } else if (userList != null) {
@@ -129,7 +114,7 @@
 		    </div>
 
 		    <!-- アカウント検索結果表示 -->
-		    <!-- <h3>検索結果</h3> -->
+		    <h1>検索結果</h1>
 		    <div class="searchResults-prof">
 		        <%
 		        List<User> searchResults = (List<User>) request.getAttribute("searchResults");

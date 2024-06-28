@@ -9,12 +9,11 @@ body {
   }
   main {
 	display: flex;
-
   }
   /* 左カラム */
 .left-navi {
     width: 30%;
-    height: 580px;
+    height: 100vh;
     background: #4B6587;
     color: white;
     padding: 20px;
@@ -69,7 +68,7 @@ body {
  #room {
 
     width: 90%;
-    height:620px;
+    height:100vh;
     overflow: scroll;
     background-color:  #f0f0f0;
 
