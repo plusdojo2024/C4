@@ -35,10 +35,10 @@
 			<div class="form-group">
 				<div class="profile-pic-wrapper"
 					onclick="document.getElementById('icon').click();">
-					<c:forEach var="lang" items="${user.langList}">
+					<%-- <c:forEach var="lang" items="${user.langList}"> --%>
 						<img src="./img/${user.icon}" class="profile-pic"
 							alt="Profile Picture">
-					</c:forEach>
+					<%-- </c:forEach> --%>
 					<div class="profile-pic-overlay">アップロード</div>
 					<input type="file" id="icon" name="icon" accept="image/*"
 						style="display: none;">
