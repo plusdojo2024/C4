@@ -25,19 +25,6 @@ public class User implements Serializable {
 		this.point = point;
 		this.langList = langList;
 	}
-
-	public User(String employee_Id, String password, String username, String birth, String comment,
-			int point) {
-		super();
-		this.employee_Id = employee_Id;
-		this.password = password;
-		this.username = username;
-
-		this.birth = birth;
-		this.comment = comment;
-		this.point = point;
-
-	}
 	//Select All method .. constructor
 	public User(String employee_Id, String password, String username,String icon, String birth, String comment,
 				int point) {

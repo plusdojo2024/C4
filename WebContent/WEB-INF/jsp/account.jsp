@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="model.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,21 +79,20 @@
 		    <!-- アカウント一覧表示 -->
 		    <h3>全てのアカウント</h3>
 		    <div class="all-prof">
-		        <%
-		        List<User> userList = (List<User>) request.getAttribute("userList");
-		        if (userList != null && !userList.isEmpty()) {
-		            for (User user : userList) {
-		        %>
+		    	<c:if test="${empty userList}">
+						<p>該当するユーザーが見つかりませんでした。</p>
+				</c:if>
+		    	<c:forEach var="user" items="${userList}">
 		            <div class="user-profile" >
 		            	<div>
-		                    <span><%= user.getUsername() %></span>
+		                    <span>${user.username}</span>
 		                </div>
 		            	<div class="container">
 
-						<img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture">
+						<img src="./img/${user.icon}" class="profile-pic" alt="Profile Picture">
 
 	                	<div>
-		                    <span><%= user.getComment() %></span>
+		                    <span>${user.comment}</span>
 		                </div>
 
 		                <hr>
@@ -102,66 +100,36 @@
 		            </div>
 
 		           </div>
-		        <%
-		            }
-		        } else if (userList != null) {
-		        %>
-		            <p>該当するユーザーが見つかりませんでした。</p>
-		        <%
-		        }
-		        %>
+		        </c:forEach>
 		    </div>
 
 		    <!-- アカウント検索結果表示 -->
 		    <h3>検索結果</h3>
 		    <div class="searchResults-prof">
-		        <%
-		        List<User> searchResults = (List<User>) request.getAttribute("searchResults");
-		        if (searchResults != null && !searchResults.isEmpty()) {
-		            for (User user : searchResults) {
-		        %>
-		            <div class="searchResults-profile"
-		            onclick="location.href='/C4/MessagesServlet?employee_Id=<%= user.getemployee_Id() %>'">
-
-		                <div>
-		                    <span><%= user.getUsername() %></span>
+		    	<c:if test="${empty searchResults}">
+						<p>該当するユーザーが見つかりませんでした。</p>
+				</c:if>
+		        <c:forEach var="s" items="${searchResults}">
+		            <div class="user-profile" >
+		            	<div>
+		                    <span>${s.username}</span>
 		                </div>
-		                <div>
-		                	 <img src="./images/<%= user.getIcon() %>" class="profile-pic" alt="Profile Picture">
+		            	<div class="container">
 
+						<img src="./img/${s.icon}" class="profile-pic" alt="Profile Picture">
 
-		                <div>
-		                    <span><%= user.getComment() %></span>
-		                </div>
-
+	                	<div>
+		                    <span>${s.comment}</span>
 		                </div>
 
 		                <hr>
+
 		            </div>
-		        <%
-		            }
-		        } else if (searchResults != null) {
-		        %>
-		            <p>該当するユーザーが見つかりませんでした。</p>
-		        <%
-		        }
-		        %>
+		            <hr>
+		           </div>
+		        </c:forEach>
 		    </div>
 	</div>
-
- 	<%-- <c:if test="${empty userList}">
-		<p>一致するデータはありません。</p>
-	</c:if>
- 	<c:forEach var="user" items="${userList}">
-
-	 	<!-- <br> -->
-        <div class="form-group">
-				<label for="id">社員ID</label> <input type="text" id="id" name="id" value="${user.employee_Id}" readonly="readonly">
-			</div>
-		<img src="./images/${user.icon}" class="profile-pic" alt="Profile Picture">
-
- 	</c:forEach> --%>
-
 	</main>
 	</body>
 </html>

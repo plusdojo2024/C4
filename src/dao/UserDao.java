@@ -518,7 +518,7 @@ public class UserDao {
 					rs.getString("employee_Id"),
 					rs.getString("password"),
 					rs.getString("username"),
-					//rs.getString("icon"),
+					rs.getString("icon"),
 					rs.getString("birth"),
 					rs.getString("comment"),
 					rs.getInt("point")

@@ -33,16 +33,10 @@
 			</div> --%>
 
 			<div class="form-group">
-				<div class="profile-pic-wrapper"
-					onclick="document.getElementById('icon').click();">
-					<%-- <c:forEach var="lang" items="${user.langList}"> --%>
-						<img src="./img/${user.icon}" class="profile-pic"
-							alt="Profile Picture">
-					<%-- </c:forEach> --%>
+				<div class="profile-pic-wrapper" onclick="document.getElementById('icon').click();">
+					<img src="./img/${user.icon}" class="profile-pic" alt="Profile Picture">
 					<div class="profile-pic-overlay">アップロード</div>
-					<input type="file" id="icon" name="icon" accept="image/*"
-						style="display: none;">
-
+					<input type="file" id="icon" name="icon" accept="image/*" style="display: none;">
 				</div>
 			</div>
 			<button type="submit" class="btn btn-secondary" name="submit"
