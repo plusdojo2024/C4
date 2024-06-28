@@ -56,6 +56,20 @@ public class UploadIconServlet extends HttpServlet {
 	        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 	        String uploadPath = /*getServletContext().getRealPath("")*/"C:/pleiades/workspace/C4" + File.separator + "/WebContent/img/";
 
+	        if (fileName.equals("")) {
+	        	LoginUser userId = (LoginUser)session.getAttribute("id");
+				String employee_id = userId.getId();
+				// 検索処理を行う
+				UserDao bDao = new UserDao();
+				User user = bDao.select(employee_id);
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("user", user);
+
+				// 結果ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
+				dispatcher.forward(request, response);
+	        }
+
 	        // Creates the images directory if it does not exist
 	        File uploadDir = new File(uploadPath);
 	        if (!uploadDir.exists()) {
@@ -90,8 +104,6 @@ public class UploadIconServlet extends HttpServlet {
 				// 結果ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
 				dispatcher.forward(request, response);
-
-
 			}
 		}
 
