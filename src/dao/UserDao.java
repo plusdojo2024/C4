@@ -108,12 +108,30 @@ public class UserDao {
 				//pStmt.setString(2, user.getPassword());
 
 				pStmt.setString(3, user.getUsername());
-				pStmt.setString(4, user.getIcon());
-				pStmt.setString(5, user.getBirth());
-				pStmt.setString(6, user.getComment());
-				pStmt.setInt(7, user.getPoint());
-
-
+				if (user.getIcon() != null) {
+					pStmt.setString(4, user.getIcon());
+				}
+				else {
+					pStmt.setString(4, null);
+				}
+				if (user.getBirth() != null) {
+					pStmt.setString(5, user.getBirth());
+				}
+				else {
+					pStmt.setString(5, null);
+				}
+				if (user.getComment() != null) {
+					pStmt.setString(6, user.getComment());
+				}
+				else {
+					pStmt.setString(6, null);
+				}
+				if (user.getPoint() != 0) {
+					pStmt.setInt(7, user.getPoint());
+				}
+				else {
+					pStmt.setInt(7, 0);
+				}
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -303,7 +321,7 @@ public class UserDao {
 
 	//ここまで
 
-	public boolean updatePhoto(String employeeId, String password, String username, String icon) {
+	public boolean updatePhoto(String employeeId, String icon) {
 		Connection conn = null;
 		boolean result = false;
 

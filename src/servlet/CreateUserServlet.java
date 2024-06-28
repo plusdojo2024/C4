@@ -20,15 +20,6 @@ import model.User;
 @WebServlet("/CreateUserServlet")
 public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateUserServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -52,7 +43,7 @@ public class CreateUserServlet extends HttpServlet {
 //				改造ここから
 				if (uDao.insert(new User( new_id,new_pw,username))) {	// 登録成功
 					// 結果ページにフォワードする
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/C4/loginServlet");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 					dispatcher.forward(request, response);
 				}
 				else {												// 登録失敗
@@ -60,10 +51,6 @@ public class CreateUserServlet extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 					dispatcher.forward(request, response);
 				}
-
-				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/C4/LoginServlet");
-				dispatcher.forward(request, response);
 	}
 
 }

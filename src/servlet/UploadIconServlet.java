@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.UserDao;
+import model.LoginUser;
+import model.User;
 
 /**
  * Servlet implementation class UploadIconServlet
@@ -52,7 +54,7 @@ public class UploadIconServlet extends HttpServlet {
 		 Part filePart = request.getPart("icon");
 
 	        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-	        String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
+	        String uploadPath = /*getServletContext().getRealPath("")*/"C:/pleiades/workspace/C4" + File.separator + "/WebContent/img/";
 
 	        // Creates the images directory if it does not exist
 	        File uploadDir = new File(uploadPath);
@@ -71,17 +73,22 @@ public class UploadIconServlet extends HttpServlet {
 	        }
 
 		String employeeId = request.getParameter("id");
-		String password = request.getParameter("password");
-		String username = request.getParameter("username");
 //		String icon = request.getParameter("icon");
 		System.out.println("file Name " + fileName);
 		 System.out.println("employeeid_phote" + employeeId);
 		UserDao uDao = new UserDao();
 		if (request.getParameter("submit").equals("変更")) {
-			if(uDao.updatePhoto(employeeId,password,username,fileName)) {
+			if(uDao.updatePhoto(employeeId,fileName)) {
+				LoginUser userId = (LoginUser)session.getAttribute("id");
+				String employee_id = userId.getId();
+				// 検索処理を行う
+				UserDao bDao = new UserDao();
+				User user = bDao.select(employee_id);
+				// 検索結果をリクエストスコープに格納する
+				request.setAttribute("user", user);
 
 				// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/profile.jsp");
 				dispatcher.forward(request, response);
 
 
